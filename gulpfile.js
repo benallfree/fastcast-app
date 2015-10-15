@@ -6,15 +6,17 @@ var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var sh = require('shelljs');
+var haml = require('gulp-haml');
 
 var paths = {
-  sass: ['./scss/**/*.scss']
+  sass: ['./scss/**/*.scss'],
+  haml: []
 };
 
-gulp.task('default', ['sass']);
+gulp.task('default', ['sass', 'haml']);
 
 gulp.task('sass', function(done) {
-  gulp.src('./scss/ionic.app.scss')
+  gulp.src('./scss/**/*.scss')
     .pipe(sass({
       errLogToConsole: true
     }))
@@ -25,10 +27,19 @@ gulp.task('sass', function(done) {
     .pipe(rename({ extname: '.min.css' }))
     .pipe(gulp.dest('./www/css/'))
     .on('end', done);
+ 
+});
+
+// Get and render all .haml files recursively
+gulp.task('haml', function () {
+  gulp.src('./haml/**/*.haml')
+    .pipe(haml({ext: '.html'}))
+  .pipe(gulp.dest('./www'));
 });
 
 gulp.task('watch', function() {
-  gulp.watch(paths.sass, ['sass']);
+  gulp.watch(['./scss/**/*.scss'], ['haml']);
+  gulp.watch(['./haml/**/*.haml'], ['haml']);
 });
 
 gulp.task('install', ['git-check'], function() {
