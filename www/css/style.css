@@ -7,7 +7,7 @@
 div {
     line-height: initial; }
   .recorder
-.status {
+.status-stopped {
     text-align: center;
     font-size: 50px;
     margin-bottom: 20px; }
@@ -19,6 +19,27 @@ div {
     animation: pulse 3s ease-out;
     animation-iteration-count: infinite;
     color: red; }
+  .recorder
+.status-playing {
+    text-align: center;
+    font-size: 50px;
+    margin-bottom: 20px;
+    animation: pulse 3s ease-out;
+    animation-iteration-count: infinite;
+    color: green; }
+  .recorder
+.range {
+    width: 280px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid black;
+    border-radius: 10px;
+    text-align: center;
+    background-color: #1E2021;
+    padding: 0px;
+    color: #F1E6D4;
+    margin-bottom: 20px;
+    letter-spacing: -7px; }
   .recorder
 .timer {
     width: 280px;
@@ -35,35 +56,61 @@ div {
     margin-bottom: 20px;
     letter-spacing: -7px; }
   .recorder
-.record {
-    width: 120px;
-    height: 120px;
-    padding: 10px;
-    text-align: center;
-    color: red;
-    font-size: 117px;
-    margin-left: auto;
-    margin-right: auto;
-    text-shadow: 2px 1px gray;
-    padding-top: 0px; }
+.controls {
+    text-align: center; }
     .recorder
-.record
-span {
-      top: -10px;
-      position: relative; }
-  .recorder
-.recording {
-    width: 120px;
-    height: 120px;
-    padding: 10px;
-    text-align: center;
-    color: red;
-    font-size: 80px;
-    margin-left: auto;
-    margin-right: auto;
-    text-shadow: 2px 1px gray;
-    border: 1px solid white;
-    border-radius: 60px; }
+.controls
+.fc-button {
+      width: 120px;
+      height: 120px;
+      padding: 10px;
+      text-align: center;
+      font-size: 117px;
+      margin-left: auto;
+      margin-right: auto;
+      text-shadow: 2px 1px gray;
+      padding-top: 0px;
+      display: inline-block;
+      border-radius: 60px;
+      vertical-align: top; }
+    .recorder
+.controls
+.record {
+      color: red; }
+    .recorder
+.controls
+.stop {
+      border: 1px solid white;
+      color: white; }
+      .recorder
+.controls
+.stop
+.ion-stop {
+        font-size: 87px;
+        top: 14px;
+        position: relative; }
+    .recorder
+.controls
+.stop-record {
+      border: 1px solid white;
+      color: red; }
+      .recorder
+.controls
+.stop-record
+.ion-stop {
+        font-size: 87px;
+        top: 14px;
+        position: relative; }
+    .recorder
+.controls
+.play {
+      color: green; }
+      .recorder
+.controls
+.play
+.ion-play {
+        position: relative;
+        left: 10px; }
 
 @-webkit-keyframes "pulse" {
   0% {

@@ -33,13 +33,15 @@ gulp.task('sass', function(done) {
 // Get and render all .haml files recursively
 gulp.task('haml', function () {
   gulp.src('./haml/**/*.haml')
-    .pipe(haml({ext: '.html'}))
+    .pipe(haml({
+      ext: '.html',
+      compiler: 'visionmedia'
+    }))
   .pipe(gulp.dest('./www'));
 });
 
 gulp.task('watch', function() {
-  gulp.watch(['./scss/**/*.scss'], ['haml']);
-  gulp.watch(['./haml/**/*.haml'], ['haml']);
+  gulp.watch(['./scss/**/*.scss', './haml/**/*.haml'], ['haml', 'sass']);
 });
 
 gulp.task('install', ['git-check'], function() {
