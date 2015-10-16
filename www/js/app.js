@@ -26,8 +26,14 @@ angular.module('fastcast', ['ionic'])
   $scope.data = {scrub: 0};
   var duration = 0;
   var scrub_point = 0;
+  var ignore_next_scrub_update = false;
 
   $scope.$watch('data.scrub', function(o,n) {
+    if(ignore_next_scrub_update)
+    {
+      ignore_next_scrub_update = false;
+      return;
+    }
     scrub_point = duration * ((n)/100.0);
     angular.element('#timer').html(scrub_point.toHHMMSS());
     if(is_app)
@@ -49,19 +55,20 @@ angular.module('fastcast', ['ionic'])
   
   $scope.play = function() {
     $scope.is_playing = true;
-    var d = new Date();
-    var start = d.getTime();
+    var start = (new Date()).getTime();
     var timeout_promise = $interval(function() {
       if(!$scope.is_playing)
       {
         $interval.cancel(timeout_promise);
         return;
       }
-      var d = new Date();
-      var current = d.getTime();
-      var elapsed = current - start;
-      angular.element('#timer').html(elapsed.toHHMMSS());
-      
+      var current = (new Date()).getTime();
+      elapsed = current - start;
+      start = (new Date()).getTime();
+      ignore_next_scrub_update = true;
+      scrub_point = scrub_point + (elapsed/1000.0);
+      $scope.data.scrub = (scrub_point / duration) * 100.0;
+      angular.element('#timer').html((scrub_point*1000.0).toHHMMSS());
     }, 100);
     if(is_app)
     {

@@ -31,7 +31,7 @@
                 Playing
             #timer.timer
               00:00:00.000
-            .range
+            .range{"ng-if": "has_recording && !is_recording"}
               %input{name: "volume", "ng-model": "data.scrub", type: "range", min: 0, max: 100}
             .controls
               .fc-button.play{"ng-click": "play()", "ng-if": "has_recording && !is_playing"}

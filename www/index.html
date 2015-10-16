@@ -26,7 +26,7 @@
 <div ng-if="is_playing">
 <div class="status-playing">Playing</div></div>
 <div id="timer" class="timer">00:00:00.000</div>
-<div class="range">
+<div ng-if="has_recording &amp;&amp; !is_recording" class="range">
 <input name="volume" ng-model="data.scrub" type="range" max="100"/></div>
 <div class="controls">
 <div ng-click="play()" ng-if="has_recording &amp;&amp; !is_playing" class="fc-button play">
