@@ -1,6 +1,5 @@
 .recorder {
   background-color: black;
-  padding: 20px;
   height: 100%;
   color: white; }
   .recorder
@@ -28,7 +27,7 @@ div {
     animation-iteration-count: infinite;
     color: green; }
   .recorder
-.range {
+.jumps {
     width: 280px;
     margin-left: auto;
     margin-right: auto;
@@ -36,10 +35,28 @@ div {
     border-radius: 10px;
     text-align: center;
     background-color: #1E2021;
-    padding: 0px;
     color: #F1E6D4;
     margin-bottom: 20px;
-    letter-spacing: -7px; }
+    font-size: 30px; }
+    .recorder
+.jumps
+.increment {
+      display: inline-block;
+      position: relative;
+      top: 20px; }
+    .recorder
+.jumps
+.skip {
+      border: 1px solid white;
+      display: inline-block;
+      border-radius: 3px; }
+      .recorder
+.jumps
+.skip .ion-arrow-left-b, .recorder
+.jumps
+.skip
+.ion-arrow-right-b {
+        display: inline-block; }
   .recorder
 .timer {
     width: 280px;

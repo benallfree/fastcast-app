@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var plumber = require('gulp-plumber');
 var gutil = require('gulp-util');
 var bower = require('bower');
 var concat = require('gulp-concat');
@@ -7,6 +8,7 @@ var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var sh = require('shelljs');
 var haml = require('gulp-haml');
+var notify = require("gulp-notify");
 
 var paths = {
   sass: ['./scss/**/*.scss'],
@@ -17,6 +19,7 @@ gulp.task('default', ['sass', 'haml']);
 
 gulp.task('sass', function(done) {
   gulp.src('./scss/**/*.scss')
+    .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
     .pipe(sass({
       errLogToConsole: true
     }))
@@ -33,11 +36,12 @@ gulp.task('sass', function(done) {
 // Get and render all .haml files recursively
 gulp.task('haml', function () {
   gulp.src('./haml/**/*.haml')
+    .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
     .pipe(haml({
       ext: '.html',
       compiler: 'visionmedia'
     }))
-  .pipe(gulp.dest('./www'));
+    .pipe(gulp.dest('./www'));
 });
 
 gulp.task('watch', function() {

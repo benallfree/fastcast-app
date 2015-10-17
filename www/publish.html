@@ -1,0 +1,10 @@
+
+<ion-view view-title="Publish Your Episode">
+<ion-content class="padding">
+<div class="list list-inset">
+<label class="item item-input">
+<input type="number" placeholder="Episode Number" ng-model="episode.number"/></label>
+<label class="item item-input">
+<input type="text" placeholder="Episode Title" ng-model="episode.title" autocapitalize="words"/></label></div>
+<button ng-click="publish()" ng-if="has_recording" class="button button-block button-positive">Publish</button>
+<progress id="progress" max="100" ng-if="is_uploading" ng-model="progress"></progress></ion-content></ion-view>

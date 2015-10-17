@@ -8,37 +8,11 @@
 <link href="css/style.css" rel="stylesheet"/>
 <script src="lib/jquery/dist/jquery.min.js"></script>
 <script src="lib/ionic/js/ionic.bundle.js"></script>
+<script src="lib/sprintf/dist/sprintf.min.js"></script>
+<script src="lib/ngCordova/dist/ng-cordova.js"></script>
 <script src="cordova.js"></script>
 <script src="js/app.js"></script></head>
 <body ng-app="fastcast" ng-controller="FastCast">
-<ion-tabs class="tabs-positive tabs-icon-only">
-<ion-tab icon-off="ion-ios-list-outline" icon-on="ion-ios-list" title="Episodes">
-<ion-content>Episodes</ion-content></ion-tab>
-<ion-tab icon-off="ion-mic-c" icon-on="ion-mic-c" title="Record">
-<div class="bar bar-header bar-positive">
-<h1 class="title">bar-positive</h1></div>
-<ion-content class="recorder has-header">
-<div ng-if="!has-recording">
-<div ng-if="!is_recording &amp;&amp; !is_playing">
-<div class="status-stopped">Stopped</div></div>
-<div ng-if="is_recording">
-<div class="status-recording">Recording</div></div>
-<div ng-if="is_playing">
-<div class="status-playing">Playing</div></div>
-<div id="timer" class="timer">00:00:00.000</div>
-<div ng-if="has_recording &amp;&amp; !is_recording" class="range">
-<input name="volume" ng-model="data.scrub" type="range" max="100"/></div>
-<div class="controls">
-<div ng-click="play()" ng-if="has_recording &amp;&amp; !is_playing" class="fc-button play">
-<div class="ion-play"></div></div>
-<div ng-click="stop()" ng-if="is_playing" class="fc-button stop">
-<div class="ion-stop"></div></div>
-<div ng-click="record()" ng-if="!is_recording &amp;&amp; !is_playing" class="fc-button record">
-<div class="ion-record"></div></div>
-<div ng-click="stop_recording()" ng-if="is_recording" class="fc-button stop-record">
-<div class="ion-stop"></div></div></div></div>
-<div ng-if="has-recording" class="publish">
-<button ng-click="publish()" ng-if="has_recording">Publish</button>
-<progress id="progress" max="100" ng-if="is_uploading" value="0"></progress></div></ion-content></ion-tab>
-<ion-tab icon-off="ion-ios-gear-outline" icon-on="ion-ios-gear" title="Settings">
-<ion-content>Settings</ion-content></ion-tab></ion-tabs></body></html>
+<ion-nav-bar class="bar-positive">
+<ion-nav-back-button>Back</ion-nav-back-button></ion-nav-bar>
+<ion-nav-view></ion-nav-view></body></html>
