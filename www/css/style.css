@@ -73,6 +73,12 @@ div {
     margin-bottom: 20px;
     letter-spacing: -7px; }
   .recorder
+.run_time {
+    color: white;
+    text-align: center;
+    font-size: 12px;
+    letter-spacing: 0px; }
+  .recorder
 .controls {
     text-align: center; }
     .recorder
@@ -128,6 +134,21 @@ div {
 .ion-play {
         position: relative;
         left: 10px; }
+
+.finish
+.saved-in-cloud {
+  font-size: 210px;
+  text-align: center; }
+
+.finish
+.published-to-listeners {
+  font-size: 210px;
+  text-align: center; }
+
+.publisher
+.uploader
+.type {
+  text-transform: capitalize; }
 
 @-webkit-keyframes "pulse" {
   0% {

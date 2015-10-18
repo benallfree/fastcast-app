@@ -1,3 +1,9 @@
-%ion-view{'view-title': 'Episodes'}
-  %ion-content.padding
-    %a.button.button-block{"ui-sref": 'record'} New Episode
+%ion-header-bar.bar-positive
+  %h1.title FastCast Podcasting Platform
+%ion-content.padding
+  %a.button.button-block{"ng-click": 'new()'} New Episode
+  .list
+    %a.item.item-icon-left{'ng-repeat': 'episode in podcast.episodes', 'ng-click': 'go(episode.slug)'}
+      %i.icon{'ng-if': '!episode.pub_date'}
+      %i.icon.ion-ios-people.balanced{'ng-if': 'episode.pub_date'}
+      <%episode.title%>

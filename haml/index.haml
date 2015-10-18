@@ -12,7 +12,11 @@
     %script{src: "lib/ngCordova/dist/ng-cordova.js"}
     %script{src: "cordova.js"}
     %script{src: "js/app.js"}
-  %body{"ng-app": "fastcast", "ng-controller": "FastCast"}
-    %ion-nav-bar.bar-positive
-      %ion-nav-back-button Back
+    %script{src: "js/util.js"}
+    %script{src: "js/controllers/AppController.js"}
+    %script{src: "js/controllers/HomeController.js"}
+    %script{src: "js/controllers/RecordController.js"}
+    %script{src: "js/controllers/FinalizeController.js"}
+    %script{src: "js/controllers/EpisodeController.js"}
+  %body{"ng-app": "fastcast", "ng-controller": "AppController"}
     %ion-nav-view

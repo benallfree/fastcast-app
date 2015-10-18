@@ -1,24 +1,30 @@
 
-<ion-view view-title="Record an Episode">
+<ion-header-bar class="bar-positive">
+<h1 class="title">
+<span ng-if="episode.title"><%episode.number | numberFixedLen:3%> - <%episode.title%></span>
+<span ng-if="!episode.title">New Episode</span></h1>
+<div class="buttons">
+<button ng-click="cancel()" class="button button-positive">Cancel</button></div></ion-header-bar>
 <ion-content class="recorder padding">
-<div ng-if="!has-recording">
 <div ng-if="!is_recording &amp;&amp; !is_playing">
 <div class="status-stopped">Stopped</div></div>
 <div ng-if="is_recording">
 <div class="status-recording">Recording</div></div>
 <div ng-if="is_playing">
 <div class="status-playing">Playing</div></div>
-<div id="timer" class="timer"><%scrub_point_ms.toHHMMSS()%></div>
+<div class="timer">
+<div id="timer"><%scrub_point_ms.toHHMMSS()%></div>
+<div class="run_time">Total <%duration_ms.toHHMMSS()%></div></div>
 <div ng-if="has_recording &amp;&amp; !is_recording" class="jumps">
 <button ng-click="seek(0)" class="button button-small skip">
 <div class="ion-skip-backward"></div></button>
-<button ng-click="rw(60000)" class="button button-small skip">
+<button ng-click="rw(60000)" on-hold="hold('rw:60000')" on-release="hold(null)" class="button button-small skip">
 <div class="ion-ios-rewind"></div></button>
-<button ng-click="rw(15000)" class="button button-small skip">
+<button ng-click="rw(15000)" on-hold="hold('rw:15000')" on-release="hold(null)" class="button button-small skip">
 <div class="ion-arrow-left-b"></div></button>
-<button ng-click="ff(15000)" class="button button-small skip">
+<button ng-click="ff(15000)" on-hold="hold('ff:15000')" on-release="hold(null)" class="button button-small skip">
 <div class="ion-arrow-right-b"></div></button>
-<button ng-click="ff(60000)" class="button button-small skip">
+<button ng-click="ff(60000)" on-hold="hold('ff:60000')" on-release="hold(null)" class="button button-small skip">
 <div class="ion-ios-fastforward"></div></button>
 <button ng-click="seek(-1)" class="button button-small skip">
 <div class="ion-skip-forward"></div></button></div>
@@ -30,6 +36,6 @@
 <div ng-click="record()" ng-if="!is_recording &amp;&amp; !is_playing" class="fc-button record">
 <div class="ion-record"></div></div>
 <div ng-click="stop_recording()" ng-if="is_recording" class="fc-button stop-record">
-<div class="ion-stop"></div></div></div></div>
+<div class="ion-stop"></div></div></div>
 <div ng-if="has_recording" class="publish">
-<button ui-sref="publish" class="button button-block button-positive">Publish Now</button></div></ion-content></ion-view>
+<button nav-direction="forward" ui-sref="episode.finalize" class="button button-block button-positive">Finalize</button></div></ion-content>
