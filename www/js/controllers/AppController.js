@@ -1,14 +1,5 @@
 app.controller('AppController', function($scope, $http, $interval, $cordovaFile, $state) {
   $scope.podcast = {
-    next_episode_number: function() {
-      var n = 0;
-      for(var slug in this.episodes)
-      {
-        var episode = this.episodes[slug];
-        n = Math.max(n,episode.number);
-      }
-      return n+1;
-    },
     episodes: {
       '001-slug-me': {
         slug: '001-slug-me',
@@ -37,11 +28,21 @@ app.controller('AppController', function($scope, $http, $interval, $cordovaFile,
     },
   };
 
+  function next_episode_number() {
+    var n = 0;
+    for(var slug in $scope.podcast.episodes)
+    {
+      var episode = $scope.podcast.episodes[slug];
+      n = Math.max(n,episode.number);
+    }
+    return n+1;
+  }
+  
   $scope.new = function()
   {
     $scope.episode = {
       slug: sprintf("fc-tgi-%d", (new Date()).getTime()),
-      number: $scope.podcast.next_episode_number(),
+      number: next_episode_number(),
     };
     $state.transitionTo('episode.record');
     
