@@ -9,6 +9,9 @@ app.controller('RecordController', function($scope, $http, $interval, $cordovaFi
     var current_ms = (new Date()).getTime();
     $scope.duration_ms = current_ms - start_time_ms;
     $scope.scrub_point_ms = $scope.duration_ms;
+    $scope.episode.duration_ms = $scope.duration_ms;
+    $scope.podcast.episodes[$scope.episode.slug] = $scope.episode;
+
     angular.element('#timer').html($scope.duration_ms.toHHMMSS());
     if(is_app)
     {
@@ -113,9 +116,9 @@ app.controller('RecordController', function($scope, $http, $interval, $cordovaFi
   function _record() {
     $scope.duration_ms = 0;
     $scope.has_recording = false;
-    $scope.audio_src = "cdvfile://localhost/persistent/podcast.m4a";
     $scope.is_recording = true;
     start_time_ms = (new Date()).getTime();
+    $scope.episode.recorded_at = start_time_ms;
     var timeout_promise = $interval(function() {
       if(!$scope.is_recording)
       {
@@ -129,7 +132,7 @@ app.controller('RecordController', function($scope, $http, $interval, $cordovaFi
     
     if(is_app)
     {
-      $scope.mediaRec = new Media($scope.audio_src,
+      $scope.mediaRec = new Media($scope.audio_src.join('/'),
         function() {
           console.log("recordAudio():Audio Success");
         },

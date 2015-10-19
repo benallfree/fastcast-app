@@ -26,6 +26,24 @@ var app = angular.module('fastcast', ['ionic', 'ngCordova'])
   };
 })
 
+.filter('orderByEpisode', function() {
+  return function(items, field, reverse) {
+    var filtered = [];
+    angular.forEach(items, function(item) {
+      filtered.push(item);
+    });
+    filtered.sort(function (a, b) {
+      if(a.published_at && !b.published_at) return 1;
+      if(!a.published_at && b.published_at) return -1;
+      // Either both are published or neither is published
+      if(a.published && b.published) return (a.published_at > b.published_at ? -1 : 1);
+      return (a.recorded_at > b.recorded_at ? -1 : 1); 
+    });
+    if(reverse) filtered.reverse();
+    return filtered;
+  };
+})
+
 
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
@@ -35,6 +53,7 @@ var app = angular.module('fastcast', ['ionic', 'ngCordova'])
     controller: 'HomeController'
   })
   .state('episode', {
+    cache: false,
     url: '/episode',
     template: '<ion-nav-view></ion-nav-view>',
     controller: 'EpisodeController',
@@ -52,9 +71,10 @@ var app = angular.module('fastcast', ['ionic', 'ngCordova'])
     controller: 'FinalizeController',
     parent: 'episode',
   })
-  .state('finish', {
+  .state('episode.finish', {
     url: '/finish',
-    templateUrl: 'finish.html'
+    templateUrl: 'finish.html',
+    parent: 'episode',
   })
   ;
   

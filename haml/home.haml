@@ -3,7 +3,7 @@
 %ion-content.padding
   %a.button.button-block{"ng-click": 'new()'} New Episode
   .list
-    %a.item.item-icon-left{'ng-repeat': 'episode in podcast.episodes', 'ng-click': 'go(episode.slug)'}
-      %i.icon{'ng-if': '!episode.pub_date'}
-      %i.icon.ion-ios-people.balanced{'ng-if': 'episode.pub_date'}
+    %a.item.item-icon-left{'ng-repeat': "episode in podcast.episodes | orderByEpisode" , 'ng-click': 'go(episode.slug)'}
+      %i.icon{'ng-if': '!episode.published_at'}
+      %i.icon.ion-ios-people.balanced{'ng-if': 'episode.published_at'}
       <%episode.title%>

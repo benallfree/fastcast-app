@@ -1,43 +1,54 @@
 app.controller('AppController', function($scope, $http, $interval, $cordovaFile, $state) {
   $scope.podcast = {
-    next_episode_number: 42,
+    next_episode_number: function() {
+      var n = 0;
+      for(var slug in this.episodes)
+      {
+        var episode = this.episodes[slug];
+        n = Math.max(n,episode.number);
+      }
+      return n+1;
+    },
     episodes: {
       '001-slug-me': {
         slug: '001-slug-me',
         title: 'Tester 1',
-        pub_date: null,
+        published_at: null,
         duration_ms: 29348634,
         number: 1,
+        recorded_at: 1445171088465,
       },
       '002-slug-me': {
         slug: '002-slug-me',
         title: 'Tester 2',
-        pub_date: 1445165649619,
+        published_at: 1445165649619,
         duration_ms: 19348634,
-        number: 1,
+        number: 2,
+        recorded_at: 1445171092622,
       },
       '003-slug-me': {
         slug: '003-slug-me',
         title: 'Tester 3',
-        pub_date: 1445165656489,
+        published_at: 1445165656489,
         duration_ms: 2934834,
-        number: 1,
+        number: 3,
+        recorded_at: 1445171102106,
       },
     },
   };
-  $scope.episode = $scope.podcast.episodes['002-slug-me'];
-  
+
   $scope.new = function()
   {
-    $scope.episode = {};
+    $scope.episode = {
+      slug: sprintf("fc-tgi-%d", (new Date()).getTime()),
+      number: $scope.podcast.next_episode_number(),
+    };
     $state.transitionTo('episode.record');
     
   }
   $scope.go = function(slug)
   {
-    console.log(slug);
     $scope.episode = $scope.podcast.episodes[slug];
-    console.log($scope.episode);
     $state.transitionTo('episode.record');
   }
 });

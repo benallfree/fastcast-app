@@ -1,34 +1,28 @@
 
 
 app.controller('FinalizeController', function($scope, $http, $interval, $cordovaFile, $state, $ionicActionSheet, $ionicHistory) {
-  var src = null;
-  var mediaRec = null;
   $scope.is_uploading = false;
-  $scope.episode = {
-    number: $scope.podcast.next_episode_number,
-  };
   $scope.uploads = {};
 
   $scope.back = function() {
     $state.transitionTo('episode.record');
   };
     
-  function upload_html(slug)
+  function upload_html()
   {
     if(is_app)
     {
-      $cordovaFile.writeFile( 'cdvfile://localhost/persistent' , 'podcast.html', 'hello world', true).then( function(result) {
-        var src = "cdvfile://localhost/persistent/podcast.html";
-        upload({slug: slug, type: 'html', mime: 'text/html', src: src});
+      $cordovaFile.writeFile( $scope.html_src[0] , $scope.html_src[1], 'hello world', true).then( function(result) {
+        upload({slug: $scope.episode.slug, type: 'html', mime: 'text/html', src: $scope.html_src.join('/')});
       }, function(err) {
       	console.log('file write error', err);
       });
     }
   }
   
-  function upload_audio(slug)
+  function upload_audio()
   {
-    upload({slug: slug, type: 'audio', mime: 'audio/mp4', src: src});
+    upload({slug: $scope.episode.slug, type: 'audio', mime: 'audio/mp4', src: $scope.audio_src.join('/')});
   }
   
   $scope.is_uploading_started = false;
@@ -45,11 +39,24 @@ app.controller('FinalizeController', function($scope, $http, $interval, $cordova
       alert('Please supply an episode title.');
       return;
     }
-    slug = sprintf("%03d-%s", $scope.episode.number, $scope.episode.title.slugify());
-    upload_html(slug);
-    upload_audio(slug);
+    if($scope.episode.is_published && !$scope.episode.published_at)
+    {
+      $scope.episode.published_at = (new Date()).getTime();
+    }
     $scope.is_uploading_started = true;
+    if(is_app)
+    {
+      upload_html();
+      upload_audio();
+    } else {
+      $scope.is_uploading_finished = true;
+    }
   };
+  
+  $scope.$watch('is_uploading_finished', function(v) {
+    if(!v) return;
+    $state.transitionTo('episode.finish');
+  });
   
   $scope.upload_count=0;
   function upload(options)
@@ -72,10 +79,6 @@ app.controller('FinalizeController', function($scope, $http, $interval, $cordova
               delete $scope.uploads[options.type]
               $scope.upload_count--;
               if($scope.upload_count==0) $scope.is_uploading_finished = true;
-              if($scope.is_uploading_finished)
-              {
-                $state.transitionTo('finished');
-              }
               $scope.$apply();
             }, 1000);
           }
