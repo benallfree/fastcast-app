@@ -44,8 +44,6 @@ app.controller('AppController', function($scope, $http, $interval, $cordovaFile,
     $scope.episode = {
       guid: guid,
       number: next_episode_number(),
-      audio_src: t + ".m4a",
-      html_src: t + '.html',
     };
     $state.transitionTo('episode.record');
     

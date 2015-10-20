@@ -1,6 +1,6 @@
 
 
-app.controller('RecordController', function($scope, $http, $interval, $cordovaFile, $state, $ionicActionSheet) {
+app.controller('RecordController', function($scope, $http, $interval, $cordovaFile, $state, $ionicActionSheet, $ionicPopup) {
   var start_time_ms = null;
   
   $scope.stop_recording = function() {

@@ -21,6 +21,8 @@
     "cordova-plugin-media",
     "cordova-plugin-file-transfer",
     "org.apache.cordova.file",
-    "https://github.com/wootwoot1234/cordova-audio-encode.git"
+    "https://github.com/wootwoot1234/cordova-audio-encode.git",
+    "https://github.com/robertklein/cordova-ios-security.git",
+    "https://github.com/xu-li/phonegap-wav2m4a.git"
   ]
 }

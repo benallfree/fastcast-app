@@ -39,6 +39,10 @@
                         {
                             "xml": "<feature name=\"Device\"><param name=\"ios-package\" value=\"CDVDevice\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Wav2M4a\"><param name=\"ios-package\" value=\"CDVWav2M4a\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -54,6 +58,16 @@
                     "MobileCoreServices.framework": [
                         {
                             "xml": false,
+                            "count": 1
+                        }
+                    ]
+                }
+            },
+            "*-Info.plist": {
+                "parents": {
+                    "NSAppTransportSecurity": [
+                        {
+                            "xml": "<dict><key>NSAllowsArbitraryLoads</key><true /></dict>",
                             "count": 1
                         }
                     ]
@@ -81,6 +95,12 @@
             "PACKAGE_NAME": "com.ionicframework.app138361"
         },
         "org.apache.cordova.device": {
+            "PACKAGE_NAME": "com.ionicframework.app138361"
+        },
+        "sk.kcorp.cordova.ios-security": {
+            "PACKAGE_NAME": "com.ionicframework.app138361"
+        },
+        "xu.li.cordova.wav2m4a": {
             "PACKAGE_NAME": "com.ionicframework.app138361"
         }
     },

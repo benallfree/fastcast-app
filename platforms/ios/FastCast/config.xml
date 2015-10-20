@@ -28,6 +28,7 @@
     <preference name="DisallowOverscroll" value="true" />
     <preference name="android-minSdkVersion" value="16" />
     <preference name="BackupWebStorage" value="none" />
+    <preference name="iosPersistentFileLocation" value="Library" />
     <feature name="AudioEncode">
         <param name="ios-package" value="AudioEncode" />
     </feature>
@@ -50,5 +51,8 @@
     </feature>
     <feature name="Device">
         <param name="ios-package" value="CDVDevice" />
+    </feature>
+    <feature name="Wav2M4a">
+        <param name="ios-package" value="CDVWav2M4a" />
     </feature>
 </widget>

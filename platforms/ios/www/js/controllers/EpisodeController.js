@@ -1,6 +1,8 @@
 
 
-app.controller('EpisodeController', function($scope, $http, $interval, $cordovaFile, $state, $ionicActionSheet) {
+app.controller('EpisodeController', function($scope, $http, $interval, $cordovaFile, $state, $ionicActionSheet, $ionicPopup) {
+  $scope.output_directory = "cdvfile://localhost/persistent/";
+  console.log($scope.output_directory);
   if(!$scope.episode)
   {
     $state.transitionTo('home');
@@ -9,13 +11,19 @@ app.controller('EpisodeController', function($scope, $http, $interval, $cordovaF
   var t = (new Date()).getTime();
   if(is_app)
   {
-    $scope.audio = new Media("cdvfile://localhost/persistent/"+$scope.episode.audio_src,
+    $scope.audio = new Media($scope.output_directory+$scope.episode.guid+".wav",
       function() {
         console.log("Audio Success");
       },
       function(err) {
         console.log("Audio Error: "+ err.code);
         console.log(err);
+        $ionicPopup.alert({
+          title: 'Audio Error',
+          template: 'The audio system has failed. Please report this.'
+        }).then(function(res) {
+          $state.transitionTo('home');
+        });
       }
     );
   }

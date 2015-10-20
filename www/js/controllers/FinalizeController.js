@@ -12,8 +12,8 @@ app.controller('FinalizeController', function($scope, $http, $interval, $cordova
   {
     if(is_app)
     {
-      $cordovaFile.writeFile( "cdvfile://localhost/persistent" , $scope.episode.html_src, 'hello world', true).then( function(result) {
-        upload({slug: $scope.episode.slug, type: 'html', mime: 'text/html', src: $scope.episode.html_src});
+      $cordovaFile.writeFile( $scope.output_directory , $scope.episode.guid+'.html', 'hello world', true).then( function(result) {
+        upload({slug: $scope.episode.slug, type: 'html', mime: 'text/html', src: $scope.episode.guid+'.html'});
       }, function(err) {
       	console.log('file write error', err);
       });
@@ -22,7 +22,7 @@ app.controller('FinalizeController', function($scope, $http, $interval, $cordova
   
   function upload_audio()
   {
-    upload({slug: $scope.episode.slug, type: 'audio', mime: 'audio/mp4', src: $scope.episode.audio_src});
+    upload({slug: $scope.episode.slug, type: 'audio', mime: 'audio/mp4', src: $scope.episode.guid+'.m4a'});
   }
   
   $scope.is_uploading_started = false;
@@ -50,7 +50,28 @@ app.controller('FinalizeController', function($scope, $http, $interval, $cordova
     if(is_app)
     {
       upload_html();
-      upload_audio();
+      
+      resolveLocalFileSystemURL($scope.output_directory+$scope.episode.guid+'.wav', function(entry) {
+        var source = entry.toURL();
+        var dst = source.replace(/.wav/, '.m4a');
+        console.log(source, dst);
+        wav2m4a.convert(source, dst, function() {
+            uplaod_audio();
+          },
+          function()
+          {
+            console.log("Encoding error", arguments);
+          }
+        );
+        return;
+        console.log(nativePath);
+        window.plugins.AudioEncode.encodeAudio($scope.output_directory+$scope.episode.guid+'.wav', function() {
+          upload_audio();
+        }, function(statusCode) {
+          console.log("Encoding failed", statusCode);
+        });
+      });
+      
     } else {
       $scope.is_uploading_finished = true;
     }
@@ -93,7 +114,7 @@ app.controller('FinalizeController', function($scope, $http, $interval, $cordova
         upload_options.chunkedMode = false;
         upload_options.httpMethod="PUT";
         upload_options.headers = {'Content-Type': options.mime};
-        ft.upload("cdvfile://localhost/persistent/"+options.src, url, options.success, options.failure, upload_options);
+        ft.upload($scope.output_directory+options.src, url, options.success, options.failure, upload_options);
       }
     }, options.failure);
   }

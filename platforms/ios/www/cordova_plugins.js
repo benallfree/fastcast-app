@@ -208,6 +208,13 @@ module.exports = [
         "clobbers": [
             "device"
         ]
+    },
+    {
+        "file": "plugins/xu.li.cordova.wav2m4a/www/wav2m4a.js",
+        "id": "xu.li.cordova.wav2m4a.wav2m4a",
+        "clobbers": [
+            "wav2m4a"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -219,7 +226,9 @@ module.exports.metadata =
     "cordova-plugin-file-transfer": "1.3.0",
     "cordova-plugin-media": "1.0.1",
     "org.apache.cordova.console": "0.2.13",
-    "org.apache.cordova.device": "0.3.0"
+    "org.apache.cordova.device": "0.3.0",
+    "sk.kcorp.cordova.ios-security": "0.3.0",
+    "xu.li.cordova.wav2m4a": "0.1"
 }
 // BOTTOM OF METADATA
 });
