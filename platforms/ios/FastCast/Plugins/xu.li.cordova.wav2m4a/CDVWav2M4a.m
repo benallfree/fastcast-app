@@ -40,7 +40,7 @@
         AVURLAsset* audioAsset = [[AVURLAsset alloc] initWithURL:src options:nil];
         
         
-        SDAVAssetExportSession *encoder = [SDAVAssetExportSession.alloc initWithAsset:anAsset];
+        SDAVAssetExportSession *encoder = [SDAVAssetExportSession.alloc initWithAsset:audioAsset];
         encoder.outputFileType = AVFileTypeAppleM4A;
         encoder.outputURL = target;
         encoder.audioSettings = @
@@ -53,6 +53,8 @@
 
         [encoder exportAsynchronouslyWithCompletionHandler:^
         {
+            CDVPluginResult* pluginResult = nil;
+
             if (encoder.status == AVAssetExportSessionStatusCompleted)
             {
                 pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
@@ -63,7 +65,7 @@
             }
             else
             {
-                NSString *msg = [session.error localizedDescription];
+                NSString *msg = [encoder.error localizedDescription];
                 pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:msg];
             }
             [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
