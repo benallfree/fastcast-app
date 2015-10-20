@@ -3,7 +3,7 @@
     %button.button.button-positive{'ui-sref': 'episode.record', 'nav-direction': 'back'} Back
   %h1.title Finalize this Episode
   .buttons
-    %button.button.button-positive{'ng-click': 'cancel()'} Cancel
+    %button.button.button-assertive{'ng-click': 'cancel()', 'ng-if': 'has_changes'} Cancel
 %ion-content.padding.publisher
   .list.list-inset
     %label.item.item-input

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <widget id="com.ionicframework.app138361" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>app</name>
+  <name>FastCast</name>
   <description>
-        An Ionic Framework and Cordova project.
+        The fastest podcasting platform. Zero to hero in one touch.
     </description>
-  <author email="hi@ionicframework" href="http://ionicframework.com/">
-      Ionic Framework Team
+  <author email="ben@benallfree.com" href="http://www.benallfree.com/">
+    Ben Allfree
     </author>
   <content src="index.html"/>
   <access origin="*"/>
@@ -17,4 +17,8 @@
   <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
   </feature>
+  <feature name="BackgroundAudio">
+    <param name="ios-package" value="BackgroundAudio" />
+    <param name="onload" value="true" />
+  </feature>  
 </widget>

@@ -1,11 +1,12 @@
-%ion-view{'view-title': 'Base Tagged!'}
-  %ion-content.padding.finish
-    .saved{'ng-if': '!episode.is_published'}
-      %p Awesome, your episode is safe in the cloud. You can go back any time and publish it later to make it live for all your listeners.
-      .saved-in-cloud.positive
-        .ion-android-cloud-done
-    .published{'ng-if': 'episode.is_published'}
-      Your episode has been published to your listeners! It is now live in your podcast feed.
-      .published-to-listeners.balanced
-        .ion-ios-people
-    %button.button.button-block.button-stable{'ui-sref': 'home'} Back to Episodes
+%ion-header-bar.bar-positive
+  %h1.title Base Tagged!
+%ion-content.padding.finish
+  .saved{'ng-if': '!episode.is_published'}
+    %p Awesome, your episode is safe in the cloud. You can go back any time and publish it later to make it live for all your listeners.
+    .saved-in-cloud.positive
+      .ion-android-cloud-done
+  .published{'ng-if': 'episode.is_published'}
+    Your episode has been published to your listeners! It is now live in your podcast feed.
+    .published-to-listeners.balanced
+      .ion-ios-people
+  %button.button.button-block.button-stable{'ui-sref': 'home'} Back to Episodes

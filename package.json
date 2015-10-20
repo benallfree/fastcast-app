@@ -20,6 +20,7 @@
   "cordovaPlugins": [
     "cordova-plugin-media",
     "cordova-plugin-file-transfer",
-    "org.apache.cordova.file"
+    "org.apache.cordova.file",
+    "https://github.com/wootwoot1234/cordova-audio-encode.git"
   ]
 }

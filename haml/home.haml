@@ -3,7 +3,13 @@
 %ion-content.padding
   %a.button.button-block{"ng-click": 'new()'} New Episode
   .list
-    %a.item.item-icon-left{'ng-repeat': "episode in podcast.episodes | orderByEpisode" , 'ng-click': 'go(episode.slug)'}
+    %a.item.item-icon-left{'ng-repeat': "episode in podcast.episodes | orderByMagic" , 'ng-click': 'go(episode.guid)'}
       %i.icon{'ng-if': '!episode.published_at'}
       %i.icon.ion-ios-people.balanced{'ng-if': 'episode.published_at'}
-      <%episode.title%>
+      %h2 <%episode.title%>
+      %p <%episode.guid%>
+      %p <%episode.html_src%>
+      %p <%episode.audio_src%>
+      %p Run length: <%episode.duration_ms.humanize()%>
+      %p{'ng-if': "episode.published_at"} Published <%episode.published_at | date : 'MM/dd/yyyy @ hh:mm:ss a'%>
+      %p{'ng-if': "!episode.published_at"} Recorded <%episode.recorded_at | date : 'MM/dd/yyyy @ hh:mm:ss a'%>

@@ -1,5 +1,5 @@
 {
-  "name": "app",
+  "name": "FastCast",
   "app_id": "",
   "gulpStartupTasks": [
     "sass",

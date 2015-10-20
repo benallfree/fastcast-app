@@ -1,11 +1,13 @@
 %ion-header-bar.bar-positive
+  .buttons
+    %button.button.button-positive{'ui-sref': 'home', 'nav-direction': 'back', 'ng-if': '!has_changes'} Back
   %h1.title
     %span{'ng-if': 'episode.title'}
       <%episode.number | numberFixedLen:3%> - <%episode.title%>
     %span{'ng-if': '!episode.title'}
       New Episode
   .buttons
-    %button.button.button-positive{'ng-click': 'cancel()'} Cancel
+    %button.button.button-assertive{'ng-click': 'cancel()', 'ng-if': 'has_changes'} Cancel
 %ion-content.recorder.padding
   %div{"ng-if": "!is_recording && !is_playing"}
     .status-stopped
@@ -38,7 +40,7 @@
   .controls
     .fc-button.play{"ng-click": "play()", "ng-if": "has_recording && !is_playing"}
       .ion-play
-    .fc-button.stop{"ng-click": "stop()", "ng-if": "is_playing"}
+    .fc-button.stop{"ng-click": "stop_playing()", "ng-if": "is_playing"}
       .ion-stop
     .fc-button.record{"ng-click": "record()", "ng-if": "!is_recording && !is_playing"}
       .ion-record

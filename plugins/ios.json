@@ -9,15 +9,11 @@
                 "parents": {
                     "/*": [
                         {
+                            "xml": "<feature name=\"AudioEncode\"><param name=\"ios-package\" value=\"AudioEncode\" /></feature>",
+                            "count": 1
+                        },
+                        {
                             "xml": "<feature name=\"Keyboard\"><param name=\"ios-package\" onload=\"true\" value=\"IonicKeyboard\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Console\"><param name=\"ios-package\" value=\"CDVLogger\" /></feature>",
-                            "count": 1
-                        },
-                        {
-                            "xml": "<feature name=\"Device\"><param name=\"ios-package\" value=\"CDVDevice\" /></feature>",
                             "count": 1
                         },
                         {
@@ -29,11 +25,19 @@
                             "count": 1
                         },
                         {
+                            "xml": "<feature name=\"FileTransfer\"><param name=\"ios-package\" value=\"CDVFileTransfer\" /></feature>",
+                            "count": 1
+                        },
+                        {
                             "xml": "<feature name=\"Media\"><param name=\"ios-package\" value=\"CDVSound\" /></feature>",
                             "count": 1
                         },
                         {
-                            "xml": "<feature name=\"FileTransfer\"><param name=\"ios-package\" value=\"CDVFileTransfer\" /></feature>",
+                            "xml": "<feature name=\"Console\"><param name=\"ios-package\" value=\"CDVLogger\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"Device\"><param name=\"ios-package\" value=\"CDVDevice\" /></feature>",
                             "count": 1
                         }
                     ]
@@ -58,7 +62,19 @@
         }
     },
     "installed_plugins": {
+        "AudioEncode": {
+            "PACKAGE_NAME": "com.ionicframework.app138361"
+        },
         "com.ionic.keyboard": {
+            "PACKAGE_NAME": "com.ionicframework.app138361"
+        },
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "com.ionicframework.app138361"
+        },
+        "cordova-plugin-file-transfer": {
+            "PACKAGE_NAME": "com.ionicframework.app138361"
+        },
+        "cordova-plugin-media": {
             "PACKAGE_NAME": "com.ionicframework.app138361"
         },
         "org.apache.cordova.console": {
@@ -66,17 +82,7 @@
         },
         "org.apache.cordova.device": {
             "PACKAGE_NAME": "com.ionicframework.app138361"
-        },
-        "cordova-plugin-media": {
-            "PACKAGE_NAME": "com.ionicframework.app138361"
-        },
-        "cordova-plugin-file-transfer": {
-            "PACKAGE_NAME": "com.ionicframework.app138361"
         }
     },
-    "dependent_plugins": {
-        "cordova-plugin-file": {
-            "PACKAGE_NAME": "com.ionicframework.app138361"
-        }
-    }
+    "dependent_plugins": {}
 }
