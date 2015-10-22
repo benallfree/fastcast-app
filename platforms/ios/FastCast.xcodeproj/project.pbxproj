@@ -35,7 +35,6 @@
 		3EC5351B9300427486ABDC19 /* CDVFileTransfer.m in Sources */ = {isa = PBXBuildFile; fileRef = F674C393DCD64D0FAEC17ED6 /* CDVFileTransfer.m */; };
 		4B77CEFCBBAE464DBBA52EA9 /* AudioEncode.m in Sources */ = {isa = PBXBuildFile; fileRef = A02024A96EF14C46A63B3BDE /* AudioEncode.m */; };
 		5B1594DD16A7569C00FEF299 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5B1594DC16A7569C00FEF299 /* AssetsLibrary.framework */; };
-		686BAE9634C74B8C9DBC3E68 /* CDVWav2M4a.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CCE639A8D364AAA9B438772 /* CDVWav2M4a.m */; };
 		7B2C144B3D074FFFBF0A468D /* CDVSound.m in Sources */ = {isa = PBXBuildFile; fileRef = F265C0C56CF14E9D838E7CE4 /* CDVSound.m */; };
 		7E7966DE1810823500FA85AD /* icon-40.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E7966D41810823500FA85AD /* icon-40.png */; };
 		7E7966DF1810823500FA85AD /* icon-40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E7966D51810823500FA85AD /* icon-40@2x.png */; };
@@ -49,7 +48,6 @@
 		7E7966E71810823500FA85AD /* icon-small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7E7966DD1810823500FA85AD /* icon-small@2x.png */; };
 		8EB86A0F4076423C8F25DF48 /* CDVLocalFilesystem.m in Sources */ = {isa = PBXBuildFile; fileRef = D39661C3E63C4FECAACAF12B /* CDVLocalFilesystem.m */; };
 		97AEFDB2EC664EA0B12B1625 /* IonicKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 06BE5C2B67054EDB99527F24 /* IonicKeyboard.m */; };
-		CAF5EB0788A24D1C8C679643 /* SDAVAssetExportSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 016563A042BF47658FC9D119 /* SDAVAssetExportSession.m */; };
 		D4A0D8761607E02300AEF8BB /* Default-568h@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = D4A0D8751607E02300AEF8BB /* Default-568h@2x~iphone.png */; };
 		D7FC7A218A9644BBB2E51352 /* CDVLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 109E2556AD0641D39FBB244A /* CDVLogger.m */; };
 /* End PBXBuildFile section */
@@ -72,7 +70,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		016563A042BF47658FC9D119 /* SDAVAssetExportSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SDAVAssetExportSession.m; path = xu.li.cordova.wav2m4a/SDAVAssetExportSession.m; sourceTree = "<group>"; };
 		03BEEE298CAC4A329F1405C5 /* CDVSound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDVSound.h; path = "cordova-plugin-media/CDVSound.h"; sourceTree = "<group>"; };
 		06BE5C2B67054EDB99527F24 /* IonicKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IonicKeyboard.m; path = com.ionic.keyboard/IonicKeyboard.m; sourceTree = "<group>"; };
 		109E2556AD0641D39FBB244A /* CDVLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDVLogger.m; path = org.apache.cordova.console/CDVLogger.m; sourceTree = "<group>"; };
@@ -81,8 +78,6 @@
 		1D6058910D05DD3D006BFB54 /* FastCast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FastCast.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		2CCE639A8D364AAA9B438772 /* CDVWav2M4a.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDVWav2M4a.m; path = xu.li.cordova.wav2m4a/CDVWav2M4a.m; sourceTree = "<group>"; };
-		2EE22C91AD5A457C81DC3C97 /* CDVWav2M4a.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDVWav2M4a.h; path = xu.li.cordova.wav2m4a/CDVWav2M4a.h; sourceTree = "<group>"; };
 		301BF52D109A57CC0062928A /* CordovaLib.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CordovaLib.xcodeproj; path = CordovaLib/CordovaLib.xcodeproj; sourceTree = "<group>"; };
 		301BF56E109A69640062928A /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; path = www; sourceTree = SOURCE_ROOT; };
 		302D95EE14D2391D003F00A1 /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
@@ -132,7 +127,6 @@
 		CA6C4D060A6A4AF29DA8CE3B /* CDVDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDVDevice.m; path = org.apache.cordova.device/CDVDevice.m; sourceTree = "<group>"; };
 		D39661C3E63C4FECAACAF12B /* CDVLocalFilesystem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDVLocalFilesystem.m; path = "cordova-plugin-file/CDVLocalFilesystem.m"; sourceTree = "<group>"; };
 		D4A0D8751607E02300AEF8BB /* Default-568h@2x~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x~iphone.png"; sourceTree = "<group>"; };
-		E079E9F9A0BA4B4186B01777 /* SDAVAssetExportSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SDAVAssetExportSession.h; path = xu.li.cordova.wav2m4a/SDAVAssetExportSession.h; sourceTree = "<group>"; };
 		EB87FDF21871DA7A0020F90C /* merges */ = {isa = PBXFileReference; lastKnownFileType = folder; name = merges; path = ../../merges; sourceTree = "<group>"; };
 		EB87FDF31871DA8E0020F90C /* www */ = {isa = PBXFileReference; lastKnownFileType = folder; name = www; path = ../../www; sourceTree = "<group>"; };
 		EB87FDF41871DAF40020F90C /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = ../../config.xml; sourceTree = "<group>"; };
@@ -257,10 +251,6 @@
 				37D6C218C71E419998E47EE8 /* CDVLogger.h */,
 				CA6C4D060A6A4AF29DA8CE3B /* CDVDevice.m */,
 				479B5F0EFB3D438F8D15B0FE /* CDVDevice.h */,
-				2CCE639A8D364AAA9B438772 /* CDVWav2M4a.m */,
-				2EE22C91AD5A457C81DC3C97 /* CDVWav2M4a.h */,
-				016563A042BF47658FC9D119 /* SDAVAssetExportSession.m */,
-				E079E9F9A0BA4B4186B01777 /* SDAVAssetExportSession.h */,
 			);
 			name = Plugins;
 			path = FastCast/Plugins;
@@ -343,6 +333,15 @@
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 510;
+				TargetAttributes = {
+					1D6058900D05DD3D006BFB54 = {
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
+					};
+				};
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "FastCast" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -455,8 +454,6 @@
 				7B2C144B3D074FFFBF0A468D /* CDVSound.m in Sources */,
 				D7FC7A218A9644BBB2E51352 /* CDVLogger.m in Sources */,
 				309B298C4FA44D71B1895312 /* CDVDevice.m in Sources */,
-				686BAE9634C74B8C9DBC3E68 /* CDVWav2M4a.m in Sources */,
-				CAF5EB0788A24D1C8C679643 /* SDAVAssetExportSession.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

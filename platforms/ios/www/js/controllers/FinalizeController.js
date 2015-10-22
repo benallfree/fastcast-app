@@ -50,7 +50,9 @@ app.controller('FinalizeController', function($scope, $http, $interval, $cordova
     if(is_app)
     {
       upload_html();
+      upload_audio();
       
+      /*
       resolveLocalFileSystemURL($scope.output_directory+$scope.episode.guid+'.wav', function(entry) {
         var source = entry.toURL();
         var dst = source.replace(/.wav/, '.m4a');
@@ -71,6 +73,7 @@ app.controller('FinalizeController', function($scope, $http, $interval, $cordova
           console.log("Encoding failed", statusCode);
         });
       });
+      */
       
     } else {
       $scope.is_uploading_finished = true;

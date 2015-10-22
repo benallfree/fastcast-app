@@ -11,7 +11,7 @@ app.controller('EpisodeController', function($scope, $http, $interval, $cordovaF
   var t = (new Date()).getTime();
   if(is_app)
   {
-    $scope.audio = new Media($scope.output_directory+$scope.episode.guid+".wav",
+    $scope.audio = new Media($scope.output_directory+$scope.episode.guid+".m4a",
       function() {
         console.log("Audio Success");
       },
