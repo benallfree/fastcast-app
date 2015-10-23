@@ -25,6 +25,11 @@ app.controller('AppController', function($scope, $http, $interval, $cordovaFile,
     }
   }
   load_state();
+  
+  console.log($scope.podcast);
+  console.log(FastCast.templates.rss({podcast: $scope.podcast}));
+
+  
 
   
   function next_episode_number() {
@@ -54,5 +59,7 @@ app.controller('AppController', function($scope, $http, $interval, $cordovaFile,
     $scope.episode = angular.copy($scope.podcast.episodes[guid]);
     $state.transitionTo('episode.record');
   }
+  
+  
 });
 

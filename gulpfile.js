@@ -9,13 +9,27 @@ var rename = require('gulp-rename');
 var sh = require('shelljs');
 var haml = require('gulp-haml');
 var notify = require("gulp-notify");
+var handlebars = require('gulp-handlebars');
+var wrap = require('gulp-wrap');
+var declare = require('gulp-declare');
+var concat = require('gulp-concat');
 
-var paths = {
-  sass: ['./scss/**/*.scss'],
-  haml: []
-};
 
-gulp.task('default', ['sass', 'haml']);
+
+gulp.task('default', ['sass', 'haml', 'handlebars']);
+
+gulp.task('handlebars', function(){
+  gulp.src('./handlebars/*.hbs')
+    .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
+    .pipe(handlebars())
+    .pipe(wrap('Handlebars.template(<%= contents %>)'))
+    .pipe(declare({
+      namespace: 'FastCast.templates',
+      noRedeclare: true, // Avoid duplicate declarations 
+    }))
+    .pipe(concat('handlebar-templates.js'))
+    .pipe(gulp.dest('www/js/'));
+});
 
 gulp.task('sass', function(done) {
   gulp.src('./scss/**/*.scss')
@@ -45,7 +59,7 @@ gulp.task('haml', function () {
 });
 
 gulp.task('watch', function() {
-  gulp.watch(['./scss/**/*.scss', './haml/**/*.haml'], ['haml', 'sass']);
+  gulp.watch(['./scss/**/*.scss', './haml/**/*.haml', './handlebars/**/*.hbs'], ['haml', 'sass', 'handlebars']);
 });
 
 gulp.task('install', ['git-check'], function() {
