@@ -2,3 +2,4 @@
 # http://git-scm.com/docs/gitignore
 
 sass/.sass-cache
+platforms/ios/cordova/*.log
