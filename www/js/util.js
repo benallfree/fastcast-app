@@ -37,6 +37,10 @@ Number.prototype.humanize = function () {
   return time;
 }
 
+String.prototype.sprintf = function() {
+  return sprintf.apply(this, this, arguments);
+};
+
 
 Handlebars.registerHelper('datetime', function(date) {
   date = !date || date.name=='datetime' ? moment() : date;

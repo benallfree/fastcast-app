@@ -10,9 +10,11 @@ app.controller('FinalizeController', function($scope, $http, $interval, $cordova
     
   function upload_html()
   {
+    var html = FastCast.templates.episode({episode: $scope.episode});
+    console.log(html);
     if(is_app)
     {
-      $cordovaFile.writeFile( $scope.output_directory , $scope.episode.guid+'.html', 'hello world', true).then( function(result) {
+      $cordovaFile.writeFile( $scope.output_directory , $scope.episode.guid+'.html', html, true).then( function(result) {
         upload({slug: $scope.episode.slug, type: 'html', mime: 'text/html', src: $scope.episode.guid+'.html'});
       }, function(err) {
       	console.log('file write error', err);
@@ -43,39 +45,26 @@ app.controller('FinalizeController', function($scope, $http, $interval, $cordova
     {
       $scope.episode.published_at = (new Date()).getTime();
     }
-    $scope.episode.slug = sprintf("%03d - %s", $scope.episode.number, $scope.episode.title).slugify();
-    $scope.podcast.episodes[$scope.episode.guid] = angular.copy($scope.episode);
-    $scope.save_state();
+    
     $scope.is_uploading_started = true;
     if(is_app)
     {
+    	window.resolveLocalFileSystemURL($scope.output_directory + $scope.episode.guid+'.m4a', function(fileEntry) {
+      	fileEntry.file(function(file) {
+          alert(file.size);
+          $scope.episode.length_bytes = file.size;
+          $scope.episode.slug = sprintf("%03d - %s", $scope.episode.number, $scope.episode.title).slugify();
+          $scope.podcast.episodes[$scope.episode.guid] = angular.copy($scope.episode);
+          $scope.save_state();
+      		console.log(file);
+      	});
+      }, function(err) {
+        console.log("error getting file size");
+      });
       upload_html();
       upload_audio();
-      
-      /*
-      resolveLocalFileSystemURL($scope.output_directory+$scope.episode.guid+'.wav', function(entry) {
-        var source = entry.toURL();
-        var dst = source.replace(/.wav/, '.m4a');
-        console.log(source, dst);
-        wav2m4a.convert(source, dst, function() {
-            uplaod_audio();
-          },
-          function()
-          {
-            console.log("Encoding error", arguments);
-          }
-        );
-        return;
-        console.log(nativePath);
-        window.plugins.AudioEncode.encodeAudio($scope.output_directory+$scope.episode.guid+'.wav', function() {
-          upload_audio();
-        }, function(statusCode) {
-          console.log("Encoding failed", statusCode);
-        });
-      });
-      */
-      
     } else {
+      console.log("Uploading HTML and M4A...");
       $scope.is_uploading_finished = true;
     }
   };

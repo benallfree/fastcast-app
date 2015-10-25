@@ -13,10 +13,18 @@ var handlebars = require('gulp-handlebars');
 var wrap = require('gulp-wrap');
 var declare = require('gulp-declare');
 var concat = require('gulp-concat');
+var coffee = require('gulp-coffee');
 
 
 
 gulp.task('default', ['sass', 'haml', 'handlebars']);
+
+gulp.task('coffee', function() {
+  gulp.src('./coffee/*.coffee')
+    .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
+    .pipe(coffee({bare: true}).on('error', gutil.log))
+    .pipe(gulp.dest('./www/js/'))
+});
 
 gulp.task('handlebars', function(){
   gulp.src('./handlebars/*.hbs')
@@ -59,7 +67,7 @@ gulp.task('haml', function () {
 });
 
 gulp.task('watch', function() {
-  gulp.watch(['./scss/**/*.scss', './haml/**/*.haml', './handlebars/**/*.hbs'], ['haml', 'sass', 'handlebars']);
+  gulp.watch(['./scss/**/*.scss', './haml/**/*.haml', './handlebars/**/*.hbs', './coffee/**/*.coffee'], ['haml', 'sass', 'handlebars', 'coffee']);
 });
 
 gulp.task('install', ['git-check'], function() {

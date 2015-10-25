@@ -1,7 +1,6 @@
 
 
 app.controller('EpisodeController', function($scope, $http, $interval, $cordovaFile, $state, $ionicActionSheet, $ionicPopup) {
-  $scope.output_directory = "cdvfile://localhost/persistent/";
   console.log($scope.output_directory);
   if(!$scope.episode)
   {

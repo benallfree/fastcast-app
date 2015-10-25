@@ -4,13 +4,19 @@
 <ion-content class="padding">
 <a ng-click="new()" class="button button-block">New Episode</a>
 <div class="list">
-<a ng-repeat="episode in podcast.episodes | orderByMagic" ng-click="go(episode.guid)" class="item item-icon-left">
-<i ng-if="!episode.published_at" class="icon"></i>
-<i ng-if="episode.published_at" class="icon ion-ios-people balanced"></i>
-<h2><%episode.title%></h2>
-<p><%episode.guid%></p>
-<p><%episode.html_src%></p>
-<p><%episode.audio_src%></p>
+<a ng-repeat="episode in podcast.episodes | orderByMagic" ng-click="!episode.is_syncing &amp;&amp; go(episode.guid)" class="item item-icon-left">
+<i ng-if="episode.is_syncing" class="icon">
+<ion-spinner icon="spiral"></ion-spinner></i>
+<i ng-if="episode.is_broken" class="icon ion-heart-broken"></i>
+<i ng-if="!episode.is_syncing &amp;&amp; !episode.is_broken &amp;&amp; !episode.published_at" class="icon"></i>
+<i ng-if=" !episode.is_broken &amp;&amp; !episode.is_syncing &amp;&amp; episode.published_at" class="icon ion-ios-people balanced"></i>
+<h2><%episode.number | numberFixedLen:3%> - <%episode.title%></h2>
+<div class="debug">
+<p>GUID: <%episode.guid%></p>
+<p>Audio: <%episode.audio_src%></p>
+<p>Duration (ms): <%episode.duration_ms%></p>
+<p>Length (bytes): <%episode.length_bytes%></p></div>
 <p>Run length: <%episode.duration_ms.humanize()%></p>
+<progress max="100" id="progress_&lt;%episode.guid%&gt;" ng-if="episode.is_syncing"></progress>
 <p ng-if="episode.published_at">Published <%episode.published_at | date : 'MM/dd/yyyy @ hh:mm:ss a'%></p>
 <p ng-if="!episode.published_at">Recorded <%episode.recorded_at | date : 'MM/dd/yyyy @ hh:mm:ss a'%></p></a></div></ion-content>

@@ -1,4 +1,30 @@
-app.controller('AppController', function($scope, $http, $interval, $cordovaFile, $state) {
+
+
+app.controller('AppController', function($scope, $http, $interval, $cordovaFile, $state, $cordovaFileTransfer, $q) {
+  Media.prototype.getDurationAsync = function() {
+    var obj = this;
+    return $q(function(resolve,reject) {
+      obj.setVolume(0);
+      obj.play();
+      obj.stop(); 
+      var counter = 0;
+      var timerDur = setInterval(function() {
+        counter = counter + 100;
+        if (counter > 2000) {
+          clearInterval(timerDur);
+          reject();
+        }
+        var dur = obj.getDuration();
+        if (dur > 0) {
+          clearInterval(timerDur);
+          resolve(dur);
+        }
+      }, 100);            
+    });
+  };
+  
+  $scope.output_directory = "cdvfile://localhost/persistent/";
+
   $scope.save_state = function() {
     window.localStorage.setItem('podcast', angular.toJson($scope.podcast));
   }
@@ -11,6 +37,8 @@ app.controller('AppController', function($scope, $http, $interval, $cordovaFile,
     } catch (e) {
       console.log("Error loading state", e);
     }
+    
+    // Fix up version number
     if(!$scope.podcast || !$scope.podcast.version)
     {
       $scope.podcast = {
@@ -19,18 +47,25 @@ app.controller('AppController', function($scope, $http, $interval, $cordovaFile,
       };
       $scope.save_state();
     }
+    
+    // Fix up missing GUIDs
     for(var k in $scope.podcast.episodes)
     {
       $scope.podcast.episodes[k].guid = k;
+      $scope.podcast.episodes[k].is_syncing = false;
+    }
+    
+    // Fix up missing episodes
+    for(var guid in static_episodes)
+    {
+      var episode = static_episodes[guid];
+      if(!(guid in $scope.podcast.episodes))
+      {
+        $scope.podcast.episodes[guid] = episode;
+      }
     }
   }
   load_state();
-  
-  console.log($scope.podcast);
-  console.log(FastCast.templates.rss({podcast: $scope.podcast}));
-
-  
-
   
   function next_episode_number() {
     var n = 0;

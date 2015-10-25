@@ -3,13 +3,18 @@
 %ion-content.padding
   %a.button.button-block{"ng-click": 'new()'} New Episode
   .list
-    %a.item.item-icon-left{'ng-repeat': "episode in podcast.episodes | orderByMagic" , 'ng-click': 'go(episode.guid)'}
-      %i.icon{'ng-if': '!episode.published_at'}
-      %i.icon.ion-ios-people.balanced{'ng-if': 'episode.published_at'}
-      %h2 <%episode.title%>
-      %p <%episode.guid%>
-      %p <%episode.html_src%>
-      %p <%episode.audio_src%>
+    %a.item.item-icon-left{'ng-repeat': "episode in podcast.episodes | orderByMagic" , 'ng-click': '!episode.is_syncing && go(episode.guid)'}
+      %i.icon{'ng-if': 'episode.is_syncing'}
+        %ion-spinner{icon: 'spiral'}
+      %i.icon.ion-heart-broken{'ng-if': 'episode.is_broken'}
+      %i.icon{'ng-if': '!episode.is_syncing && !episode.is_broken && !episode.published_at'}
+      %i.icon.ion-ios-people.balanced{'ng-if': ' !episode.is_broken && !episode.is_syncing && episode.published_at'}
+      %h2 <%episode.number | numberFixedLen:3%> - <%episode.title%>
+      .debug
+        %p GUID: <%episode.guid%>
+        %p Duration (ms): <%episode.duration_ms%>
+        %p Length (bytes): <%episode.length_bytes%>
       %p Run length: <%episode.duration_ms.humanize()%>
+      %progress{max: "100", id: 'progress_<%episode.guid%>', 'ng-if': 'episode.is_syncing'}
       %p{'ng-if': "episode.published_at"} Published <%episode.published_at | date : 'MM/dd/yyyy @ hh:mm:ss a'%>
       %p{'ng-if': "!episode.published_at"} Recorded <%episode.recorded_at | date : 'MM/dd/yyyy @ hh:mm:ss a'%>
