@@ -20,7 +20,7 @@ var coffee = require('gulp-coffee');
 gulp.task('default', ['sass', 'haml', 'handlebars']);
 
 gulp.task('coffee', function() {
-  gulp.src('./coffee/*.coffee')
+  gulp.src('./coffee/**/*.coffee')
     .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
     .pipe(coffee({bare: true}).on('error', gutil.log))
     .pipe(gulp.dest('./www/js/'))

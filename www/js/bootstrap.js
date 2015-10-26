@@ -1,12 +1,15 @@
-if(is_app)
-{
-  document.addEventListener("deviceready", function() {
-    var domElement = document.getElementById('body');
-    angular.bootstrap(domElement, ["fastcast"]);
-  }, false);  
+var boot_angular;
+
+boot_angular = function() {
+  var domElement;
+  domElement = document.getElementById('body');
+  return angular.bootstrap(domElement, ['fastcast']);
+};
+
+if (is_app) {
+  document.addEventListener('deviceready', boot_angular, false);
 } else {
   $(function() {
-    var domElement = document.getElementById('body');
-    angular.bootstrap(domElement, ["fastcast"]);
+    return boot_angular();
   });
 }
