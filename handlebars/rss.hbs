@@ -25,7 +25,7 @@
       <link>http://www.fast-cast.net/podcasts/tgi/index.html</link>
     </image>
     <itunes:category text="Education"/>    
-		{{#each podcast.episodes}}
+		{{#each episodes}}
 			{{#if this.published_at }}
 		    <item>
 		      <guid isPermaLink="false">{{this.guid}}</guid>
@@ -38,7 +38,7 @@
 		      <itunes:summary>{{this.description}}</itunes:summary>
 		      <itunes:subtitle>{{this.description}}</itunes:subtitle>
 		      <description>{{this.description}}</description>
-		      <enclosure type="audio/mp4" url="http://www.fast-cast.net/podcasts/tgi/episodes/{{this.slug}}/{{this.slug}}.m4a" length="26652130"/>
+		      <enclosure type="audio/mp4" url="http://www.fast-cast.net/podcasts/tgi/episodes/{{this.slug}}/{{this.slug}}.m4a" length="{{this.length_bytes}}"/>
 		      <itunes:image href="http://www.fast-cast.net/podcasts/tgi/logo.jpg"/>
 		    </item>
 			{{/if}}

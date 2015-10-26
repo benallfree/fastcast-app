@@ -15,7 +15,7 @@ app.controller 'EpisodeController', ($scope, $http, $interval, $cordovaFile, $st
         template: 'The audio system has failed. Please report this.').then (res) ->
         $state.transitionTo 'home'
       )
-  $scope.has_recording = $scope.episode.recorded_at != null
+  $scope.has_recording = $scope.episode.recorded_at?
   $scope.is_uploading = false
   $scope.is_playing = false
   $scope.is_recording = false

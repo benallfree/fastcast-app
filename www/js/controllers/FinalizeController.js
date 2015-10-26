@@ -1,5 +1,23 @@
 app.controller('FinalizeController', function($scope, $http, $interval, $cordovaFile, $state, $ionicActionSheet, $ionicHistory) {
-  var upload, upload_audio, upload_html;
+  var upload, upload_audio, upload_html, upload_rss;
+  upload_rss = function() {
+    var rss;
+    rss = FastCast.templates.rss({
+      episodes: orderByMagic($scope.podcast.episodes)
+    });
+    console.log(rss);
+    if (is_app) {
+      return $cordovaFile.writeFile($scope.output_directory, 'tgi.rss', rss, true).then((function(result) {
+        return upload({
+          type: 'rss',
+          mime: 'application/rss+xml',
+          src: 'tgi.rss'
+        });
+      }), function(err) {
+        return console.log('file write error', err);
+      });
+    }
+  };
   upload_html = function() {
     var html;
     html = FastCast.templates.episode({
@@ -86,12 +104,14 @@ app.controller('FinalizeController', function($scope, $http, $interval, $cordova
       $scope.episode.published_at = (new Date).getTime();
     }
     $scope.is_uploading_started = true;
+    $scope.episode.slug = sprintf('%03d - %s', $scope.episode.number, $scope.episode.title).slugify();
     if (is_app) {
       window.resolveLocalFileSystemURL($scope.output_directory + $scope.episode.guid + '.m4a', (function(fileEntry) {
         return fileEntry.file(function(file) {
+          console.log("got byte size", file);
           $scope.episode.length_bytes = file.size;
-          $scope.episode.slug = sprintf('%03d - %s', $scope.episode.number, $scope.episode.title).slugify();
           $scope.podcast.episodes[$scope.episode.guid] = angular.copy($scope.episode);
+          upload_rss();
           $scope.save_state();
           return console.log(file);
         });

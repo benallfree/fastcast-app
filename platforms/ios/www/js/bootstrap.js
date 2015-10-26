@@ -1,7 +1,16 @@
-document.addEventListener("deviceready", function() {
-    // retrieve the DOM element that had the ng-app attribute
-  if(is_app) alert('attachx');
-  
-  var domElement = document.getElementById('body');
-  angular.bootstrap(domElement, ["fastcast"]);
-}, false);
+var boot_angular;
+
+boot_angular = function() {
+  var domElement;
+  domElement = document.getElementById('body');
+  return angular.bootstrap(domElement, ['fastcast']);
+};
+
+if (is_app) {
+  alert('attach');
+  document.addEventListener('deviceready', boot_angular, false);
+} else {
+  $(function() {
+    return boot_angular();
+  });
+}

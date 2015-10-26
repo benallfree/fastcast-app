@@ -19,7 +19,7 @@ app.controller('EpisodeController', function($scope, $http, $interval, $cordovaF
       });
     });
   }
-  $scope.has_recording = $scope.episode.recorded_at !== null;
+  $scope.has_recording = $scope.episode.recorded_at != null;
   $scope.is_uploading = false;
   $scope.is_playing = false;
   $scope.is_recording = false;

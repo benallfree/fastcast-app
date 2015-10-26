@@ -1,100 +1,62 @@
-
-
 app.controller('AppController', function($scope, $http, $interval, $cordovaFile, $state, $cordovaFileTransfer, $q) {
-  Media.prototype.getDurationAsync = function() {
-    var obj = this;
-    return $q(function(resolve,reject) {
-      obj.setVolume(0);
-      obj.play();
-      obj.stop(); 
-      var counter = 0;
-      var timerDur = setInterval(function() {
-        counter = counter + 100;
-        if (counter > 2000) {
-          clearInterval(timerDur);
-          reject();
-        }
-        var dur = obj.getDuration();
-        if (dur > 0) {
-          clearInterval(timerDur);
-          resolve(dur);
-        }
-      }, 100);            
-    });
-  };
-  
-  $scope.output_directory = "cdvfile://localhost/persistent/";
-
-  $scope.save_state = function() {
-    window.localStorage.setItem('podcast', angular.toJson($scope.podcast));
-  }
-
-  function load_state()
-  {
+  var load_state, next_episode_number;
+  load_state = function() {
+    var e, episode, error, guid, k, results;
     $scope.podcast = null;
     try {
       $scope.podcast = JSON.parse(window.localStorage.getItem('podcast'));
-    } catch (e) {
-      console.log("Error loading state", e);
+    } catch (error) {
+      e = error;
+      console.log('Error loading state', e);
     }
-    
-    // Fix up version number
-    if(!$scope.podcast || !$scope.podcast.version)
-    {
+    if (!$scope.podcast || !$scope.podcast.version) {
       $scope.podcast = {
         version: 1,
         episodes: {}
       };
       $scope.save_state();
     }
-    
-    // Fix up missing GUIDs
-    for(var k in $scope.podcast.episodes)
-    {
+    for (k in $scope.podcast.episodes) {
       $scope.podcast.episodes[k].guid = k;
       $scope.podcast.episodes[k].is_syncing = false;
     }
-    
-    // Fix up missing episodes
-    for(var guid in static_episodes)
-    {
-      var episode = static_episodes[guid];
-      if(!(guid in $scope.podcast.episodes))
-      {
-        $scope.podcast.episodes[guid] = episode;
+    results = [];
+    for (guid in static_episodes) {
+      episode = static_episodes[guid];
+      if (!(guid in $scope.podcast.episodes)) {
+        results.push($scope.podcast.episodes[guid] = episode);
+      } else {
+        results.push(void 0);
       }
     }
-  }
-  load_state();
-  
-  function next_episode_number() {
-    var n = 0;
-    for(var slug in $scope.podcast.episodes)
-    {
-      var episode = $scope.podcast.episodes[slug];
-      n = Math.max(n,episode.number);
+    return results;
+  };
+  next_episode_number = function() {
+    var episode, n, slug;
+    n = 0;
+    for (slug in $scope.podcast.episodes) {
+      episode = $scope.podcast.episodes[slug];
+      n = Math.max(n, episode.number);
     }
-    return n+1;
-  }
-  
-  $scope.new = function()
-  {
-    var t = (new Date()).getTime();
-    var guid = sprintf("fc-tgi-%d", t);
+    return n + 1;
+  };
+  $scope.output_directory = 'cdvfile://localhost/persistent/';
+  $scope.save_state = function() {
+    return window.localStorage.setItem('podcast', angular.toJson($scope.podcast));
+  };
+  load_state();
+  $scope["new"] = function() {
+    var guid, t;
+    t = (new Date).getTime();
+    guid = sprintf('fc-tgi-%d', t);
     $scope.episode = {
       guid: guid,
-      number: next_episode_number(),
+      number: next_episode_number()
     };
-    $state.transitionTo('episode.record');
-    
-  }
-  
-  $scope.go = function(guid)
-  {
+    return $state.transitionTo('episode.record');
+  };
+  return $scope.go = function(guid) {
     $scope.episode = angular.copy($scope.podcast.episodes[guid]);
-    $state.transitionTo('episode.record');
-  }
-  
-  
+    return $state.transitionTo('episode.record');
+  };
 });
-

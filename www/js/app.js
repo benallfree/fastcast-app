@@ -19,32 +19,7 @@ app = angular.module('fastcast', ['ionic', 'ngCordova']).config(function($interp
   };
 }).filter('orderByMagic', function() {
   return function(episodes) {
-    var array;
-    array = [];
-    Object.keys(episodes).forEach(function(key) {
-      array.push(episodes[key]);
-    });
-    array.sort(function(a, b) {
-      if (a.published_at && !b.published_at) {
-        return 1;
-      }
-      if (!a.published_at && b.published_at) {
-        return -1;
-      }
-      if (a.published_at && b.published_at) {
-        if (a.published_at > b.published_at) {
-          return -1;
-        } else {
-          return 1;
-        }
-      }
-      if (a.recorded_at > b.recorded_at) {
-        return -1;
-      } else {
-        return 1;
-      }
-    });
-    return array;
+    return orderByMagic(episodes);
   };
 }).config(function($stateProvider, $urlRouterProvider) {
   $stateProvider.state('home', {

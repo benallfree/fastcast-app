@@ -1,3 +1,5 @@
+var orderByMagic;
+
 String.prototype.slugify = function() {
   return this.toLowerCase().replace(/\s+/g, '-').replace(/[^\w\-]+/g, '').replace(/\-\-+/g, '-').replace(/^-+/, '').replace(/-+$/, '');
 };
@@ -52,3 +54,32 @@ Handlebars.registerHelper('hhmmss', function(duration) {
 Handlebars.registerHelper('sprintf', function() {
   return sprintf.apply(this, arguments);
 });
+
+orderByMagic = function(hash) {
+  var array;
+  array = [];
+  Object.keys(hash).forEach(function(key) {
+    array.push(hash[key]);
+  });
+  array.sort(function(a, b) {
+    if (a.published_at && !b.published_at) {
+      return 1;
+    }
+    if (!a.published_at && b.published_at) {
+      return -1;
+    }
+    if (a.published_at && b.published_at) {
+      if (a.published_at > b.published_at) {
+        return -1;
+      } else {
+        return 1;
+      }
+    }
+    if (a.recorded_at > b.recorded_at) {
+      return -1;
+    } else {
+      return 1;
+    }
+  });
+  return array;
+};

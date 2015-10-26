@@ -39,3 +39,21 @@ Handlebars.registerHelper 'hhmmss', (duration) ->
   duration.toHHMMSS false
 Handlebars.registerHelper 'sprintf', ->
   sprintf.apply this, arguments
+  
+orderByMagic = (hash) ->
+  array = []
+  Object.keys(hash).forEach (key) ->
+    array.push hash[key]
+    return
+  # apply a custom sorting function
+  array.sort (a, b) ->
+    if a.published_at and !b.published_at
+      return 1
+    if !a.published_at and b.published_at
+      return -1
+    # Either both are published or neither is published
+    if a.published_at and b.published_at
+      return if a.published_at > b.published_at then -1 else 1
+    if a.recorded_at > b.recorded_at then -1 else 1
+  array
+  

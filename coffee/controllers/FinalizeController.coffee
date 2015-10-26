@@ -1,5 +1,17 @@
 app.controller 'FinalizeController', ($scope, $http, $interval, $cordovaFile, $state, $ionicActionSheet, $ionicHistory) ->
 
+  upload_rss = ->
+    rss = FastCast.templates.rss(episodes: orderByMagic($scope.podcast.episodes))
+    console.log rss
+    if is_app
+      $cordovaFile.writeFile($scope.output_directory, 'tgi.rss', rss, true).then ((result) ->
+        upload
+          type: 'rss'
+          mime: 'application/rss+xml'
+          src: 'tgi.rss'
+      ), (err) ->
+        console.log 'file write error', err
+    
   upload_html = ->
     html = FastCast.templates.episode(episode: $scope.episode)
     console.log html
@@ -25,12 +37,12 @@ app.controller 'FinalizeController', ($scope, $http, $interval, $cordovaFile, $s
     $scope.uploads[options.type] = 0
     $http.get('http://api.fast-cast.net', params:
       slug: options.slug
-      type: options.type).then ((response) ->
+      type: options.type)
+    .then ((response) ->
       $scope.uploads[options.type] = 10
       url = response.data
       if is_app
         ft = new FileTransfer
-
         ft.onprogress = (pe) ->
           console.log 'makin progress', options
           $scope.uploads[options.type] = pe.loaded / pe.total * 90 + 10
@@ -72,12 +84,14 @@ app.controller 'FinalizeController', ($scope, $http, $interval, $cordovaFile, $s
     if $scope.episode.is_published and !$scope.episode.published_at
       $scope.episode.published_at = (new Date).getTime()
     $scope.is_uploading_started = true
+    $scope.episode.slug = sprintf('%03d - %s', $scope.episode.number, $scope.episode.title).slugify()
     if is_app
       window.resolveLocalFileSystemURL $scope.output_directory + $scope.episode.guid + '.m4a', ((fileEntry) ->
         fileEntry.file (file) ->
+          console.log "got byte size", file
           $scope.episode.length_bytes = file.size
-          $scope.episode.slug = sprintf('%03d - %s', $scope.episode.number, $scope.episode.title).slugify()
           $scope.podcast.episodes[$scope.episode.guid] = angular.copy($scope.episode)
+          upload_rss()
           $scope.save_state()
           console.log file
       ), (err) ->

@@ -36,7 +36,7 @@ app.controller('RecordController', function($scope, $http, $interval, $cordovaFi
       return $scope.audio.stopRecord();
     }
   };
-  hold_promise = void 0;
+  hold_promise = null;
   $scope.hold = function(mode) {
     var parts;
     if (!mode) {

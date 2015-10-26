@@ -31,7 +31,7 @@ app.controller 'RecordController', ($scope, $http, $interval, $cordovaFile, $sta
     if is_app
       $scope.audio.stopRecord()
 
-  hold_promise = undefined
+  hold_promise = null
 
   $scope.hold = (mode) ->
     if !mode
