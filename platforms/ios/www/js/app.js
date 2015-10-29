@@ -2,7 +2,7 @@ var app, is_app;
 
 is_app = document.URL.indexOf('http://') === -1 && document.URL.indexOf('https://') === -1;
 
-app = angular.module('fastcast', ['ionic', 'ngCordova']).config(function($interpolateProvider) {
+app = angular.module('fastcast', ['ionic', 'ngCordova', 'ngIOS9UIWebViewPatch']).config(function($interpolateProvider) {
   return $interpolateProvider.startSymbol('<%').endSymbol('%>');
 }).run(function($ionicPlatform) {
   return $ionicPlatform.ready(function() {

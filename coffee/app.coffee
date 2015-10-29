@@ -2,7 +2,8 @@ is_app = document.URL.indexOf('http://') == -1 and document.URL.indexOf('https:/
 
 app = angular.module('fastcast', [
   'ionic'
-  'ngCordova'
+  'ngCordova',
+  'ngIOS9UIWebViewPatch',
 ])
 
 .config(($interpolateProvider) ->

@@ -64,13 +64,13 @@ app.controller('FinalizeController', function($scope, $http, $interval, $cordova
           $scope.uploads[options.type] = pe.loaded / pe.total * 90 + 10;
           angular.element('#progress_' + options.type).val($scope.uploads[options.type]);
           if ($scope.uploads[options.type] >= 100) {
-            setTimeout((function() {
+            return setTimeout((function() {
               delete $scope.uploads[options.type];
               $scope.upload_count--;
               if ($scope.upload_count === 0) {
                 $scope.is_uploading_finished = true;
               }
-              $scope.$apply();
+              return $scope.$apply();
             }), 1000);
           }
         };
@@ -97,27 +97,39 @@ app.controller('FinalizeController', function($scope, $http, $interval, $cordova
     if (!$scope.episode.number) {
       alert('Please supply an episode number.');
     }
-    if (!$scope.episode.title) {
-      alert('Please supply an episode title.');
-    }
-    if ($scope.episode.is_published && !$scope.episode.published_at) {
-      $scope.episode.published_at = (new Date).getTime();
+    $scope.episode.published_at = null;
+    if ($scope.episode.is_published) {
+      if (!$scope.episode.title) {
+        alert('Please supply an episode title.');
+      }
+      if (!$scope.episode.description) {
+        alert('Please supply an episode description.');
+      }
+      if (!$scope.episode.published_at) {
+        $scope.episode.published_at = (new Date).getTime();
+      }
     }
     $scope.is_uploading_started = true;
     $scope.episode.slug = sprintf('%03d - %s', $scope.episode.number, $scope.episode.title).slugify();
     if (is_app) {
-      window.resolveLocalFileSystemURL($scope.output_directory + $scope.episode.guid + '.m4a', (function(fileEntry) {
-        return fileEntry.file(function(file) {
-          console.log("got byte size", file);
-          $scope.episode.length_bytes = file.size;
-          $scope.podcast.episodes[$scope.episode.guid] = angular.copy($scope.episode);
-          upload_rss();
-          $scope.save_state();
-          return console.log(file);
+      if (!$scope.episode.length_bytes) {
+        window.resolveLocalFileSystemURL($scope.output_directory + $scope.episode.guid + '.m4a', (function(fileEntry) {
+          return fileEntry.file(function(file) {
+            console.log("got byte size", file);
+            $scope.episode.length_bytes = file.size;
+            $scope.podcast.episodes[$scope.episode.guid] = angular.copy($scope.episode);
+            upload_rss();
+            $scope.save_state();
+            return console.log(file);
+          });
+        }), function(err) {
+          return console.log('error getting file size');
         });
-      }), function(err) {
-        return console.log('error getting file size');
-      });
+      } else {
+        $scope.podcast.episodes[$scope.episode.guid] = angular.copy($scope.episode);
+        upload_rss();
+        $scope.save_state();
+      }
       upload_html();
       return upload_audio();
     } else {

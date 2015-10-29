@@ -54,9 +54,7 @@ app.controller 'FinalizeController', ($scope, $http, $interval, $cordovaFile, $s
               if $scope.upload_count == 0
                 $scope.is_uploading_finished = true
               $scope.$apply()
-              return
             ), 1000
-          return
 
         upload_options = new FileUploadOptions
         upload_options.fileName = options.src
@@ -79,23 +77,32 @@ app.controller 'FinalizeController', ($scope, $http, $interval, $cordovaFile, $s
   $scope.publish = ->
     if !$scope.episode.number
       alert 'Please supply an episode number.'
-    if !$scope.episode.title
-      alert 'Please supply an episode title.'
-    if $scope.episode.is_published and !$scope.episode.published_at
-      $scope.episode.published_at = (new Date).getTime()
+    $scope.episode.published_at = null
+    if $scope.episode.is_published
+      if !$scope.episode.title
+        alert 'Please supply an episode title.'
+      if !$scope.episode.description
+        alert 'Please supply an episode description.'
+      if !$scope.episode.published_at
+        $scope.episode.published_at = (new Date).getTime()
     $scope.is_uploading_started = true
     $scope.episode.slug = sprintf('%03d - %s', $scope.episode.number, $scope.episode.title).slugify()
     if is_app
-      window.resolveLocalFileSystemURL $scope.output_directory + $scope.episode.guid + '.m4a', ((fileEntry) ->
-        fileEntry.file (file) ->
-          console.log "got byte size", file
-          $scope.episode.length_bytes = file.size
-          $scope.podcast.episodes[$scope.episode.guid] = angular.copy($scope.episode)
-          upload_rss()
-          $scope.save_state()
-          console.log file
-      ), (err) ->
-        console.log 'error getting file size'
+      if(!$scope.episode.length_bytes)
+        window.resolveLocalFileSystemURL $scope.output_directory + $scope.episode.guid + '.m4a', ((fileEntry) ->
+          fileEntry.file (file) ->
+            console.log "got byte size", file
+            $scope.episode.length_bytes = file.size
+            $scope.podcast.episodes[$scope.episode.guid] = angular.copy($scope.episode)
+            upload_rss()
+            $scope.save_state()
+            console.log file
+        ), (err) ->
+          console.log 'error getting file size'
+      else
+        $scope.podcast.episodes[$scope.episode.guid] = angular.copy($scope.episode)
+        upload_rss()
+        $scope.save_state()
       upload_html()
       upload_audio()
     else

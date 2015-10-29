@@ -6,21 +6,25 @@ app.controller 'AppController', ($scope, $http, $interval, $cordovaFile, $state,
       $scope.podcast = JSON.parse(window.localStorage.getItem('podcast'))
     catch e
       console.log 'Error loading state', e
+      
     # Fix up version number
     if !$scope.podcast or !$scope.podcast.version
       $scope.podcast =
         version: 1
         episodes: {}
       $scope.save_state()
+      
     # Fix up missing GUIDs
     for k of $scope.podcast.episodes
       $scope.podcast.episodes[k].guid = k
       $scope.podcast.episodes[k].is_syncing = false
+      
     # Fix up missing episodes
-    for guid of static_episodes
-      episode = static_episodes[guid]
-      if !(guid of $scope.podcast.episodes)
-        $scope.podcast.episodes[guid] = episode
+    $scope.podcast.episodes = angular.merge({}, static_episodes, $scope.podcast.episodes);
+    # for guid of static_episodes
+    #   episode = static_episodes[guid]
+    #   #if !(guid of $scope.podcast.episodes)
+    #   $scope.podcast.episodes[guid] = episode
 
   next_episode_number = ->
     n = 0

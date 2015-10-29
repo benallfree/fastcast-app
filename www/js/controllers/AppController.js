@@ -1,7 +1,7 @@
 app.controller('AppController', function($scope, $http, $interval, $cordovaFile, $state, $cordovaFileTransfer, $q) {
   var load_state, next_episode_number;
   load_state = function() {
-    var e, episode, error, guid, k, results;
+    var e, error, k;
     $scope.podcast = null;
     try {
       $scope.podcast = JSON.parse(window.localStorage.getItem('podcast'));
@@ -20,16 +20,7 @@ app.controller('AppController', function($scope, $http, $interval, $cordovaFile,
       $scope.podcast.episodes[k].guid = k;
       $scope.podcast.episodes[k].is_syncing = false;
     }
-    results = [];
-    for (guid in static_episodes) {
-      episode = static_episodes[guid];
-      if (!(guid in $scope.podcast.episodes)) {
-        results.push($scope.podcast.episodes[guid] = episode);
-      } else {
-        results.push(void 0);
-      }
-    }
-    return results;
+    return $scope.podcast.episodes = angular.merge({}, static_episodes, $scope.podcast.episodes);
   };
   next_episode_number = function() {
     var episode, n, slug;
