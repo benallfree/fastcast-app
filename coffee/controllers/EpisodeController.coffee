@@ -4,17 +4,7 @@ app.controller 'EpisodeController', ($scope, $http, $interval, $cordovaFile, $st
   if !$scope.episode
     $state.transitionTo 'home'
   t = (new Date).getTime()
-  if is_app
-    $scope.audio = new Media($scope.output_directory + $scope.episode.guid + '.m4a', (->
-      console.log 'Audio Success'
-    ), (err) ->
-      console.log 'Audio Error: ' + err.code
-      console.log err
-      $ionicPopup.alert(
-        title: 'Audio Error'
-        template: 'The audio system has failed. Please report this.').then (res) ->
-        $state.transitionTo 'home'
-      )
+  
   $scope.has_recording = $scope.episode.recorded_at?
   $scope.is_uploading = false
   $scope.is_playing = false
@@ -23,7 +13,6 @@ app.controller 'EpisodeController', ($scope, $http, $interval, $cordovaFile, $st
   $scope.scrub_point_ms = 0
   $scope.has_changes = false
   $scope.$watch 'episode', ((oldObj, newObj) ->
-    console.log oldObj, newObj
     $scope.has_changes = !angular.equals(oldObj, newObj)
   ), true
 

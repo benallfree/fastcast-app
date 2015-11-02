@@ -17,7 +17,7 @@ var coffee = require('gulp-coffee');
 
 
 
-gulp.task('default', ['sass', 'haml', 'handlebars']);
+gulp.task('default', ['sass', 'haml', 'handlebars', 'coffee']);
 
 gulp.task('coffee', function() {
   gulp.src('./coffee/**/*.coffee')
