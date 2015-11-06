@@ -44,10 +44,10 @@ app.controller('AppController', function($scope, $http, $interval, $cordovaFile,
       guid: guid,
       number: next_episode_number()
     };
-    return $state.transitionTo('episode.record');
+    return $state.go('episode.record');
   };
   return $scope.go = function(guid) {
     $scope.episode = angular.copy($scope.podcast.episodes[guid]);
-    return $state.transitionTo('episode.record');
+    return $state.go('episode.record');
   };
 });

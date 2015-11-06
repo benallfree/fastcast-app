@@ -89,7 +89,7 @@ app.controller('FinalizeController', function($scope, $http, $interval, $cordova
   $scope.is_uploading = false;
   $scope.uploads = {};
   $scope.back = function() {
-    return $state.transitionTo('episode.record');
+    return $state.go('episode.record');
   };
   $scope.is_uploading_started = false;
   $scope.is_uploading_finished = false;
@@ -141,7 +141,7 @@ app.controller('FinalizeController', function($scope, $http, $interval, $cordova
     if (!v) {
       return;
     }
-    return $state.transitionTo('episode.finish');
+    return $state.go('episode.finish');
   });
   return $scope.upload_count = 0;
 });

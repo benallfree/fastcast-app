@@ -1,11 +1,12 @@
 
-<ion-header-bar class="bar-positive">
-<div class="buttons">
-<button ui-sref="episode.record" nav-direction="back" class="button button-positive">Back</button></div>
-<h1 class="title">Finalize this Episode</h1>
-<div class="buttons">
-<button ng-click="cancel()" ng-if="has_changes" class="button button-assertive">Cancel</button></div></ion-header-bar>
-<ion-content class="padding publisher">
+<ion-view>
+<ion-nav-title>
+<span ng-if="episode.title"><%episode.number | numberFixedLen:3%> - <%episode.title%></span>
+<span ng-if="!episode.title">New Episode</span></ion-nav-title>
+<ion-nav-buttons side="secondary">
+<button ng-click="cancel()" ng-if="has_changes" class="button button-assertive">Cancel</button></ion-nav-buttons>
+<ion-content>
+<div class="finalize-view">
 <div class="list list-inset">
 <label class="item item-input">
 <span class="input-label">Episode #</span>
@@ -27,4 +28,4 @@
 <div ng-repeat="(type, progress) in uploads">
 <div class="type"><%type%></div>
 <div class="progress">
-<progress max="100" id="progress_&lt;%type%&gt;"></progress></div></div></div></ion-content>
+<progress max="100" id="progress_&lt;%type%&gt;"></progress></div></div></div></div></ion-content></ion-view>

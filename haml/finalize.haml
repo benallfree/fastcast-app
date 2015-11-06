@@ -1,34 +1,37 @@
-%ion-header-bar.bar-positive
-  .buttons
-    %button.button.button-positive{'ui-sref': 'episode.record', 'nav-direction': 'back'} Back
-  %h1.title Finalize this Episode
-  .buttons
+%ion-view
+  %ion-nav-title
+    %span{'ng-if': 'episode.title'}
+      <%episode.number | numberFixedLen:3%> - <%episode.title%>
+    %span{'ng-if': '!episode.title'}
+      New Episode
+  %ion-nav-buttons{side: 'secondary'}
     %button.button.button-assertive{'ng-click': 'cancel()', 'ng-if': 'has_changes'} Cancel
-%ion-content.padding.publisher
-  .list.list-inset
-    %label.item.item-input
-      %span.input-label Episode #
-      %input{type: 'number', 'ng-model': 'episode.number'}
-    %label.item.item-input
-      %span.input-label Title
-      %input{type: 'text', 'ng-model': 'episode.title', autocapitalize: 'words'}
-    %label.item.item-input
-      %textarea{placeholder: 'Episode Description', 'ng-model': 'episode.description'}
-    .item.item-toggle
-      Publish
-      %label.toggle.toggle-balanced
-        %input{type: 'checkbox', 'ng-model': 'episode.is_published'}
-        .track
-          .handle
-  .publish_buttons{'ng-if': '!is_uploading_started'}
-    %button.button.button-block.button-balanced{"ng-click": "publish()", "ng-if": "episode.is_published"}
-      Publish to Listeners
-    %button.button.button-block.button-positive{"ng-click": "publish()", "ng-if": "!episode.is_published"}
-      Save for Later
-  .uploader{'ng-if': 'is_uploading_started && upload_count>0'}
-    Saving to cloud...
-    %div{'ng-repeat': '(type, progress) in uploads'}
-      .type
-        <%type%>
-      .progress
-        %progress{max: "100", id: 'progress_<%type%>'}
+  %ion-content
+    .finalize-view
+      .list.list-inset
+        %label.item.item-input
+          %span.input-label Episode #
+          %input{type: 'number', 'ng-model': 'episode.number'}
+        %label.item.item-input
+          %span.input-label Title
+          %input{type: 'text', 'ng-model': 'episode.title', autocapitalize: 'words'}
+        %label.item.item-input
+          %textarea{placeholder: 'Episode Description', 'ng-model': 'episode.description'}
+        .item.item-toggle
+          Publish
+          %label.toggle.toggle-balanced
+            %input{type: 'checkbox', 'ng-model': 'episode.is_published'}
+            .track
+              .handle
+      .publish_buttons{'ng-if': '!is_uploading_started'}
+        %button.button.button-block.button-balanced{"ng-click": "publish()", "ng-if": "episode.is_published"}
+          Publish to Listeners
+        %button.button.button-block.button-positive{"ng-click": "publish()", "ng-if": "!episode.is_published"}
+          Save for Later
+      .uploader{'ng-if': 'is_uploading_started && upload_count>0'}
+        Saving to cloud...
+        %div{'ng-repeat': '(type, progress) in uploads'}
+          .type
+            <%type%>
+          .progress
+            %progress{max: "100", id: 'progress_<%type%>'}

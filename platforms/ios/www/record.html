@@ -1,13 +1,12 @@
 
-<ion-header-bar class="bar-positive">
-<div class="buttons">
-<button ui-sref="home" nav-direction="back" ng-if="!has_changes" class="button button-positive">Back</button></div>
-<h1 class="title">
+<ion-view>
+<ion-nav-title>
 <span ng-if="episode.title"><%episode.number | numberFixedLen:3%> - <%episode.title%></span>
-<span ng-if="!episode.title">New Episode</span></h1>
-<div class="buttons">
-<button ng-click="cancel()" ng-if="has_changes" class="button button-assertive">Cancel</button></div></ion-header-bar>
-<ion-content class="recorder padding">
+<span ng-if="!episode.title">New Episode</span></ion-nav-title>
+<ion-nav-buttons side="secondary">
+<button ng-click="cancel()" ng-if="has_changes" class="button button-assertive">Cancel</button></ion-nav-buttons>
+<ion-content>
+<div class="record-view">
 <div ng-if="!is_recording &amp;&amp; !is_playing">
 <div class="status-stopped">Stopped</div></div>
 <div ng-if="is_recording">
@@ -40,4 +39,4 @@
 <div ng-click="stop_recording()" ng-if="is_recording" class="fc-button stop-record">
 <div class="ion-stop"></div></div></div>
 <div ng-if="has_recording" class="publish">
-<button nav-direction="forward" ui-sref="episode.finalize" class="button button-block button-positive">Finalize</button></div></ion-content>
+<button nav-direction="forward" ui-sref="episode.finalize" class="button button-block button-positive">Finalize</button></div></div></ion-content></ion-view>

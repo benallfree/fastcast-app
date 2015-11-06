@@ -2,7 +2,7 @@ app.controller 'EpisodeController', ($scope, $http, $interval, $cordovaFile, $st
   console.log $scope.output_directory
   
   if !$scope.episode
-    $state.transitionTo 'home'
+    $state.go 'home'
   t = (new Date).getTime()
   
   $scope.has_recording = $scope.episode.recorded_at?
@@ -22,5 +22,5 @@ app.controller 'EpisodeController', ($scope, $http, $interval, $cordovaFile, $st
       titleText: 'Discard changes'
       cancelText: 'Cancel'
       destructiveButtonClicked: ->
-        $state.transitionTo 'home'
+        $state.go 'home'
     )

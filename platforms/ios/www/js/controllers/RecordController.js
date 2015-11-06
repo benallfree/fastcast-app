@@ -1,8 +1,25 @@
-app.controller('RecordController', function($scope, $http, $interval, $cordovaFile, $state, $ionicActionSheet, $ionicPopup) {
-  var _record, hold_promise, start_time_ms;
+app.controller('RecordController', function($scope, $http, $interval, $cordovaFile, $state, $ionicActionSheet, $ionicPopup, $ionicNavBarDelegate) {
+  var _record, hold_promise, new_media, start_time_ms;
   start_time_ms = null;
+  new_media = function() {
+    if (is_app) {
+      return $scope.audio = new Media($scope.output_directory + $scope.episode.guid + '.m4a', (function() {}), (function(err) {
+        console.log('Audio Error: ' + err.code);
+        console.log(err);
+        return $ionicPopup.alert({
+          title: 'Audio Error',
+          template: 'The audio system has failed. Please report this.'
+        }).then((function(res) {
+          return $state.go('home');
+        }));
+      }), (function(status) {
+        return console.log("Media status", status);
+      }));
+    }
+  };
   _record = function() {
     var timeout_promise;
+    $scope.new_media();
     $scope.has_changes = true;
     $scope.duration_ms = 0;
     $scope.has_recording = false;

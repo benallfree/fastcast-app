@@ -1,7 +1,12 @@
 
-<ion-header-bar class="bar-positive">
-<h1 class="title">Base Tagged!</h1></ion-header-bar>
-<ion-content class="padding finish">
+<ion-view>
+<ion-nav-title>
+<span ng-if="episode.title"><%episode.number | numberFixedLen:3%> - <%episode.title%></span>
+<span ng-if="!episode.title">New Episode</span></ion-nav-title>
+<ion-nav-buttons side="secondary">
+<button ng-click="cancel()" ng-if="has_changes" class="button button-assertive">Cancel</button></ion-nav-buttons>
+<ion-content>
+<div class="finish-view">
 <div ng-if="!episode.is_published" class="saved">
 <p>Awesome, your episode is safe in the cloud. You can go back any time and publish it later to make it live for all your listeners.</p>
 <div class="saved-in-cloud positive">
@@ -9,4 +14,4 @@
 <div ng-if="episode.is_published" class="published">Your episode has been published to your listeners! It is now live in your podcast feed.
 <div class="published-to-listeners balanced">
 <div class="ion-ios-people"></div></div></div>
-<button ui-sref="home" class="button button-block button-stable">Back to Episodes</button></ion-content>
+<button ui-sref="home" class="button button-block button-stable">Back to Episodes</button></div></ion-content></ion-view>

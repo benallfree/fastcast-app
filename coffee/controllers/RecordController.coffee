@@ -1,20 +1,26 @@
-app.controller 'RecordController', ($scope, $http, $interval, $cordovaFile, $state, $ionicActionSheet, $ionicPopup) ->
+app.controller 'RecordController', ($scope, $http, $interval, $cordovaFile, $state, $ionicActionSheet, $ionicPopup, $ionicNavBarDelegate) ->
   start_time_ms = null
 
   new_media = ->
     if is_app
-      $scope.audio = new Media($scope.output_directory + $scope.episode.guid + '.m4a', (->
-        # Audio success
-      ), ((err) ->
-        console.log 'Audio Error: ' + err.code
-        console.log err
-        $ionicPopup.alert(
-          title: 'Audio Error'
-          template: 'The audio system has failed. Please report this.'
-        ).then (res) ->
-          $state.transitionTo 'home'
-      ), ((status)->
-        console.log("Media status", status)
+      $scope.audio = new Media(
+        $scope.output_directory + $scope.episode.guid + '.m4a', 
+        (->
+          # Audio success
+        ), 
+        ((err) ->
+          console.log 'Audio Error: ' + err.code
+          console.log err
+          $ionicPopup.alert(
+            title: 'Audio Error'
+            template: 'The audio system has failed. Please report this.'
+          ).then ((res) ->
+            $state.go 'home'
+          )
+        ), 
+        ((status)->
+          console.log("Media status", status)
+        )
       )
               
   _record = ->

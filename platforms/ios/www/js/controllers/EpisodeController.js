@@ -2,7 +2,7 @@ app.controller('EpisodeController', function($scope, $http, $interval, $cordovaF
   var t;
   console.log($scope.output_directory);
   if (!$scope.episode) {
-    $state.transitionTo('home');
+    $state.go('home');
   }
   t = (new Date).getTime();
   $scope.has_recording = $scope.episode.recorded_at != null;
@@ -22,7 +22,7 @@ app.controller('EpisodeController', function($scope, $http, $interval, $cordovaF
       titleText: 'Discard changes',
       cancelText: 'Cancel',
       destructiveButtonClicked: function() {
-        return $state.transitionTo('home');
+        return $state.go('home');
       }
     });
   };

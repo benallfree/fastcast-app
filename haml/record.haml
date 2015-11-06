@@ -1,50 +1,49 @@
-%ion-header-bar.bar-positive
-  .buttons
-    %button.button.button-positive{'ui-sref': 'home', 'nav-direction': 'back', 'ng-if': '!has_changes'} Back
-  %h1.title
+%ion-view
+  %ion-nav-title
     %span{'ng-if': 'episode.title'}
       <%episode.number | numberFixedLen:3%> - <%episode.title%>
     %span{'ng-if': '!episode.title'}
       New Episode
-  .buttons
+  %ion-nav-buttons{side: 'secondary'}
     %button.button.button-assertive{'ng-click': 'cancel()', 'ng-if': 'has_changes'} Cancel
-%ion-content.recorder.padding
-  %div{"ng-if": "!is_recording && !is_playing"}
-    .status-stopped
-      Stopped
-  %div{"ng-if": "is_recording"}
-    .status-recording
-      Recording
-  %div{"ng-if": "is_playing"}
-    .status-playing
-      Playing
-  .timer
-    #timer
-      <%scrub_point_ms.toHHMMSS()%>
-    .run_time
-      Total <%duration_ms.toHHMMSS()%>
-  .jumps{"ng-if": "has_recording && !is_recording"}
-    %button.button.button-small.skip{"ng-click": "seek(0)"}
-      .ion-skip-backward
-    %button.button.button-small.skip{"ng-click": "rw(60000)", 'on-hold': "hold('rw:60000')", 'on-release': "hold(null)"}
-      .ion-ios-rewind
-    %button.button.button-small.skip{"ng-click": "rw(15000)", 'on-hold': "hold('rw:15000')", 'on-release': "hold(null)"}
-      .ion-arrow-left-b
-    %button.button.button-small.skip{"ng-click": "ff(15000)", 'on-hold': "hold('ff:15000')", 'on-release': "hold(null)"}
-      .ion-arrow-right-b
-    %button.button.button-small.skip{"ng-click": "ff(60000)", 'on-hold': "hold('ff:60000')", 'on-release': "hold(null)"}
-      .ion-ios-fastforward
-    %button.button.button-small.skip{"ng-click": "seek(-1)"}
-      .ion-skip-forward
+  %ion-content
+    .record-view
+      %div{"ng-if": "!is_recording && !is_playing"}
+        .status-stopped
+          Stopped
+      %div{"ng-if": "is_recording"}
+        .status-recording
+          Recording
+      %div{"ng-if": "is_playing"}
+        .status-playing
+          Playing
+      .timer
+        #timer
+          <%scrub_point_ms.toHHMMSS()%>
+        .run_time
+          Total <%duration_ms.toHHMMSS()%>
+      .jumps{"ng-if": "has_recording && !is_recording"}
+        %button.button.button-small.skip{"ng-click": "seek(0)"}
+          .ion-skip-backward
+        %button.button.button-small.skip{"ng-click": "rw(60000)", 'on-hold': "hold('rw:60000')", 'on-release': "hold(null)"}
+          .ion-ios-rewind
+        %button.button.button-small.skip{"ng-click": "rw(15000)", 'on-hold': "hold('rw:15000')", 'on-release': "hold(null)"}
+          .ion-arrow-left-b
+        %button.button.button-small.skip{"ng-click": "ff(15000)", 'on-hold': "hold('ff:15000')", 'on-release': "hold(null)"}
+          .ion-arrow-right-b
+        %button.button.button-small.skip{"ng-click": "ff(60000)", 'on-hold': "hold('ff:60000')", 'on-release': "hold(null)"}
+          .ion-ios-fastforward
+        %button.button.button-small.skip{"ng-click": "seek(-1)"}
+          .ion-skip-forward
 
-  .controls
-    .fc-button.play{"ng-click": "play()", "ng-if": "has_recording && !is_playing"}
-      .ion-play
-    .fc-button.stop{"ng-click": "stop_playing()", "ng-if": "is_playing"}
-      .ion-stop
-    .fc-button.record{"ng-click": "record()", "ng-if": "!is_recording && !is_playing"}
-      .ion-record
-    .fc-button.stop-record{"ng-click": "stop_recording()", "ng-if": "is_recording"}
-      .ion-stop
-  .publish{"ng-if": "has_recording"}
-    %button.button.button-block.button-positive{'nav-direction': 'forward', 'ui-sref': 'episode.finalize'} Finalize
+      .controls
+        .fc-button.play{"ng-click": "play()", "ng-if": "has_recording && !is_playing"}
+          .ion-play
+        .fc-button.stop{"ng-click": "stop_playing()", "ng-if": "is_playing"}
+          .ion-stop
+        .fc-button.record{"ng-click": "record()", "ng-if": "!is_recording && !is_playing"}
+          .ion-record
+        .fc-button.stop-record{"ng-click": "stop_recording()", "ng-if": "is_recording"}
+          .ion-stop
+      .publish{"ng-if": "has_recording"}
+        %button.button.button-block.button-positive{'nav-direction': 'forward', 'ui-sref': 'episode.finalize'} Finalize

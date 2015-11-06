@@ -1,16 +1,16 @@
-.recorder {
+.record-view {
   background-color: black;
   height: 100%;
   color: white; }
-  .recorder
+  .record-view
 div {
     line-height: initial; }
-  .recorder
+  .record-view
 .status-stopped {
     text-align: center;
     font-size: 50px;
     margin-bottom: 20px; }
-  .recorder
+  .record-view
 .status-recording {
     text-align: center;
     font-size: 50px;
@@ -18,7 +18,7 @@ div {
     animation: pulse 3s ease-out;
     animation-iteration-count: infinite;
     color: red; }
-  .recorder
+  .record-view
 .status-playing {
     text-align: center;
     font-size: 50px;
@@ -26,7 +26,7 @@ div {
     animation: pulse 3s ease-out;
     animation-iteration-count: infinite;
     color: green; }
-  .recorder
+  .record-view
 .jumps {
     width: 280px;
     margin-left: auto;
@@ -38,26 +38,26 @@ div {
     color: #F1E6D4;
     margin-bottom: 20px;
     font-size: 30px; }
-    .recorder
+    .record-view
 .jumps
 .increment {
       display: inline-block;
       position: relative;
       top: 20px; }
-    .recorder
+    .record-view
 .jumps
 .skip {
       border: 1px solid white;
       display: inline-block;
       border-radius: 3px; }
-      .recorder
+      .record-view
 .jumps
-.skip .ion-arrow-left-b, .recorder
+.skip .ion-arrow-left-b, .record-view
 .jumps
 .skip
 .ion-arrow-right-b {
         display: inline-block; }
-  .recorder
+  .record-view
 .timer {
     width: 280px;
     margin-left: auto;
@@ -72,16 +72,16 @@ div {
     color: #F1E6D4;
     margin-bottom: 20px;
     letter-spacing: -7px; }
-  .recorder
+  .record-view
 .run_time {
     color: white;
     text-align: center;
     font-size: 12px;
     letter-spacing: 0px; }
-  .recorder
+  .record-view
 .controls {
     text-align: center; }
-    .recorder
+    .record-view
 .controls
 .fc-button {
       width: 120px;
@@ -96,56 +96,56 @@ div {
       display: inline-block;
       border-radius: 60px;
       vertical-align: top; }
-    .recorder
+    .record-view
 .controls
 .record {
       color: red; }
-    .recorder
+    .record-view
 .controls
 .stop {
       border: 1px solid white;
       color: white; }
-      .recorder
+      .record-view
 .controls
 .stop
 .ion-stop {
         font-size: 87px;
         top: 14px;
         position: relative; }
-    .recorder
+    .record-view
 .controls
 .stop-record {
       border: 1px solid white;
       color: red; }
-      .recorder
+      .record-view
 .controls
 .stop-record
 .ion-stop {
         font-size: 87px;
         top: 14px;
         position: relative; }
-    .recorder
+    .record-view
 .controls
 .play {
       color: green; }
-      .recorder
+      .record-view
 .controls
 .play
 .ion-play {
         position: relative;
         left: 10px; }
 
-.finish
+.finish-view
 .saved-in-cloud {
   font-size: 210px;
   text-align: center; }
 
-.finish
+.finish-view
 .published-to-listeners {
   font-size: 210px;
   text-align: center; }
 
-.publisher
+.finalize-view
 .uploader
 .type {
   text-transform: capitalize; }

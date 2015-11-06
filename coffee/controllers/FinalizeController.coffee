@@ -69,7 +69,7 @@ app.controller 'FinalizeController', ($scope, $http, $interval, $cordovaFile, $s
   $scope.uploads = {}
 
   $scope.back = ->
-    $state.transitionTo 'episode.record'
+    $state.go 'episode.record'
 
   $scope.is_uploading_started = false
   $scope.is_uploading_finished = false
@@ -112,5 +112,5 @@ app.controller 'FinalizeController', ($scope, $http, $interval, $cordovaFile, $s
   $scope.$watch 'is_uploading_finished', (v) ->
     if !v
       return
-    $state.transitionTo 'episode.finish'
+    $state.go 'episode.finish'
   $scope.upload_count = 0

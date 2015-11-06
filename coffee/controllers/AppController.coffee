@@ -46,8 +46,8 @@ app.controller 'AppController', ($scope, $http, $interval, $cordovaFile, $state,
     $scope.episode =
       guid: guid
       number: next_episode_number()
-    $state.transitionTo 'episode.record'
+    $state.go 'episode.record'
 
   $scope.go = (guid) ->
     $scope.episode = angular.copy($scope.podcast.episodes[guid])
-    $state.transitionTo 'episode.record'
+    $state.go 'episode.record'

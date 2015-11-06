@@ -67,7 +67,7 @@ gulp.task('haml', function () {
 });
 
 gulp.task('watch', function() {
-  gulp.watch(['./scss/**/*.scss', './haml/**/*.haml', './handlebars/**/*.hbs', './coffee/**/*.coffee'], ['haml', 'sass', 'handlebars', 'coffee']);
+  gulp.watch(['./scss/**/*.scss', './www/lib/ionic/scss/**/*.scss', './haml/**/*.haml', './handlebars/**/*.hbs', './coffee/**/*.coffee'], ['haml', 'sass', 'handlebars', 'coffee']);
 });
 
 gulp.task('install', ['git-check'], function() {
