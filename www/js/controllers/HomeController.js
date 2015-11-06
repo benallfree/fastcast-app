@@ -1,1 +1,1 @@
-app.controller('HomeController', function($scope) {});
+app.controller('HomeController', function($scope, $ionicHistory) {});

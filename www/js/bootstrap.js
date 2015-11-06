@@ -7,7 +7,6 @@ boot_angular = function() {
 };
 
 if (is_app) {
-  alert('attach');
   document.addEventListener('deviceready', boot_angular, false);
 } else {
   $(function() {

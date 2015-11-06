@@ -1,9 +1,5 @@
-app.controller('EpisodeController', function($scope, $http, $interval, $cordovaFile, $state, $ionicActionSheet, $ionicPopup) {
+app.controller('EpisodeController', function($scope, $http, $interval, $cordovaFile, $state, $ionicActionSheet, $ionicNavBarDelegate, $ionicPopup) {
   var t;
-  console.log($scope.output_directory);
-  if (!$scope.episode) {
-    $state.go('home');
-  }
   t = (new Date).getTime();
   $scope.has_recording = $scope.episode.recorded_at != null;
   $scope.is_uploading = false;
@@ -22,7 +18,7 @@ app.controller('EpisodeController', function($scope, $http, $interval, $cordovaF
       titleText: 'Discard changes',
       cancelText: 'Cancel',
       destructiveButtonClicked: function() {
-        return $state.go('home');
+        return $scope.home();
       }
     });
   };

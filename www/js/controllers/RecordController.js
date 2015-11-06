@@ -1,136 +1,84 @@
-app.controller('RecordController', function($scope, $http, $interval, $cordovaFile, $state, $ionicActionSheet, $ionicPopup, $ionicNavBarDelegate) {
-  var _record, hold_promise, new_media, start_time_ms;
-  start_time_ms = null;
-  new_media = function() {
-    if (is_app) {
-      return $scope.audio = new Media($scope.output_directory + $scope.episode.guid + '.m4a', (function() {}), (function(err) {
-        console.log('Audio Error: ' + err.code);
-        console.log(err);
-        return $ionicPopup.alert({
-          title: 'Audio Error',
-          template: 'The audio system has failed. Please report this.'
-        }).then((function(res) {
-          return $state.go('home');
-        }));
-      }), (function(status) {
-        return console.log("Media status", status);
+app.controller('RecordController', function($scope, $http, $interval, $cordovaFile, $state, $ionicActionSheet, $ionicHistory, $ionicPopup, $ionicNavBarDelegate) {
+  var hold_promise, rec;
+  rec = new Recorder($scope.output_directory + $scope.episode.guid + '.m4a', {
+    onScrubUpdate: function(ms) {
+      return $scope.scrub_point_ms = ms;
+    },
+    onDurationUpdate: function(ms) {
+      $scope.duration_ms = ms;
+      return $scope.episode.duration_ms = ms;
+    },
+    onAudioError: function() {
+      return $ionicPopup.alert({
+        title: 'Audio Error',
+        template: 'The audio system has failed. Please report this.'
+      }).then((function(res) {
+        return $scope.home();
       }));
+    },
+    onPlayStart: function() {
+      return $scope.is_playing = true;
+    },
+    onPlayStop: function() {
+      return $scope.is_playing = false;
+    },
+    onRecordStart: function() {
+      $scope.has_changes = true;
+      $ionicNavBarDelegate.showBackButton(false);
+      $ionicHistory.clearHistory();
+      $scope.is_recording = true;
+      $scope.has_recording = false;
+      return $scope.episode.recorded_at = (new Date).getTime();
+    },
+    onRecordStop: function() {
+      $scope.is_recording = false;
+      return $scope.has_recording = true;
+    },
+    onEvent: function() {
+      return $scope.$applyAsync();
     }
-  };
-  _record = function() {
-    var timeout_promise;
-    $scope.new_media();
-    $scope.has_changes = true;
-    $scope.duration_ms = 0;
-    $scope.has_recording = false;
-    $scope.is_recording = true;
-    start_time_ms = (new Date).getTime();
-    $scope.episode.recorded_at = start_time_ms;
-    timeout_promise = $interval((function() {
-      var current_ms;
-      if (!$scope.is_recording) {
-        $interval.cancel(timeout_promise);
-        return;
-      }
-      current_ms = (new Date).getTime();
-      $scope.duration_ms = current_ms - start_time_ms;
-      angular.element('#timer').html($scope.duration_ms.toHHMMSS());
-    }), 100);
-    if (is_app) {
-      return $scope.audio.startRecord();
-    }
-  };
-  $scope.stop_recording = function() {
-    var current_ms;
-    $scope.is_recording = false;
-    $scope.has_recording = true;
-    current_ms = (new Date).getTime();
-    $scope.duration_ms = current_ms - start_time_ms;
-    $scope.scrub_point_ms = $scope.duration_ms;
-    $scope.episode.duration_ms = $scope.duration_ms;
-    angular.element('#timer').html($scope.duration_ms.toHHMMSS());
-    if (is_app) {
-      return $scope.audio.stopRecord();
-    }
-  };
+  });
   hold_promise = null;
-  $scope.hold = function(mode) {
-    var parts;
-    if (!mode) {
+  $scope.hold = function(ms) {
+    if (!ms) {
       $interval.cancel(hold_promise);
       return;
     }
-    parts = mode.split(/:/);
     return hold_promise = $interval((function() {
-      return $scope[parts[0]](parseInt(parts[1]));
+      return rec.step(ms);
     }), 100);
   };
   $scope.seek = function(ms) {
-    console.log(ms);
-    if (ms === -1) {
-      ms = Number.MAX_VALUE;
-    }
-    $scope.scrub_point_ms = Math.min($scope.duration_ms, Math.max(0, ms));
-    console.log($scope.scrub_point_ms);
-    angular.element('#timer').html($scope.scrub_point_ms.toHHMMSS());
-    if (is_app) {
-      return $scope.audio.seekTo($scope.scrub_point_ms);
-    }
+    console.log('seek', ms);
+    return rec.seek(ms);
   };
-  $scope.ff = function(ms) {
-    console.log('ff');
-    return $scope.seek($scope.scrub_point_ms + ms);
-  };
-  $scope.rw = function(ms) {
-    return $scope.seek($scope.scrub_point_ms - ms);
+  $scope.step = function(ms) {
+    console.log('step', ms);
+    return rec.step(ms);
   };
   $scope.play = function() {
-    var start_ms, timeout_promise;
-    $scope.is_playing = true;
-    if ($scope.scrub_point_ms >= $scope.duration_ms) {
-      $scope.scrub_point_ms = 0;
-    }
-    start_ms = (new Date).getTime();
-    timeout_promise = $interval((function() {
-      var current_ms, elapsed_ms;
-      if (!$scope.is_playing) {
-        $interval.cancel(timeout_promise);
-        return;
-      }
-      current_ms = (new Date).getTime();
-      elapsed_ms = current_ms - start_ms;
-      start_ms = (new Date).getTime();
-      $scope.scrub_point_ms = $scope.scrub_point_ms + elapsed_ms;
-      if ($scope.scrub_point_ms >= $scope.duration_ms) {
-        $scope.scrub_point_ms = $scope.duration_ms;
-        $scope.stop_playing();
-      }
-      return angular.element('#timer').html($scope.scrub_point_ms.toHHMMSS());
-    }), 100);
-    if (is_app) {
-      $scope.audio.seekTo($scope.scrub_point_ms / 1000.0);
-      return $scope.audio.play();
-    }
+    return rec.play();
   };
   $scope.stop_playing = function() {
-    $scope.is_playing = false;
-    if (is_app) {
-      return $scope.audio.stop();
-    }
+    return rec.stop();
+  };
+  $scope.stop_recording = function() {
+    return rec.stop();
   };
   return $scope.record = function() {
     var hideSheet;
     if ($scope.has_recording) {
-      hideSheet = $ionicActionSheet.show({
+      return hideSheet = $ionicActionSheet.show({
         destructiveText: 'Scrap and Re-Record',
         titleText: 'Re-record episode',
         cancelText: 'Cancel',
         destructiveButtonClicked: function() {
           hideSheet();
-          return _record();
+          return rec.record();
         }
       });
+    } else {
+      return rec.record();
     }
-    return _record();
   };
 });

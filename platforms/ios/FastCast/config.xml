@@ -72,7 +72,7 @@
     <author email="ben@benallfree.com" href="http://www.benallfree.com/">
     Ben Allfree
     </author>
-    <content src="index.html" />
+    <content src="debug.html" />
     <access origin="*" />
     <preference name="webviewbounce" value="false" />
     <preference name="UIWebViewBounce" value="false" />

@@ -1,5 +1,6 @@
-app.controller('FinalizeController', function($scope, $http, $interval, $cordovaFile, $state, $ionicActionSheet, $ionicHistory) {
+app.controller('FinalizeController', function($scope, $http, $interval, $cordovaFile, $state, $ionicActionSheet, $ionicNavBarDelegate, $ionicHistory) {
   var upload, upload_audio, upload_html, upload_rss;
+  $ionicNavBarDelegate.showBackButton(true);
   upload_rss = function() {
     var rss;
     rss = FastCast.templates.rss({
@@ -141,6 +142,9 @@ app.controller('FinalizeController', function($scope, $http, $interval, $cordova
     if (!v) {
       return;
     }
+    $ionicHistory.nextViewOptions({
+      disableBack: true
+    });
     return $state.go('episode.finish');
   });
   return $scope.upload_count = 0;

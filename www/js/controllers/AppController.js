@@ -1,5 +1,11 @@
-app.controller('AppController', function($scope, $http, $interval, $cordovaFile, $state, $cordovaFileTransfer, $q) {
+app.controller('AppController', function($scope, $http, $interval, $cordovaFile, $state, $cordovaFileTransfer, $q, $ionicHistory) {
   var load_state, next_episode_number;
+  $scope.home = function() {
+    $ionicHistory.nextViewOptions({
+      disableBack: true
+    });
+    return $state.go('home');
+  };
   load_state = function() {
     var e, error, k;
     $scope.podcast = null;

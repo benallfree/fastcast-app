@@ -45,6 +45,7 @@ app = angular.module('fastcast', ['ionic', 'ngCordova', 'ngIOS9UIWebViewPatch'])
   }).state('episode.finish', {
     url: '/finish',
     templateUrl: 'finish.html',
+    controller: 'FinishController',
     parent: 'episode'
   });
   return $urlRouterProvider.otherwise('/');

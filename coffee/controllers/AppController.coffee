@@ -1,5 +1,10 @@
-app.controller 'AppController', ($scope, $http, $interval, $cordovaFile, $state, $cordovaFileTransfer, $q) ->
-
+app.controller 'AppController', ($scope, $http, $interval, $cordovaFile, $state, $cordovaFileTransfer, $q, $ionicHistory) ->
+  $scope.home = ->
+    $ionicHistory.nextViewOptions({
+      disableBack: true
+    });  
+    $state.go 'home'
+    
   load_state = ->
     $scope.podcast = null
     try

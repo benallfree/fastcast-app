@@ -4,8 +4,6 @@
       <%episode.number | numberFixedLen:3%> - <%episode.title%>
     %span{'ng-if': '!episode.title'}
       New Episode
-  %ion-nav-buttons{side: 'secondary'}
-    %button.button.button-assertive{'ng-click': 'cancel()', 'ng-if': 'has_changes'} Cancel
   %ion-content
     .finish-view
       .saved{'ng-if': '!episode.is_published'}
@@ -16,4 +14,4 @@
         Your episode has been published to your listeners! It is now live in your podcast feed.
         .published-to-listeners.balanced
           .ion-ios-people
-      %button.button.button-block.button-stable{'ui-sref': 'home'} Back to Episodes
+      %button.button.button-block.button-stable{'ng-click': 'home()'} Back to Episodes

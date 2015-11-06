@@ -54,6 +54,7 @@ app = angular.module('fastcast', [
   .state 'episode.finish',
     url: '/finish'
     templateUrl: 'finish.html'
+    controller: 'FinishController'
     parent: 'episode'
   $urlRouterProvider.otherwise '/'
 )

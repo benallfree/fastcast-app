@@ -14,18 +14,18 @@
 <div ng-if="is_playing">
 <div class="status-playing">Playing</div></div>
 <div class="timer">
-<div id="timer"><%scrub_point_ms.toHHMMSS()%></div>
-<div class="run_time">Total <%duration_ms.toHHMMSS()%></div></div>
+<div id="timer"><%scrub_point_ms.toHHMMSS(true)%></div>
+<div class="run_time">Total <%duration_ms.toHHMMSS(true)%></div></div>
 <div ng-if="has_recording &amp;&amp; !is_recording" class="jumps">
 <button ng-click="seek(0)" class="button button-small skip">
 <div class="ion-skip-backward"></div></button>
-<button ng-click="rw(60000)" on-hold="hold('rw:60000')" on-release="hold(null)" class="button button-small skip">
+<button ng-click="step(-60000)" on-hold="hold(-60000)" on-release="hold(null)" class="button button-small skip">
 <div class="ion-ios-rewind"></div></button>
-<button ng-click="rw(15000)" on-hold="hold('rw:15000')" on-release="hold(null)" class="button button-small skip">
+<button ng-click="step(-15000)" on-hold="hold(-15000)" on-release="hold(null)" class="button button-small skip">
 <div class="ion-arrow-left-b"></div></button>
-<button ng-click="ff(15000)" on-hold="hold('ff:15000')" on-release="hold(null)" class="button button-small skip">
+<button ng-click="step(15000)" on-hold="hold(15000)" on-release="hold(null)" class="button button-small skip">
 <div class="ion-arrow-right-b"></div></button>
-<button ng-click="ff(60000)" on-hold="hold('ff:60000')" on-release="hold(null)" class="button button-small skip">
+<button ng-click="step(60000)" on-hold="hold(60000)" on-release="hold(null)" class="button button-small skip">
 <div class="ion-ios-fastforward"></div></button>
 <button ng-click="seek(-1)" class="button button-small skip">
 <div class="ion-skip-forward"></div></button></div>

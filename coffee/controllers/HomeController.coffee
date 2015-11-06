@@ -1,1 +1,1 @@
-app.controller 'HomeController', ($scope) -> 
+app.controller 'HomeController', ($scope, $ionicHistory) -> 

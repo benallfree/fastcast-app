@@ -19,19 +19,19 @@
           Playing
       .timer
         #timer
-          <%scrub_point_ms.toHHMMSS()%>
+          <%scrub_point_ms.toHHMMSS(true)%>
         .run_time
-          Total <%duration_ms.toHHMMSS()%>
+          Total <%duration_ms.toHHMMSS(true)%>
       .jumps{"ng-if": "has_recording && !is_recording"}
         %button.button.button-small.skip{"ng-click": "seek(0)"}
           .ion-skip-backward
-        %button.button.button-small.skip{"ng-click": "rw(60000)", 'on-hold': "hold('rw:60000')", 'on-release': "hold(null)"}
+        %button.button.button-small.skip{"ng-click": "step(-60000)", 'on-hold': "hold(-60000)", 'on-release': "hold(null)"}
           .ion-ios-rewind
-        %button.button.button-small.skip{"ng-click": "rw(15000)", 'on-hold': "hold('rw:15000')", 'on-release': "hold(null)"}
+        %button.button.button-small.skip{"ng-click": "step(-15000)", 'on-hold': "hold(-15000)", 'on-release': "hold(null)"}
           .ion-arrow-left-b
-        %button.button.button-small.skip{"ng-click": "ff(15000)", 'on-hold': "hold('ff:15000')", 'on-release': "hold(null)"}
+        %button.button.button-small.skip{"ng-click": "step(15000)", 'on-hold': "hold(15000)", 'on-release': "hold(null)"}
           .ion-arrow-right-b
-        %button.button.button-small.skip{"ng-click": "ff(60000)", 'on-hold': "hold('ff:60000')", 'on-release': "hold(null)"}
+        %button.button.button-small.skip{"ng-click": "step(60000)", 'on-hold': "hold(60000)", 'on-release': "hold(null)"}
           .ion-ios-fastforward
         %button.button.button-small.skip{"ng-click": "seek(-1)"}
           .ion-skip-forward

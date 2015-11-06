@@ -1,8 +1,4 @@
-app.controller 'EpisodeController', ($scope, $http, $interval, $cordovaFile, $state, $ionicActionSheet, $ionicPopup) ->
-  console.log $scope.output_directory
-  
-  if !$scope.episode
-    $state.go 'home'
+app.controller 'EpisodeController', ($scope, $http, $interval, $cordovaFile, $state, $ionicActionSheet, $ionicNavBarDelegate, $ionicPopup) ->
   t = (new Date).getTime()
   
   $scope.has_recording = $scope.episode.recorded_at?
@@ -12,6 +8,7 @@ app.controller 'EpisodeController', ($scope, $http, $interval, $cordovaFile, $st
   $scope.duration_ms = $scope.episode.duration_ms or 0
   $scope.scrub_point_ms = 0
   $scope.has_changes = false
+  
   $scope.$watch 'episode', ((oldObj, newObj) ->
     $scope.has_changes = !angular.equals(oldObj, newObj)
   ), true
@@ -22,5 +19,5 @@ app.controller 'EpisodeController', ($scope, $http, $interval, $cordovaFile, $st
       titleText: 'Discard changes'
       cancelText: 'Cancel'
       destructiveButtonClicked: ->
-        $state.go 'home'
+        $scope.home()
     )

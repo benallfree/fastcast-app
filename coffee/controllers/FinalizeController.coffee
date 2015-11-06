@@ -1,4 +1,5 @@
-app.controller 'FinalizeController', ($scope, $http, $interval, $cordovaFile, $state, $ionicActionSheet, $ionicHistory) ->
+app.controller 'FinalizeController', ($scope, $http, $interval, $cordovaFile, $state, $ionicActionSheet, $ionicNavBarDelegate, $ionicHistory) ->
+  $ionicNavBarDelegate.showBackButton true
 
   upload_rss = ->
     rss = FastCast.templates.rss(episodes: orderByMagic($scope.podcast.episodes))
@@ -112,5 +113,8 @@ app.controller 'FinalizeController', ($scope, $http, $interval, $cordovaFile, $s
   $scope.$watch 'is_uploading_finished', (v) ->
     if !v
       return
+    $ionicHistory.nextViewOptions({
+      disableBack: true
+    });  
     $state.go 'episode.finish'
   $scope.upload_count = 0
