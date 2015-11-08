@@ -33,17 +33,17 @@ app = angular.module('fastcast', ['ionic', 'ngCordova', 'ngIOS9UIWebViewPatch'])
     controller: 'EpisodeController',
     abstract: true
   }).state('episode.record', {
-    url: '/record',
+    url: '/episode/record',
     templateUrl: 'record.html',
     controller: 'RecordController',
     parent: 'episode'
   }).state('episode.finalize', {
-    url: '/finalize',
+    url: '/episode/finalize',
     templateUrl: 'finalize.html',
     controller: 'FinalizeController',
     parent: 'episode'
   }).state('episode.finish', {
-    url: '/finish',
+    url: '/episode/finish',
     templateUrl: 'finish.html',
     controller: 'FinishController',
     parent: 'episode'

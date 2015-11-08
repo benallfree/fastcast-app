@@ -1,6 +1,7 @@
 app.controller 'EpisodeController', ($scope, $http, $interval, $cordovaFile, $state, $ionicActionSheet, $ionicNavBarDelegate, $ionicPopup) ->
   t = (new Date).getTime()
   
+  $scope.rec = null
   $scope.has_recording = $scope.episode.recorded_at?
   $scope.is_uploading = false
   $scope.is_playing = false
@@ -10,6 +11,8 @@ app.controller 'EpisodeController', ($scope, $http, $interval, $cordovaFile, $st
   $scope.has_changes = false
   
   $scope.$watch 'episode', ((oldObj, newObj) ->
+    console.log("changed", oldObj, newObj)
+    console.log("equality", angular.equals(oldObj, newObj))
     $scope.has_changes = !angular.equals(oldObj, newObj)
   ), true
 

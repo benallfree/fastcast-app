@@ -9,7 +9,7 @@ class Recorder
       onPlayStart: ->
       onPlayStop: ->
       onEvent: (name,args...)->
-      debug: false
+      debug: true
     @options = angular.extend(default_options, options)
     @duration_ms = 0
     @scrub_point_ms = 0
@@ -17,7 +17,7 @@ class Recorder
     
   log: (args...)=>
     return unless @options.debug
-    console.apply('log', args)
+    console.log.apply(args)
 
   new_media: (ready_cb, status_cb, error_cb) =>
     status = {}

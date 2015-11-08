@@ -1,5 +1,8 @@
 app.controller('RecordController', function($scope, $http, $interval, $cordovaFile, $state, $ionicActionSheet, $ionicHistory, $ionicPopup, $ionicNavBarDelegate) {
   var hold_promise, rec;
+  $scope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
+    return rec.stop();
+  });
   rec = new Recorder($scope.output_directory + $scope.episode.guid + '.m4a', {
     onScrubUpdate: function(ms) {
       return $scope.scrub_point_ms = ms;

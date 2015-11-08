@@ -6,7 +6,7 @@
       New Episode
   %ion-nav-buttons{side: 'secondary'}
     %button.button.button-assertive{'ng-click': 'cancel()', 'ng-if': 'has_changes'} Cancel
-  %ion-content
+  %ion-content.padding
     .finalize-view
       .list.list-inset
         %label.item.item-input
@@ -28,10 +28,3 @@
           Publish to Listeners
         %button.button.button-block.button-positive{"ng-click": "publish()", "ng-if": "!episode.is_published"}
           Save for Later
-      .uploader{'ng-if': 'is_uploading_started && upload_count>0'}
-        Saving to cloud...
-        %div{'ng-repeat': '(type, progress) in uploads'}
-          .type
-            <%type%>
-          .progress
-            %progress{max: "100", id: 'progress_<%type%>'}

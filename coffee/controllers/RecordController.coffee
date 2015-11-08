@@ -1,4 +1,9 @@
 app.controller 'RecordController', ($scope, $http, $interval, $cordovaFile, $state, $ionicActionSheet, $ionicHistory, $ionicPopup, $ionicNavBarDelegate) ->
+
+  $scope.$on('$stateChangeStart', (event, toState, toParams, fromState, fromParams)->
+    rec.stop()
+  )
+  
   rec = new Recorder(
     $scope.output_directory + $scope.episode.guid + '.m4a',
     onScrubUpdate: (ms)->

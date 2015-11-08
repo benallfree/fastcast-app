@@ -27,7 +27,7 @@ Recorder = (function() {
         var args, name;
         name = arguments[0], args = 2 <= arguments.length ? slice.call(arguments, 1) : [];
       },
-      debug: false
+      debug: true
     };
     this.options = angular.extend(default_options, options);
     this.duration_ms = 0;
@@ -41,7 +41,7 @@ Recorder = (function() {
     if (!this.options.debug) {
       return;
     }
-    return console.apply('log', args);
+    return console.log.apply(args);
   };
 
   Recorder.prototype.new_media = function(ready_cb, status_cb, error_cb) {

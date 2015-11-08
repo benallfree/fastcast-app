@@ -19,6 +19,7 @@
     %script{src: "js/static_podcasts.js"}
     %script{src: "js/handlebar-templates.js"}
     %script{src: "js/classes/Recorder.js"}
+    %script{src: "js/classes/Uploader.js"}
     %script{src: "js/controllers/AppController.js"}
     %script{src: "js/controllers/HomeController.js"}
     %script{src: "js/controllers/EpisodeController.js"}
@@ -30,3 +31,7 @@
     %ion-nav-bar
       %ion-nav-back-button
     %ion-nav-view
+      %ion-footer-bar.bar-assertive.sync{"align-title" : "left", 'ng-click': 'show_sync()', 'ng-if': 'uploader.is_syncing'}
+        %h1.title
+          %ion-spinner{icon: 'spiral'}
+          Syncing

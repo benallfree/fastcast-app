@@ -1,0 +1,13 @@
+%ion-modal-view
+  %ion-header-bar
+    %h1.title My Modal title
+  %buttons
+    %button.button
+      %i.icon.ion-close 
+  %ion-content
+    .uploader
+      %div{'ng-repeat': 'item in uploader.uploads'}
+        .type
+          <%item.type%>
+        .progress
+          %progress{max: "100", 'ng-model': "item.progress"}
