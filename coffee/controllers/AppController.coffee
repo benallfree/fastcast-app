@@ -1,9 +1,4 @@
 app.controller 'AppController', ($scope, $http, $interval, $cordovaFile, $state, $cordovaFileTransfer, $q, $ionicHistory) ->
-  $scope.uploader = new Uploader(
-    onEvent: ->
-      $scope.$applyAsync()
-  )
-  
   $scope.home = ->
     $ionicHistory.nextViewOptions({
       disableBack: true

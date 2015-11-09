@@ -1,6 +1,5 @@
 app.controller('AppController', function($scope, $http, $interval, $cordovaFile, $state, $cordovaFileTransfer, $q, $ionicHistory) {
   var load_state, next_episode_number;
-  $scope.uploader = new Uploader();
   $scope.home = function() {
     $ionicHistory.nextViewOptions({
       disableBack: true

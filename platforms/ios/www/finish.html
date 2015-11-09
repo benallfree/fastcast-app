@@ -3,7 +3,7 @@
 <ion-nav-title>
 <span ng-if="episode.title"><%episode.number | numberFixedLen:3%> - <%episode.title%></span>
 <span ng-if="!episode.title">New Episode</span></ion-nav-title>
-<ion-content class="padding">
+<ion-content>
 <div class="finish-view">
 <div ng-if="!episode.is_published" class="saved">
 <p>Awesome, your episode is safe in the cloud. You can go back any time and publish it later to make it live for all your listeners.</p>

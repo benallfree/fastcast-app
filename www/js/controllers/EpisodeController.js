@@ -1,7 +1,6 @@
 app.controller('EpisodeController', function($scope, $http, $interval, $cordovaFile, $state, $ionicActionSheet, $ionicNavBarDelegate, $ionicPopup) {
   var t;
   t = (new Date).getTime();
-  $scope.rec = null;
   $scope.has_recording = $scope.episode.recorded_at != null;
   $scope.is_uploading = false;
   $scope.is_playing = false;
@@ -10,8 +9,6 @@ app.controller('EpisodeController', function($scope, $http, $interval, $cordovaF
   $scope.scrub_point_ms = 0;
   $scope.has_changes = false;
   $scope.$watch('episode', (function(oldObj, newObj) {
-    console.log("changed", oldObj, newObj);
-    console.log("equality", angular.equals(oldObj, newObj));
     return $scope.has_changes = !angular.equals(oldObj, newObj);
   }), true);
   return $scope.cancel = function() {

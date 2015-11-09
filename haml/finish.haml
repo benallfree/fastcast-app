@@ -4,7 +4,7 @@
       <%episode.number | numberFixedLen:3%> - <%episode.title%>
     %span{'ng-if': '!episode.title'}
       New Episode
-  %ion-content.padding
+  %ion-content
     .finish-view
       .saved{'ng-if': '!episode.is_published'}
         %p Awesome, your episode is safe in the cloud. You can go back any time and publish it later to make it live for all your listeners.

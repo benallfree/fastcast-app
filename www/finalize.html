@@ -5,7 +5,7 @@
 <span ng-if="!episode.title">New Episode</span></ion-nav-title>
 <ion-nav-buttons side="secondary">
 <button ng-click="cancel()" ng-if="has_changes" class="button button-assertive">Cancel</button></ion-nav-buttons>
-<ion-content class="padding">
+<ion-content>
 <div class="finalize-view">
 <div class="list list-inset">
 <label class="item item-input">
@@ -23,4 +23,9 @@
 <div class="handle"></div></div></label></div></div>
 <div ng-if="!is_uploading_started" class="publish_buttons">
 <button ng-click="publish()" ng-if="episode.is_published" class="button button-block button-balanced">Publish to Listeners</button>
-<button ng-click="publish()" ng-if="!episode.is_published" class="button button-block button-positive">Save for Later</button></div></div></ion-content></ion-view>
+<button ng-click="publish()" ng-if="!episode.is_published" class="button button-block button-positive">Save for Later</button></div>
+<div ng-if="is_uploading_started &amp;&amp; upload_count&gt;0" class="uploader">Saving to cloud...
+<div ng-repeat="(type, progress) in uploads">
+<div class="type"><%type%></div>
+<div class="progress">
+<progress max="100" id="progress_&lt;%type%&gt;"></progress></div></div></div></div></ion-content></ion-view>

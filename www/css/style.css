@@ -160,11 +160,3 @@ div {
   100% {
     -webkit-transform: scale(1);
     opacity: 0.0; } }
-
-.sync
-.spinner {
-  stroke: #be1f35;
-  fill: #0df716;
-  margin: 7px;
-  position: relative;
-  top: 7px; }

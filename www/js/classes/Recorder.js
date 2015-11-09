@@ -27,7 +27,7 @@ Recorder = (function() {
         var args, name;
         name = arguments[0], args = 2 <= arguments.length ? slice.call(arguments, 1) : [];
       },
-      debug: true
+      debug: false
     };
     this.options = angular.extend(default_options, options);
     this.duration_ms = 0;

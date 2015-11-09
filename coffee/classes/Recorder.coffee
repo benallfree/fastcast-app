@@ -9,7 +9,7 @@ class Recorder
       onPlayStart: ->
       onPlayStop: ->
       onEvent: (name,args...)->
-      debug: true
+      debug: false
     @options = angular.extend(default_options, options)
     @duration_ms = 0
     @scrub_point_ms = 0
