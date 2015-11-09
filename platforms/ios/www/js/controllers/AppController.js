@@ -39,6 +39,8 @@ app.controller('AppController', function($scope, $http, $interval, $cordovaFile,
   };
   $scope.output_directory = 'cdvfile://localhost/persistent/';
   $scope.save_state = function() {
+    var json;
+    json = angular.toJson($scope.podcast);
     return window.localStorage.setItem('podcast', angular.toJson($scope.podcast));
   };
   load_state();

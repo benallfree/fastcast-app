@@ -6,7 +6,7 @@
       New Episode
   %ion-nav-buttons{side: 'secondary'}
     %button.button.button-assertive{'ng-click': 'cancel()', 'ng-if': 'has_changes'} Cancel
-  %ion-content
+  %ion-content.padding
     .record-view
       %div{"ng-if": "!is_recording && !is_playing"}
         .status-stopped

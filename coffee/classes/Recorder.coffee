@@ -19,6 +19,11 @@ class Recorder
     return unless @options.debug
     console.log.apply(@, args)
 
+  event: (name,args...) =>
+    @log("event", name, args)
+    @options[name].apply(@,args)
+    @options.onEvent(name, args)
+
   new_media: (ready_cb, status_cb, error_cb) =>
     status = {}
     status[Media.MEDIA_NONE] = 'None'
@@ -65,12 +70,7 @@ class Recorder
       ((media,error)=> #error
       )
     )
-     
-  event: (name,args...) =>
-    @log("event", name, args)
-    @options[name].apply(@,args)
-    @options.onEvent(name, args)
-    
+         
   record: =>
     @new_media(
       ((media)=> # ready

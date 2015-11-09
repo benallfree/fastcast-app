@@ -11,9 +11,9 @@ Recorder = (function() {
     this.seek = bind(this.seek, this);
     this.step = bind(this.step, this);
     this.record = bind(this.record, this);
-    this.event = bind(this.event, this);
     this.get_duration = bind(this.get_duration, this);
     this.new_media = bind(this.new_media, this);
+    this.event = bind(this.event, this);
     this.log = bind(this.log, this);
     default_options = {
       onScrubUpdate: function(ms) {},
@@ -42,6 +42,14 @@ Recorder = (function() {
       return;
     }
     return console.log.apply(this, args);
+  };
+
+  Recorder.prototype.event = function() {
+    var args, name;
+    name = arguments[0], args = 2 <= arguments.length ? slice.call(arguments, 1) : [];
+    this.log("event", name, args);
+    this.options[name].apply(this, args);
+    return this.options.onEvent(name, args);
   };
 
   Recorder.prototype.new_media = function(ready_cb, status_cb, error_cb) {
@@ -95,14 +103,6 @@ Recorder = (function() {
     })(this)), ((function(_this) {
       return function(media, error) {};
     })(this)));
-  };
-
-  Recorder.prototype.event = function() {
-    var args, name;
-    name = arguments[0], args = 2 <= arguments.length ? slice.call(arguments, 1) : [];
-    this.log("event", name, args);
-    this.options[name].apply(this, args);
-    return this.options.onEvent(name, args);
   };
 
   Recorder.prototype.record = function() {

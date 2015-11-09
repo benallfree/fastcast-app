@@ -41,7 +41,9 @@ app.controller 'AppController', ($scope, $http, $interval, $cordovaFile, $state,
   $scope.output_directory = 'cdvfile://localhost/persistent/'
 
   $scope.save_state = ->
+    json = angular.toJson($scope.podcast)
     window.localStorage.setItem 'podcast', angular.toJson($scope.podcast)
+    
 
   load_state()
 
