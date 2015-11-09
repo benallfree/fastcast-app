@@ -41,7 +41,7 @@ Recorder = (function() {
     if (!this.options.debug) {
       return;
     }
-    return console.log.apply(args);
+    return console.log.apply(this, args);
   };
 
   Recorder.prototype.new_media = function(ready_cb, status_cb, error_cb) {

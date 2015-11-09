@@ -17,7 +17,7 @@ class Recorder
     
   log: (args...)=>
     return unless @options.debug
-    console.log.apply(args)
+    console.log.apply(@, args)
 
   new_media: (ready_cb, status_cb, error_cb) =>
     status = {}
