@@ -1,4 +1,4 @@
-categories =
+window.categories =
   "Arts":[
     "Design"
     "Fashion & Beauty"

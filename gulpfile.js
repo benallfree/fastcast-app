@@ -14,16 +14,19 @@ var wrap = require('gulp-wrap');
 var declare = require('gulp-declare');
 var concat = require('gulp-concat');
 var coffee = require('gulp-coffee');
-
+var sourcemaps = require('gulp-sourcemaps');
 
 
 gulp.task('default', ['sass', 'haml', 'handlebars', 'coffee']);
 
 gulp.task('coffee', function() {
-  gulp.src('./coffee/**/*.coffee')
+  gulp.src(['./coffee/**/*.coffee'])
     .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
-    .pipe(coffee({bare: true}).on('error', gutil.log))
-    .pipe(gulp.dest('./www/js/'))
+    .pipe(sourcemaps.init())
+    .pipe(coffee())
+    .pipe(concat('all.js'))
+    .pipe(sourcemaps.write())
+    .pipe(gulp.dest('./www'))
 });
 
 gulp.task('handlebars', function(){
@@ -42,17 +45,13 @@ gulp.task('handlebars', function(){
 gulp.task('sass', function(done) {
   gulp.src('./scss/**/*.scss')
     .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
+    .pipe(sourcemaps.init())
     .pipe(sass({
       errLogToConsole: true
     }))
-    .pipe(gulp.dest('./www/css/'))
-    .pipe(minifyCss({
-      keepSpecialComments: 0
-    }))
-    .pipe(rename({ extname: '.min.css' }))
-    .pipe(gulp.dest('./www/css/'))
-    .on('end', done);
- 
+    .pipe(concat('all.css'))
+    .pipe(sourcemaps.write())
+    .pipe(gulp.dest('./www'))
 });
 
 // Get and render all .haml files recursively

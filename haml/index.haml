@@ -4,8 +4,8 @@
     %meta{charset: "utf-8"}
     %meta{content: "initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width", name: "viewport"}
     %title
-    %link{href: "css/ionic.app.css", rel: "stylesheet"}
-    %link{href: "css/style.css", rel: "stylesheet"}
+    %link{href: "all.css", rel: "stylesheet"}
+    %script{src: "cordova.js"}
     %script{src: "lib/jquery/dist/jquery.min.js"}
     %script{src: "lib/ionic/js/ionic.bundle.js"}
     %script{src: "lib/angular-ios9-uiwebview-patch/angular-ios9-uiwebview-patch.js"}
@@ -13,23 +13,8 @@
     %script{src: "lib/handlebars/handlebars.js"}
     %script{src: "lib/moment/min/moment.min.js"}
     %script{src: "lib/ngCordova/dist/ng-cordova.js"}
-    %script{src: "cordova.js"}
-    %script{src: "js/app.js"}
-    %script{src: "js/util.js"}
-    %script{src: "js/static_podcasts.js"}
-    %script{src: "js/static_categories.js"}
-    %script{src: "js/handlebar-templates.js"}
-    %script{src: "js/classes/Recorder.js"}
-    %script{src: "js/classes/Uploader.js"}
-    %script{src: "js/controllers/AppController.js"}
-    %script{src: "js/controllers/HomeController.js"}
-    %script{src: "js/controllers/EpisodeController.js"}
-    %script{src: "js/controllers/RecordController.js"}
-    %script{src: "js/controllers/FinalizeController.js"}
-    %script{src: "js/controllers/FinishController.js"}
-    %script{src: "js/controllers/SettingsController.js"}
-    %script{src: "js/controllers/PodcastSettingsController.js"}
-    %script{src: "js/bootstrap.js"}
+    %script{src: "all.js"}
+
   %body{"ng-controller": "AppController", id: 'body'}
     %ion-side-menus
       %ion-side-menu{side: "left"}

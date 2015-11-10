@@ -163,3 +163,5 @@ class Recorder
     @is_playing = false
     @is_recording = false
     @get_duration()
+
+window.Recorder = Recorder

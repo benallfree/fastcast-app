@@ -40,7 +40,7 @@ Handlebars.registerHelper 'hhmmss', (duration) ->
 Handlebars.registerHelper 'sprintf', ->
   sprintf.apply this, arguments
   
-orderByMagic = (hash) ->
+window.orderByMagic = (hash) ->
   array = []
   Object.keys(hash).forEach (key) ->
     array.push hash[key]

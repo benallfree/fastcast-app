@@ -1,4 +1,4 @@
-static_episodes = 
+window.static_episodes = 
   'fc-tgi-1444671420000':
     guid: 'fc-tgi-1444671420000'
     slug: '001-assassins'

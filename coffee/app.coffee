@@ -1,6 +1,6 @@
-is_app = document.URL.indexOf('http://') == -1 and document.URL.indexOf('https://') == -1
+window.is_app = document.URL.indexOf('http://') == -1 and document.URL.indexOf('https://') == -1
 
-app = angular.module('fastcast', [
+window.app = angular.module('fastcast', [
   'ionic'
   'ngCordova',
   'ngIOS9UIWebViewPatch',
