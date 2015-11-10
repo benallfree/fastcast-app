@@ -17,12 +17,15 @@ var coffee = require('gulp-coffee');
 var sourcemaps = require('gulp-sourcemaps');
 
 
-gulp.task('default', ['sass', 'coffee', 'handlebars', 'concat', 'haml']);
+gulp.task('default', ['sass', 'coffee', 'handlebars', 'concat', 'haml'], function() {
+});
 
 gulp.task('concat', function() {
   gulp.src(['./build/js/**/*.js'])
     .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
+    .pipe(sourcemaps.init({loadMaps: true}))
     .pipe(concat('all.js'))
+    .pipe(sourcemaps.write())
     .pipe(gulp.dest('./www'))
   gulp.src(['./build/css/**/*.css'])
     .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
@@ -73,7 +76,9 @@ gulp.task('haml', function () {
       ext: '.html',
       compiler: 'visionmedia'
     }))
-    .pipe(gulp.dest('./www'));
+    .pipe(gulp.dest('./www'))
+    .pipe(notify('Done'))
+    ;
 });
 
 gulp.task('watch', function() {
