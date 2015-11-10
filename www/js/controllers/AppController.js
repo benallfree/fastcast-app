@@ -1,5 +1,8 @@
-app.controller('AppController', function($scope, $http, $interval, $cordovaFile, $state, $cordovaFileTransfer, $q, $ionicHistory) {
+app.controller('AppController', function($scope, $http, $interval, $cordovaFile, $state, $cordovaFileTransfer, $q, $ionicHistory, $ionicSideMenuDelegate) {
   var load_state, next_episode_number;
+  $scope.toggleLeft = function() {
+    return $ionicSideMenuDelegate.toggleLeft();
+  };
   $scope.home = function() {
     $ionicHistory.nextViewOptions({
       disableBack: true
@@ -41,7 +44,14 @@ app.controller('AppController', function($scope, $http, $interval, $cordovaFile,
   $scope.save_state = function() {
     var json;
     json = angular.toJson($scope.podcast);
-    return window.localStorage.setItem('podcast', angular.toJson($scope.podcast));
+    window.localStorage.setItem('podcast', angular.toJson($scope.podcast));
+    return $cordovaFile.writeFile($scope.output_directory, 'data.json', json, true).then((function(result) {
+      return new UploadWorker({
+        type: 'json',
+        mime: 'application/json',
+        src: $scope.output_directory + 'data.json'
+      });
+    }));
   };
   load_state();
   $scope["new"] = function() {

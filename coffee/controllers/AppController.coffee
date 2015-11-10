@@ -1,4 +1,18 @@
-app.controller 'AppController', ($scope, $http, $interval, $cordovaFile, $state, $cordovaFileTransfer, $q, $ionicHistory) ->
+app.controller 'AppController', (
+  $scope, 
+  $http, 
+  $interval, 
+  $cordovaFile, 
+  $state, 
+  $cordovaFileTransfer, 
+  $q, 
+  $ionicHistory, 
+  $ionicSideMenuDelegate
+  ) ->
+    
+  $scope.toggleLeft = ->
+    $ionicSideMenuDelegate.toggleLeft()
+  
   $scope.home = ->
     $ionicHistory.nextViewOptions({
       disableBack: true
@@ -43,6 +57,13 @@ app.controller 'AppController', ($scope, $http, $interval, $cordovaFile, $state,
   $scope.save_state = ->
     json = angular.toJson($scope.podcast)
     window.localStorage.setItem 'podcast', angular.toJson($scope.podcast)
+    $cordovaFile.writeFile($scope.output_directory, 'data.json', json, true).then ((result) ->
+      (new UploadWorker(
+        type: 'json'
+        mime: 'application/json'
+        src: $scope.output_directory + 'data.json'
+      ))
+    )
     
 
   load_state()

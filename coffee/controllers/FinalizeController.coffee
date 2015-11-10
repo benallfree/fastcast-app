@@ -3,26 +3,24 @@ app.controller 'FinalizeController', ($scope, $http, $interval, $cordovaFile, $s
 
   upload_rss = ->
     rss = FastCast.templates.rss(episodes: orderByMagic($scope.podcast.episodes))
-    if is_app
-      $cordovaFile.writeFile($scope.output_directory, 'tgi.rss', rss, true).then ((result) ->
-        upload
-          type: 'rss'
-          mime: 'application/rss+xml'
-          src: $scope.output_directory + 'tgi.rss'
-      ), (err) ->
-        console.log 'file write error', err
+    $cordovaFile.writeFile($scope.output_directory, 'tgi.rss', rss, true).then ((result) ->
+      upload
+        type: 'rss'
+        mime: 'application/rss+xml'
+        src: $scope.output_directory + 'tgi.rss'
+    ), (err) ->
+      console.log 'file write error', err
     
   upload_html = ->
     html = FastCast.templates.episode(episode: $scope.episode)
-    if is_app
-      $cordovaFile.writeFile($scope.output_directory, $scope.episode.guid + '.html', html, true).then ((result) ->
-        upload
-          slug: $scope.episode.slug
-          type: 'html'
-          mime: 'text/html'
-          src: $scope.output_directory + $scope.episode.guid + '.html'
-      ), (err) ->
-        console.log 'file write error', err
+    $cordovaFile.writeFile($scope.output_directory, $scope.episode.guid + '.html', html, true).then ((result) ->
+      upload
+        slug: $scope.episode.slug
+        type: 'html'
+        mime: 'text/html'
+        src: $scope.output_directory + $scope.episode.guid + '.html'
+    ), (err) ->
+      console.log 'file write error', err
 
   upload_audio = ->
     upload

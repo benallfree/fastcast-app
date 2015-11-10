@@ -17,6 +17,7 @@
     %script{src: "js/app.js"}
     %script{src: "js/util.js"}
     %script{src: "js/static_podcasts.js"}
+    %script{src: "js/static_categories.js"}
     %script{src: "js/handlebar-templates.js"}
     %script{src: "js/classes/Recorder.js"}
     %script{src: "js/classes/Uploader.js"}
@@ -26,8 +27,18 @@
     %script{src: "js/controllers/RecordController.js"}
     %script{src: "js/controllers/FinalizeController.js"}
     %script{src: "js/controllers/FinishController.js"}
+    %script{src: "js/controllers/SettingsController.js"}
+    %script{src: "js/controllers/PodcastSettingsController.js"}
     %script{src: "js/bootstrap.js"}
   %body{"ng-controller": "AppController", id: 'body'}
-    %ion-nav-bar
-      %ion-nav-back-button
-    %ion-nav-view
+    %ion-side-menus
+      %ion-side-menu{side: "left"}
+        %ion-header-bar.bar-assertive
+          %h1.title Settings
+        %ion-content
+          %ion-list
+            %ion-item{'ui-sref': 'settings.podcast'} Podcast Settings
+      %ion-side-menu-content
+        %ion-nav-bar
+          %ion-nav-back-button
+        %ion-nav-view

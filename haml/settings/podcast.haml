@@ -1,0 +1,41 @@
+%ion-view
+  %ion-nav-title
+    Podcast Settings
+  %ion-nav-buttons{side: 'secondary'}
+    %button.button.button-assertive{'ng-click': 'cancel()', 'ng-if': 'has_changes'} Cancel
+  %ion-content.padding
+    .podcast-settings-view
+      .list.list-inset
+        %label.item.item-input
+          %span.input-label Title
+          %input{type: 'text', 'ng-model': 'podcast.title', autocapitalize: 'words'}
+        %label.item.item-input
+          %span.input-label Subtitle
+          %input{type: 'text', 'ng-model': 'podcast.subtitle', autocapitalize: 'words'}
+        %label.item.item-input
+          %span.input-label Author
+          %input{type: 'text', 'ng-model': 'podcast.author'}
+        %label.item.item-input
+          %textarea{placeholder: 'Show Description', 'ng-model': 'show.description'}
+        %label.item.item-input.item-select
+          .input-label
+            Primary Category
+          %select
+            %option --
+            %option{selected: ""} Green
+            %option Red
+        %label.item.item-input.item-select
+          .input-label
+            Secondary Category
+          %select
+            %option --
+            %option{selected: ""} Green
+            %option Red
+        .item.item-toggle
+          Explicit?
+          %label.toggle.toggle-balanced
+            %input{type: 'checkbox', 'ng-model': 'podcast.is_explicit'}
+            .track
+              .handle
+      %button.button.button-block.button-balanced{"ng-click": "save()"}
+        Save

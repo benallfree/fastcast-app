@@ -33,20 +33,30 @@ app = angular.module('fastcast', ['ionic', 'ngCordova', 'ngIOS9UIWebViewPatch'])
     controller: 'EpisodeController',
     abstract: true
   }).state('episode.record', {
-    url: '/record',
-    templateUrl: 'record.html',
+    url: '/episode/record',
+    templateUrl: 'episode/record.html',
     controller: 'RecordController',
     parent: 'episode'
   }).state('episode.finalize', {
-    url: '/finalize',
-    templateUrl: 'finalize.html',
+    url: '/episode/finalize',
+    templateUrl: 'episode/finalize.html',
     controller: 'FinalizeController',
     parent: 'episode'
   }).state('episode.finish', {
-    url: '/finish',
-    templateUrl: 'finish.html',
+    url: '/episode/finish',
+    templateUrl: 'episode/finish.html',
     controller: 'FinishController',
     parent: 'episode'
+  }).state('settings', {
+    url: '/settings',
+    template: '<ion-nav-view></ion-nav-view>',
+    controller: 'SettingsController',
+    abstract: true
+  }).state('settings.podcast', {
+    url: '/settings/podcast',
+    tempalteUrl: 'settings/podcast.html',
+    controller: 'PodcastSettingsController',
+    parent: 'settings'
   });
   return $urlRouterProvider.otherwise('/');
 });

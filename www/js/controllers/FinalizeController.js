@@ -6,35 +6,31 @@ app.controller('FinalizeController', function($scope, $http, $interval, $cordova
     rss = FastCast.templates.rss({
       episodes: orderByMagic($scope.podcast.episodes)
     });
-    if (is_app) {
-      return $cordovaFile.writeFile($scope.output_directory, 'tgi.rss', rss, true).then((function(result) {
-        return upload({
-          type: 'rss',
-          mime: 'application/rss+xml',
-          src: $scope.output_directory + 'tgi.rss'
-        });
-      }), function(err) {
-        return console.log('file write error', err);
+    return $cordovaFile.writeFile($scope.output_directory, 'tgi.rss', rss, true).then((function(result) {
+      return upload({
+        type: 'rss',
+        mime: 'application/rss+xml',
+        src: $scope.output_directory + 'tgi.rss'
       });
-    }
+    }), function(err) {
+      return console.log('file write error', err);
+    });
   };
   upload_html = function() {
     var html;
     html = FastCast.templates.episode({
       episode: $scope.episode
     });
-    if (is_app) {
-      return $cordovaFile.writeFile($scope.output_directory, $scope.episode.guid + '.html', html, true).then((function(result) {
-        return upload({
-          slug: $scope.episode.slug,
-          type: 'html',
-          mime: 'text/html',
-          src: $scope.output_directory + $scope.episode.guid + '.html'
-        });
-      }), function(err) {
-        return console.log('file write error', err);
+    return $cordovaFile.writeFile($scope.output_directory, $scope.episode.guid + '.html', html, true).then((function(result) {
+      return upload({
+        slug: $scope.episode.slug,
+        type: 'html',
+        mime: 'text/html',
+        src: $scope.output_directory + $scope.episode.guid + '.html'
       });
-    }
+    }), function(err) {
+      return console.log('file write error', err);
+    });
   };
   upload_audio = function() {
     return upload({

@@ -1,4 +1,6 @@
 %ion-view{'view-title': 'FastCast Podcasting Platform'}
+  %ion-nav-buttons{side: "left"}
+    %button.button.button-icon.button-clear.ion-navicon{"ng-click": "toggleLeft()"}          
   %ion-content.padding
     .home-view
       %a.button.button-block{"ng-click": 'new()'} New Episode
