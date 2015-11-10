@@ -17,29 +17,41 @@ var coffee = require('gulp-coffee');
 var sourcemaps = require('gulp-sourcemaps');
 
 
-gulp.task('default', ['sass', 'haml', 'handlebars', 'coffee']);
+gulp.task('default', ['sass', 'coffee', 'handlebars', 'concat', 'haml']);
+
+gulp.task('concat', function() {
+  gulp.src(['./build/js/**/*.js'])
+    .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
+    .pipe(concat('all.js'))
+    .pipe(gulp.dest('./www'))
+  gulp.src(['./build/css/**/*.css'])
+    .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
+    .pipe(concat('all.css'))
+    .pipe(gulp.dest('./www'))
+});
 
 gulp.task('coffee', function() {
   gulp.src(['./coffee/**/*.coffee'])
     .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
     .pipe(sourcemaps.init())
     .pipe(coffee())
-    .pipe(concat('all.js'))
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest('./www'))
+    .pipe(gulp.dest('./build/js'))
 });
 
 gulp.task('handlebars', function(){
   gulp.src('./handlebars/*.hbs')
     .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
+    .pipe(sourcemaps.init())
     .pipe(handlebars())
     .pipe(wrap('Handlebars.template(<%= contents %>)'))
     .pipe(declare({
       namespace: 'FastCast.templates',
       noRedeclare: true, // Avoid duplicate declarations 
     }))
+    .pipe(sourcemaps.write())
     .pipe(concat('handlebar-templates.js'))
-    .pipe(gulp.dest('www/js/'));
+    .pipe(gulp.dest('./build/js'));
 });
 
 gulp.task('sass', function(done) {
@@ -49,9 +61,8 @@ gulp.task('sass', function(done) {
     .pipe(sass({
       errLogToConsole: true
     }))
-    .pipe(concat('all.css'))
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest('./www'))
+    .pipe(gulp.dest('./build/css'))
 });
 
 // Get and render all .haml files recursively
@@ -66,7 +77,13 @@ gulp.task('haml', function () {
 });
 
 gulp.task('watch', function() {
-  gulp.watch(['./scss/**/*.scss', './www/lib/ionic/scss/**/*.scss', './haml/**/*.haml', './handlebars/**/*.hbs', './coffee/**/*.coffee'], ['haml', 'sass', 'handlebars', 'coffee']);
+  gulp.watch([
+    './scss/**/*.scss', 
+    './www/lib/ionic/scss/**/*.scss', 
+    './haml/**/*.haml', 
+    './handlebars/**/*.hbs', 
+    './coffee/**/*.coffee'
+  ], ['default']);
 });
 
 gulp.task('install', ['git-check'], function() {

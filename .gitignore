@@ -7,3 +7,4 @@ platforms/ios/FastCast.xcodeproj/project.xcworkspace/xcuserdata/uncovered.xcuser
 platforms/ios/www
 www
 !www/img
+build
