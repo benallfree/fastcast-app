@@ -8,3 +8,4 @@ platforms/ios/www
 www
 !www/img
 build
+node_modules
