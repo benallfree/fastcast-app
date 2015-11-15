@@ -41,31 +41,31 @@ window.app = angular.module('fastcast', [
     template: '<ion-nav-view></ion-nav-view>'
     controller: 'EpisodeController'
     abstract: true)
-  .state('episode.record',
-    url: '/episode/record'
-    templateUrl: 'episode/record.html'
-    controller: 'RecordController'
-    parent: 'episode')
-  .state('episode.finalize',
-    url: '/episode/finalize'
-    templateUrl: 'episode/finalize.html'
-    controller: 'FinalizeController'
-    parent: 'episode')
-  .state('episode.finish',
-    url: '/episode/finish'
-    templateUrl: 'episode/finish.html'
-    controller: 'FinishController'
-    parent: 'episode')
+    .state('episode.record',
+      url: '/record'
+      templateUrl: 'episode/record.html'
+      controller: 'RecordController'
+      parent: 'episode')
+    .state('episode.finalize',
+      url: '/finalize'
+      templateUrl: 'episode/finalize.html'
+      controller: 'FinalizeController'
+      parent: 'episode')
+    .state('episode.finish',
+      url: '/finish'
+      templateUrl: 'episode/finish.html'
+      controller: 'FinishController'
+      parent: 'episode')
   .state('settings',
     url: '/settings'
     template: '<ion-nav-view></ion-nav-view>'
     controller: 'SettingsController'
     abstract: true)
-  .state('settings.podcast',
-    url: '/settings/podcast'
-    tempalteUrl: 'settings/podcast.html'
-    controller: 'PodcastSettingsController'
-    parent: 'settings')
+    .state('settings.podcast',
+      url: '/podcast'
+      templateUrl: 'settings/podcast.html'
+      controller: 'PodcastSettingsController'
+      parent: 'settings')
     
   $urlRouterProvider.otherwise '/'
 )
