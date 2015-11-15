@@ -4,46 +4,67 @@ var gutil = require('gulp-util');
 var bower = require('bower');
 var concat = require('gulp-concat');
 var sass = require('gulp-sass');
-var minifyCss = require('gulp-minify-css');
-var rename = require('gulp-rename');
 var sh = require('shelljs');
 var haml = require('gulp-haml');
 var notify = require("gulp-notify");
 var handlebars = require('gulp-handlebars');
 var wrap = require('gulp-wrap');
 var declare = require('gulp-declare');
-var concat = require('gulp-concat');
 var coffee = require('gulp-coffee');
 var sourcemaps = require('gulp-sourcemaps');
+var clean = require('gulp-clean');
+var notifier = require('node-notifier');
 
-
-gulp.task('default', ['sass', 'coffee', 'handlebars', 'concat', 'haml'], function() {
+gulp.task('clean', function() {
+  return gulp.src('./build/', {read: false})
+    .pipe(clean());
 });
 
-gulp.task('concat', function() {
-  gulp.src(['./build/js/**/*.js'])
+gulp.task('default', ['build_js', 'build_css', 'haml'], function () {
+  notifier.notify({
+    'title': 'Done',
+    'message': 'Done!'
+  });
+});
+
+gulp.task('build_js', ['coffee', 'handlebars'], function() {
+  return gulp.src(['./build/js/**/*.js'])
     .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
     .pipe(sourcemaps.init({loadMaps: true}))
     .pipe(concat('all.js'))
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest('./www'))
-  gulp.src(['./build/css/**/*.css'])
-    .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
-    .pipe(concat('all.css'))
-    .pipe(gulp.dest('./www'))
+    .pipe(gulp.dest('./www'));
 });
 
-gulp.task('coffee', function() {
-  gulp.src(['./coffee/**/*.coffee'])
+gulp.task('build_css', ['sass'], function() {
+  return gulp.src(['./build/css/**/*.css'])
+    .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
+    .pipe(concat('all.css'))
+    .pipe(gulp.dest('./www'));
+});
+
+gulp.task('haml', function() {
+  return gulp.src('./haml/**/*.haml')
+    .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
+    .pipe(haml({
+      ext: '.html',
+      compiler: 'visionmedia'
+    }))
+    .pipe(gulp.dest('./www'));
+});
+
+
+gulp.task('coffee', ['clean'], function() {
+  return gulp.src(['./coffee/**/*.coffee'])
     .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
     .pipe(sourcemaps.init())
     .pipe(coffee())
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest('./build/js'))
+    .pipe(gulp.dest('./build/js'));
 });
 
-gulp.task('handlebars', function(){
-  gulp.src('./handlebars/*.hbs')
+gulp.task('handlebars', ['clean'], function() {
+  return gulp.src('./handlebars/*.hbs')
     .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
     .pipe(sourcemaps.init())
     .pipe(handlebars())
@@ -54,40 +75,31 @@ gulp.task('handlebars', function(){
     }))
     .pipe(sourcemaps.write())
     .pipe(concat('handlebar-templates.js'))
-    .pipe(gulp.dest('./build/js'));
-});
+    .pipe(gulp.dest('./build/js'));  
+})
 
-gulp.task('sass', function(done) {
-  gulp.src('./scss/**/*.scss')
+gulp.task('sass', ['clean'], function() {
+  return gulp.src('./scss/**/*.scss')
     .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
     .pipe(sourcemaps.init())
     .pipe(sass({
       errLogToConsole: true
     }))
     .pipe(sourcemaps.write())
-    .pipe(gulp.dest('./build/css'))
+    .pipe(gulp.dest('./build/css'));
 });
 
-// Get and render all .haml files recursively
-gulp.task('haml', function () {
-  gulp.src('./haml/**/*.haml')
-    .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
-    .pipe(haml({
-      ext: '.html',
-      compiler: 'visionmedia'
-    }))
-    .pipe(gulp.dest('./www'))
-    .pipe(notify('Done'))
-    ;
-});
+
+
+
 
 gulp.task('watch', function() {
   gulp.watch([
     './scss/**/*.scss', 
-    './www/lib/ionic/scss/**/*.scss', 
-    './haml/**/*.haml', 
-    './handlebars/**/*.hbs', 
-    './coffee/**/*.coffee'
+    './www/lib/ionic/scss/**/*.scss',
+    './haml/**/*.haml',
+    './handlebars/**/*.hbs',
+    './coffee/**/*.coffee',
   ], ['default']);
 });
 
