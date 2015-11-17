@@ -10,6 +10,9 @@ app.controller 'AppController', (
   $ionicSideMenuDelegate
   ) ->
     
+  $scope.settings = ->
+    $state.go 'settings.podcast'
+    
   $scope.toggleLeft = ->
     $ionicSideMenuDelegate.toggleLeft()
   
