@@ -9,7 +9,7 @@ app.controller 'EpisodeController', ($scope, $http, $interval, $cordovaFile, $st
   $scope.scrub_point_ms = 0
   $scope.has_changes = false
   
-  $scope.$watch 'episode', ((oldObj, newObj) ->
+  $scope.$watch 'episode', ((newObj, oldObj) ->
     $scope.has_changes = !angular.equals(oldObj, newObj)
   ), true
 
