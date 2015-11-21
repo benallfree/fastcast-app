@@ -102,6 +102,12 @@
         },
         "xu.li.cordova.wav2m4a": {
             "PACKAGE_NAME": "com.benallfree.fastcast"
+        },
+        "com.synconset.imagepicker": {
+            "PACKAGE_NAME": "com.benallfree.fastcast"
+        },
+        "com-badrit-base64": {
+            "PACKAGE_NAME": "com.benallfree.fastcast"
         }
     },
     "dependent_plugins": {}

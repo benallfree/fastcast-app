@@ -4,9 +4,10 @@
       <%episode.number | numberFixedLen:3%> - <%episode.title%>
     %span{'ng-if': '!episode.title'}
       New Episode
+  %ion-nav-buttons{side: "left"}          
   %ion-nav-buttons{side: 'secondary'}
     %button.button.button-assertive{'ng-click': 'cancel()', 'ng-if': 'has_changes'} Cancel
-  %ion-content.padding
+  %ion-content.padding{scroll: 'false'}
     .record-view
       %div{"ng-if": "!is_recording && !is_playing"}
         .status-stopped

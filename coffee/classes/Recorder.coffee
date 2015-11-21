@@ -11,9 +11,9 @@ class Recorder
       onEvent: (name,args...)->
       debug: false
     @options = angular.extend(default_options, options)
-    @duration_ms = 0
     @scrub_point_ms = 0
     @stop()
+    @get_duration()
     
   log: (args...)=>
     return unless @options.debug
@@ -126,11 +126,11 @@ class Recorder
     if @scrub_point_ms >= @duration_ms
       @scrub_point_ms = 0
       @event('onScrubUpdate', @scrub_point_ms)
-      
+    
     @media = @new_media(
       ((media)=>    # ready
-        media.seekTo(@scrub_point_ms / 1000.0)
         media.play()
+        media.seekTo(@scrub_point_ms)
       ),
       ((media,status)=> # Status
         if status == Media.MEDIA_RUNNING
@@ -158,10 +158,9 @@ class Recorder
         @event('onAudioError')
       )
     )
-    
+  
   stop: =>
     @is_playing = false
     @is_recording = false
-    @get_duration()
 
 window.Recorder = Recorder

@@ -246,6 +246,22 @@ module.exports = [
         "clobbers": [
             "wav2m4a"
         ]
+    },
+    {
+        "file": "plugins/com.synconset.imagepicker/www/imagepicker.js",
+        "id": "com.synconset.imagepicker.ImagePicker",
+        "pluginId": "com.synconset.imagepicker",
+        "clobbers": [
+            "plugins.imagePicker"
+        ]
+    },
+    {
+        "file": "plugins/com-badrit-base64/www/Base64.js",
+        "id": "com-badrit-base64.Base64",
+        "pluginId": "com-badrit-base64",
+        "clobbers": [
+            "navigator.Base64"
+        ]
     }
 ];
 module.exports.metadata = 

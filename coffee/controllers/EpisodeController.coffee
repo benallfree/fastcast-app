@@ -1,4 +1,15 @@
-app.controller 'EpisodeController', ($scope, $http, $interval, $cordovaFile, $state, $ionicActionSheet, $ionicNavBarDelegate, $ionicPopup) ->
+app.controller 'EpisodeController', (
+  $scope, 
+  $ionicSideMenuDelegate
+  $ionicActionSheet
+  ) ->
+    
+  $scope.$on '$ionicView.enter', ->
+      $ionicSideMenuDelegate.canDragContent false
+
+  $scope.$on '$ionicView.leave', ->
+      $ionicSideMenuDelegate.canDragContent true
+
   t = (new Date).getTime()
   
   $scope.has_recording = $scope.episode.recorded_at?

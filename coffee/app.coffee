@@ -4,6 +4,7 @@ window.app = angular.module('fastcast', [
   'ionic'
   'ngCordova',
   'ngIOS9UIWebViewPatch',
+  'jrCrop',
 ])
 
 .config(($interpolateProvider) ->

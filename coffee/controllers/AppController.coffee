@@ -7,9 +7,51 @@ app.controller 'AppController', (
   $cordovaFileTransfer, 
   $q, 
   $ionicHistory, 
-  $ionicSideMenuDelegate
+  $ionicSideMenuDelegate,
+  $jrCrop,
+  $cordovaImagePicker
   ) ->
-    
+
+
+  $scope.select_logo = (cb)->
+    options = 
+      maximumImagesCount: 1
+
+    $cordovaImagePicker.getPictures(options)
+      .then ( ((results) ->
+        $jrCrop.crop(
+          url: results[0]
+          title: 'Move and Scale'
+          width: 300
+          height: 300
+        ).then( (canvas)->
+          c = Caman(canvas, ->
+            @resize
+              width: 75
+              height: 75
+            @render =>
+              data_url = @toBase64('jpeg')
+              b64 = data_url.replace(/^data:.+?;base64,/, "");
+              console.log(data_url.substring(0,50))
+              _base64ToArrayBuffer = (base64) ->
+                binary_string = window.atob(base64.replace(/\s/g, ''))
+                len = binary_string.length
+                bytes = new Uint8Array(len)
+                i = 0
+                while i < len
+                  bytes[i] = binary_string.charCodeAt(i)
+                  i++
+                bytes.buffer        
+              data = _base64ToArrayBuffer(b64)
+              $cordovaFile.writeFile($scope.output_directory, "test.jpg", data, true).then(->
+                cb($scope.output_directory+ "test.jpg", data_url)
+              )
+          )
+        )
+      )), (error)->
+        console.log(error)
+
+
   $scope.settings = ->
     $state.go 'settings.podcast'
     
@@ -56,7 +98,11 @@ app.controller 'AppController', (
     n + 1
 
   $scope.output_directory = 'cdvfile://localhost/persistent/'
-
+  
+  resolveLocalFileSystemURL($scope.output_directory, (entry)->
+    $scope.native_output_directory = entry.toURL()
+  )
+  
   $scope.save_state = ->
     json = angular.toJson($scope.podcast)
     window.localStorage.setItem 'podcast', angular.toJson($scope.podcast)

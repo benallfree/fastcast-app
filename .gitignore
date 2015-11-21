@@ -2,10 +2,8 @@
 # http://git-scm.com/docs/gitignore
 
 sass/.sass-cache
-platforms/ios/cordova/*.log
-platforms/ios/FastCast.xcodeproj/project.xcworkspace/xcuserdata/uncovered.xcuserdatad/UserInterfaceState.xcuserstate
-platforms/ios/www
-www
-!www/img
-build
-node_modules
+/platforms/ios/cordova/*.log
+/platforms/ios/FastCast.xcodeproj/project.xcworkspace/xcuserdata/uncovered.xcuserdatad/UserInterfaceState.xcuserstate
+/platforms/ios/www
+/build
+/node_modules

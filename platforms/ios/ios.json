@@ -43,6 +43,10 @@
                         {
                             "xml": "<feature name=\"Wav2M4a\"><param name=\"ios-package\" value=\"CDVWav2M4a\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"ImagePicker\"><param name=\"ios-package\" value=\"SOSPicker\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -77,6 +81,12 @@
             "PACKAGE_NAME": "com.benallfree.fastcast"
         },
         "xu.li.cordova.wav2m4a": {
+            "PACKAGE_NAME": "com.benallfree.fastcast"
+        },
+        "com.synconset.imagepicker": {
+            "PACKAGE_NAME": "com.benallfree.fastcast"
+        },
+        "com-badrit-base64": {
             "PACKAGE_NAME": "com.benallfree.fastcast"
         }
     },
@@ -327,6 +337,22 @@
             "pluginId": "xu.li.cordova.wav2m4a",
             "clobbers": [
                 "wav2m4a"
+            ]
+        },
+        {
+            "file": "plugins/com.synconset.imagepicker/www/imagepicker.js",
+            "id": "com.synconset.imagepicker.ImagePicker",
+            "pluginId": "com.synconset.imagepicker",
+            "clobbers": [
+                "plugins.imagePicker"
+            ]
+        },
+        {
+            "file": "plugins/com-badrit-base64/www/Base64.js",
+            "id": "com-badrit-base64.Base64",
+            "pluginId": "com-badrit-base64",
+            "clobbers": [
+                "navigator.Base64"
             ]
         }
     ]
