@@ -1,0 +1,13 @@
+
+<ion-view>
+<ion-nav-title>Base Tagged!</ion-nav-title>
+<ion-content scroll="false" class="padding">
+<div class="finish-view">
+<div ng-if="!episode.is_published" class="saved">
+<p>Awesome, your episode is safe in the cloud. You can go back any time and publish it later to make it live for all your listeners.</p>
+<div class="saved-in-cloud positive">
+<div class="ion-android-cloud-done"></div></div></div>
+<div ng-if="episode.is_published" class="published">Your episode has been published to your listeners! It is now live in your podcast feed.
+<div class="published-to-listeners balanced">
+<div class="ion-ios-people"></div></div></div>
+<button ng-click="home()" class="button button-block button-stable">Back to Episodes</button></div></ion-content></ion-view>

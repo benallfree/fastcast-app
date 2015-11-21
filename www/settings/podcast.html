@@ -1,0 +1,35 @@
+
+<ion-view>
+<ion-nav-title>Podcast Settings</ion-nav-title>
+<ion-nav-buttons side="secondary">
+<button ng-click="cancel()" ng-if="has_changes" class="button button-assertive">Cancel</button></ion-nav-buttons>
+<ion-content class="padding">
+<div class="podcast-settings-view">
+<div class="list list-inset">
+<label class="item item-input">
+<span class="input-label">Title</span>
+<input type="text" ng-model="show.title" autocapitalize="words"/></label>
+<label class="item item-input">
+<span class="input-label">Cover Art</span>
+<img ng-src="&lt;%logo_src%&gt;" ng-if="logo_src" style="width: 75px; width: 75px; border-radius: 3px; margin-right: 10px; border: 1px solid rgb(213, 213, 213)"/>
+<button ng-click="do_logo()">Choose</button></label>
+<label class="item item-input">
+<span class="input-label">Subtitle</span>
+<input type="text" ng-model="show.subtitle" autocapitalize="words"/></label>
+<label class="item item-input">
+<span class="input-label">Author</span>
+<input type="text" ng-model="show.author"/></label>
+<label class="item item-input item-select">
+<div class="input-label">Category #1</div>
+<select ng-model="show.primary_category" ng-options="item.key as item.name for item in cats"></select></label>
+<label class="item item-input item-select">
+<div class="input-label">Category #2</div>
+<select ng-model="show.secondary_category" ng-options="item.key as item.name for item in cats"></select></label>
+<div class="item item-toggle">Explicit?
+<label class="toggle toggle-balanced">
+<input type="checkbox" ng-model="show.is_explicit"/>
+<div class="track">
+<div class="handle"></div></div></label></div>
+<label class="item item-input">
+<textarea placeholder="Show Description" ng-model="show.description"></textarea></label></div>
+<button ng-click="save()" class="button button-block button-balanced">Save</button></div></ion-content></ion-view>
