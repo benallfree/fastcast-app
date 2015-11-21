@@ -12,6 +12,7 @@
     "moment": "~2.10.6",
     "angular-ios9-uiwebview-patch": "~1.1.1",
     "jr-crop": "~1.1.2",
-    "caman": "~4.1.2"
+    "caman": "~4.1.2",
+    "underscore": "~1.8.3"
   }
 }

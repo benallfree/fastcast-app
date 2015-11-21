@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
+  <channel>
+    <atom:link href="http://www.fast-cast.net/podcasts/<%- podcast.code %>/feed.rss" rel="self" type="application/rss+xml"/>
+    <title><%- podcast.title %></title>
+    <link>http://www.fast-cast.net/podcasts/<%- podcast.code %>/index.html</link>
+    <pubDate><%- rfc2822() %></pubDate>
+    <lastBuildDate><%- rfc2822() %></lastBuildDate>
+    <ttl>60</ttl>
+    <language>en</language>
+    <copyright>All rights reserved</copyright>
+    <webMaster><%- podcast.code %>@fast-cast.net (<%- podcast.author %>)</webMaster>
+    <description><%- podcast.description %></description>
+    <itunes:new-feed-url>http://www.fast-cast.net/podcasts/<%- podcast.code %>/feed.rss</itunes:new-feed-url>
+    <itunes:subtitle><%- podcast.subtitle %></itunes:subtitle>
+    <itunes:owner>
+      <itunes:name><%- podcast.author %></itunes:name>
+      <itunes:email><%- podcast.code %>@fast-cast.net</itunes:email>
+    </itunes:owner>
+    <itunes:author><%- podcast.author %></itunes:author>
+    <itunes:explicit><%- podcast.is_explicit ? 'yes' : 'no' %></itunes:explicit>
+    <itunes:image href="http://www.fast-cast.net/podcasts/<%- podcast.code %>/logo.jpg"/>
+    <image>
+      <url>http://www.fast-cast.net/podcasts/<%- podcast.code %>/logo.jpg</url>
+      <title><%- podcast.title %></title>
+      <link>http://www.fast-cast.net/podcasts/<%- podcast.code %>/index.html</link>
+    </image>
+    <% _.each(['primary_category', 'secondary_category'], function(k) { %>
+      <% var parts = podcast[k].split(/\|/); %>
+  		<itunes:category text="<%- parts[0] %>">
+  			<% if(parts.length>1) { %>
+  				<itunes:category text="<%- parts[1] %>"/>
+  			<% } %>
+  		</itunes:category>
+    <% }) %>
+		<% _.each(orderByMagic(podcast.episodes), function(episode) {
+        if(!episode.published_at) return;
+        %>
+		    <item>
+		      <guid isPermaLink="false"><%- episode.guid %></guid>
+		      <title><%- sprintf("%03d", episode.number) %> - <%- episode.title %></title>
+		      <pubDate><%- rfc2822(episode.published_at) %></pubDate>
+		      <link>http://www.fast-cast.net/podcasts/<%- podcast.code %>/episodes/<%- episode.slug %></link>
+		      <itunes:duration><%- episode.duration_ms.toHHMMSS() %></itunes:duration>
+		      <itunes:author>Ben Allfree</itunes:author>
+		      <itunes:explicit>yes</itunes:explicit>
+		      <itunes:summary><%- episode.description %></itunes:summary>
+		      <itunes:subtitle><%- episode.description %></itunes:subtitle>
+		      <description><%- episode.description %></description>
+		      <enclosure type="audio/mp4" url="http://www.fast-cast.net/podcasts/<%- podcast.code %>/episodes/<%- episode.slug %>/<%- episode.slug %>.m4a" length="<%- episode.length_bytes %>"/>
+		      <itunes:image href="http://www.fast-cast.net/podcasts/<%- podcast.code %>/logo.jpg"/>
+		    </item>
+		<% }) %>
+  </channel>
+</rss>

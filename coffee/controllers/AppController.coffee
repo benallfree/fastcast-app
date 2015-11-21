@@ -7,50 +7,8 @@ app.controller 'AppController', (
   $cordovaFileTransfer, 
   $q, 
   $ionicHistory, 
-  $ionicSideMenuDelegate,
-  $jrCrop,
-  $cordovaImagePicker
+  $ionicSideMenuDelegate
   ) ->
-
-
-  $scope.select_logo = (cb)->
-    options = 
-      maximumImagesCount: 1
-
-    $cordovaImagePicker.getPictures(options)
-      .then ( ((results) ->
-        $jrCrop.crop(
-          url: results[0]
-          title: 'Move and Scale'
-          width: 300
-          height: 300
-        ).then( (canvas)->
-          c = Caman(canvas, ->
-            @resize
-              width: 75
-              height: 75
-            @render =>
-              data_url = @toBase64('jpeg')
-              b64 = data_url.replace(/^data:.+?;base64,/, "");
-              console.log(data_url.substring(0,50))
-              _base64ToArrayBuffer = (base64) ->
-                binary_string = window.atob(base64.replace(/\s/g, ''))
-                len = binary_string.length
-                bytes = new Uint8Array(len)
-                i = 0
-                while i < len
-                  bytes[i] = binary_string.charCodeAt(i)
-                  i++
-                bytes.buffer        
-              data = _base64ToArrayBuffer(b64)
-              $cordovaFile.writeFile($scope.output_directory, "test.jpg", data, true).then(->
-                cb($scope.output_directory+ "test.jpg", data_url)
-              )
-          )
-        )
-      )), (error)->
-        console.log(error)
-
 
   $scope.settings = ->
     $state.go 'settings.podcast'
@@ -119,7 +77,7 @@ app.controller 'AppController', (
 
   $scope.new = ->
     t = (new Date).getTime()
-    guid = sprintf('fc-tgi-%d', t)
+    guid = sprintf('fc-%s-%d', $scope.podcast.code t)
     $scope.episode =
       guid: guid
       number: next_episode_number()
@@ -127,4 +85,5 @@ app.controller 'AppController', (
 
   $scope.go = (guid) ->
     $scope.episode = angular.copy($scope.podcast.episodes[guid])
+    $scope.episode.is_published = $scope.episode.published_at?
     $state.go 'episode.record'

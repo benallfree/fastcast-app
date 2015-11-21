@@ -7,7 +7,7 @@ var sass = require('gulp-sass');
 var sh = require('shelljs');
 var haml = require('gulp-haml');
 var notify = require("gulp-notify");
-var handlebars = require('gulp-handlebars');
+var jst = require('gulp-jst');
 var wrap = require('gulp-wrap');
 var declare = require('gulp-declare');
 var coffee = require('gulp-coffee');
@@ -27,7 +27,7 @@ gulp.task('default', ['build_js', 'build_css', 'haml'], function () {
   });
 });
 
-gulp.task('build_js', ['coffee', 'handlebars'], function() {
+gulp.task('build_js', ['coffee', 'jst'], function() {
   return gulp.src(['./build/js/**/*.js'])
     .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
     .pipe(sourcemaps.init({loadMaps: true}))
@@ -63,18 +63,15 @@ gulp.task('coffee', ['clean'], function() {
     .pipe(gulp.dest('./build/js'));
 });
 
-gulp.task('handlebars', ['clean'], function() {
-  return gulp.src('./handlebars/*.hbs')
+gulp.task('jst', ['clean'], function() {
+  return gulp.src('./jst/*.html')
     .pipe(plumber({errorHandler: notify.onError("Error: <%= error.message %>")}))
-    .pipe(sourcemaps.init())
-    .pipe(handlebars())
-    .pipe(wrap('Handlebars.template(<%= contents %>)'))
+    .pipe(jst())
     .pipe(declare({
       namespace: 'FastCast.templates',
-      noRedeclare: true, // Avoid duplicate declarations 
+      noRedeclare: true, // Avoid duplicate declarations
     }))
-    .pipe(sourcemaps.write())
-    .pipe(concat('handlebar-templates.js'))
+    .pipe(concat('jst.js'))
     .pipe(gulp.dest('./build/js'));  
 })
 
@@ -98,7 +95,7 @@ gulp.task('watch', function() {
     './scss/**/*.scss', 
     './www/lib/ionic/scss/**/*.scss',
     './haml/**/*.haml',
-    './handlebars/**/*.hbs',
+    './jst/**/*.html',
     './coffee/**/*.coffee',
   ], ['default']);
 });

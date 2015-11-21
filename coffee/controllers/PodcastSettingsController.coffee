@@ -1,4 +1,13 @@
-app.controller 'PodcastSettingsController', ($scope, $ionicHistory, $ionicPopup, $ionicNavBarDelegate, $ionicActionSheet) ->
+app.controller 'PodcastSettingsController', (
+  $scope, 
+  $ionicHistory, 
+  $ionicPopup, 
+  $ionicNavBarDelegate, 
+  $ionicActionSheet,
+  $jrCrop,
+  $cordovaImagePicker,
+  $cordovaFile
+) ->
   
   cats = []
   for cat,subcats of categories
@@ -15,11 +24,57 @@ app.controller 'PodcastSettingsController', ($scope, $ionicHistory, $ionicPopup,
   $scope.cats = cats
   
   $scope.do_logo = ->
-    $scope.select_logo( (path, data_url)->
-      $scope.show.logo_path = path
-      $scope.logo_src = data_url;
-    )
+    options = 
+      maximumImagesCount: 1
 
+    $cordovaImagePicker.getPictures(options)
+      .then ( ((results) ->
+        $jrCrop.crop(
+          url: results[0]
+          title: 'Move and Scale'
+          width: 300
+          height: 300
+        ).then( (canvas)->
+          _base64ToArrayBuffer = (base64) ->
+            binary_string = window.atob(base64.replace(/\s/g, ''))
+            len = binary_string.length
+            bytes = new Uint8Array(len)
+            i = 0
+            while i < len
+              bytes[i] = binary_string.charCodeAt(i)
+              i++
+            bytes.buffer
+          resize = (src_canvas, dst_name, d,cb = null)->
+            Caman(src_canvas, ->
+              @resize
+                width: d
+                height: d
+              @render =>
+                data_url = @toBase64('jpeg')
+                b64 = data_url.replace(/^data:.+?;base64,/, "");
+                console.log(data_url.substring(0,50))
+                data = _base64ToArrayBuffer(b64)
+                $cordovaFile.writeFile($scope.output_directory, dst_name, data, true).then(->
+                  if cb
+                    cb($scope.output_directory+ dst_name, data_url)
+                )
+              @reset()
+            )
+          resize(canvas, 'logo-thumb.jpg', 75, (path, data_url)->
+            $scope.show.logo_path = path
+            $scope.logo_src = data_url
+          )
+          resize(canvas, 'logo.jpg', 1400, (path, data_url)->
+            new UploadWorker(
+              type: 'logo'
+              mime: 'image/jpeg'
+              src: path
+            )
+          )
+        )
+      )), (error)->
+        console.log(error)
+        
   getb64 = (cdv_path, cb) ->
     resolveLocalFileSystemURL(cdv_path, (entry)->
       path = entry.toURL()
@@ -77,6 +132,16 @@ app.controller 'PodcastSettingsController', ($scope, $ionicHistory, $ionicPopup,
     for k,v of $scope.show
       $scope.podcast[k] = $scope.show[k]
     $scope.save_state()
+    if($scope.has_changes)
+      rss = FastCast.templates.rss
+        podcast: $scope.podcast
+      $cordovaFile.writeFile($scope.output_directory, $scope.podcast.code+'.rss', rss, true).then ((result) ->
+        new UploadWorker(
+          type: 'rss'
+          mime: 'application/rss+xml'
+          src: $scope.output_directory + $scope.podcast.code+'.rss'
+        )
+      )
     $scope.home()
 
   $scope.cancel = ->

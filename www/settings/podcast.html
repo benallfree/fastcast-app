@@ -6,6 +6,9 @@
 <ion-content class="padding">
 <div class="podcast-settings-view">
 <div class="list list-inset">
+<label style="background: red" class="item item-input">
+<span class="input-label">Show Code</span>
+<input type="text" ng-model="show.code"/></label>
 <label class="item item-input">
 <span class="input-label">Title</span>
 <input type="text" ng-model="show.title" autocapitalize="words"/></label>
@@ -15,7 +18,7 @@
 <button ng-click="do_logo()">Choose</button></label>
 <label class="item item-input">
 <span class="input-label">Subtitle</span>
-<input type="text" ng-model="show.subtitle" autocapitalize="words"/></label>
+<input type="text" ng-model="show.subtitle"/></label>
 <label class="item item-input">
 <span class="input-label">Author</span>
 <input type="text" ng-model="show.author"/></label>

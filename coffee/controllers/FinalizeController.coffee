@@ -2,17 +2,19 @@ app.controller 'FinalizeController', ($scope, $http, $interval, $cordovaFile, $s
   $ionicNavBarDelegate.showBackButton true
 
   upload_rss = ->
-    rss = FastCast.templates.rss(episodes: orderByMagic($scope.podcast.episodes))
-    $cordovaFile.writeFile($scope.output_directory, 'tgi.rss', rss, true).then ((result) ->
+    rss = FastCast.templates.rss
+      podcast: $scope.podcast
+    $cordovaFile.writeFile($scope.output_directory, $scope.podcast.code+'.rss', rss, true).then ((result) ->
       upload
         type: 'rss'
         mime: 'application/rss+xml'
-        src: $scope.output_directory + 'tgi.rss'
+        src: $scope.output_directory + $scope.podcast.code + '.rss'
     ), (err) ->
       console.log 'file write error', err
     
   upload_html = ->
-    html = FastCast.templates.episode(episode: $scope.episode)
+    html = FastCast.templates.episode
+      episode: $scope.episode
     $cordovaFile.writeFile($scope.output_directory, $scope.episode.guid + '.html', html, true).then ((result) ->
       upload
         slug: $scope.episode.slug
@@ -68,6 +70,8 @@ app.controller 'FinalizeController', ($scope, $http, $interval, $cordovaFile, $s
         alert 'Please supply an episode description.'
       if !$scope.episode.published_at
         $scope.episode.published_at = (new Date).getTime()
+    else
+      $scope.episode.published_at = null
     $scope.is_uploading_started = true
     $scope.episode.slug = sprintf('%03d - %s', $scope.episode.number, $scope.episode.title).slugify()
     if(!$scope.episode.length_bytes)

@@ -1,3 +1,5 @@
+$jrCrop.defaultOptions.template = $jrCrop.defaultOptions.template.replace(/{{/g, '<%').replace(/}}/g, '%>')
+
 String::slugify = ->
   @toLowerCase().replace(/\s+/g, '-').replace(/[^\w\-]+/g, '').replace(/\-\-+/g, '-').replace(/^-+/, '').replace /-+$/, ''
   # Trim - from end of text
@@ -31,14 +33,9 @@ Number::humanize = ->
 String::sprintf = ->
   sprintf.apply this, this, arguments
 
-Handlebars.registerHelper 'datetime', (date) ->
+window.rfc2822 = (date)->
   date = if !date or date.name == 'datetime' then moment() else date
   moment(date).format 'ddd, DD MMM YYYY HH:mm:ss ZZ'
-Handlebars.registerHelper 'hhmmss', (duration) ->
-  duration = Math.max(1000, duration)
-  duration.toHHMMSS false
-Handlebars.registerHelper 'sprintf', ->
-  sprintf.apply this, arguments
   
 window.orderByMagic = (hash) ->
   array = []
