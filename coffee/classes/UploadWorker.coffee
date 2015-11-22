@@ -59,6 +59,7 @@ class UploadWorker
       upload_options.chunkedMode = false
       upload_options.httpMethod = 'PUT'
       upload_options.headers = 'Content-Type': @item.mime
+      console.log("Uploading", @item.src, url)
       ft.upload(
         @item.src, 
         url, 

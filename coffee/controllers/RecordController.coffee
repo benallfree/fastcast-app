@@ -1,4 +1,8 @@
 app.controller 'RecordController', ($scope, $http, $interval, $cordovaFile, $state, $ionicActionSheet, $ionicHistory, $ionicPopup, $ionicNavBarDelegate) ->
+  $scope.$parent.$on '$ionicView.beforeLeave', ->
+    console.log('beforeLeave')
+    rec.stop()
+
   rec = new Recorder(
     $scope.output_directory + $scope.episode.guid + '.m4a',
     onScrubUpdate: (ms)->

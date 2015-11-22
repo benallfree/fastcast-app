@@ -85,6 +85,7 @@ app.controller 'PodcastSettingsController', (
     )
 
   $scope.show = 
+    code: ''
     title: ''
     subtitle: ''
     author: ''
@@ -108,12 +109,14 @@ app.controller 'PodcastSettingsController', (
   
   $scope.has_changes = false
   $scope.$watch 'show', ((newValue, oldValue) ->
+    $scope.show.code = $scope.show.code.toLowerCase()
     $scope.has_changes = !angular.equals(original, newValue)
     $ionicNavBarDelegate.showBackButton !$scope.has_changes
   ), true
       
   $scope.save = ->
     validate =
+      code: 'a show code'
       title: 'a title'
       logo_path: 'cover art'
       subtitle: 'a subtitle'
@@ -152,3 +155,5 @@ app.controller 'PodcastSettingsController', (
       destructiveButtonClicked: ->
         $scope.home()
     )
+  
+  $jrCrop.defaultOptions.template = $jrCrop.defaultOptions.template.replace(/{{/g, '<%').replace(/}}/g, '%>')

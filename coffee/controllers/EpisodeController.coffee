@@ -5,10 +5,10 @@ app.controller 'EpisodeController', (
   ) ->
     
   $scope.$on '$ionicView.enter', ->
-      $ionicSideMenuDelegate.canDragContent false
+    $ionicSideMenuDelegate.canDragContent false
 
   $scope.$on '$ionicView.leave', ->
-      $ionicSideMenuDelegate.canDragContent true
+    $ionicSideMenuDelegate.canDragContent true
 
   t = (new Date).getTime()
   

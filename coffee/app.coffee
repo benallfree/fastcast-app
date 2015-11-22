@@ -7,8 +7,9 @@ window.app = angular.module('fastcast', [
   'jrCrop',
 ])
 
-.config(($interpolateProvider) ->
+.config(($interpolateProvider, $ionicConfigProvider) ->
   $interpolateProvider.startSymbol('<%').endSymbol '%>'
+  $ionicConfigProvider.views.swipeBackEnabled(false)
 )
 
 .run(($ionicPlatform) ->
