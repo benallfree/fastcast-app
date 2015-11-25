@@ -9,7 +9,7 @@ app.controller 'AppController', (
   $ionicHistory, 
   $ionicSideMenuDelegate
   ) ->
-
+  console.log('AppController');
 
   $scope.settings = ->
     $state.go 'settings.podcast'
@@ -78,7 +78,7 @@ app.controller 'AppController', (
 
   $scope.new = ->
     t = (new Date).getTime()
-    guid = sprintf('fc-%s-%d', $scope.podcast.code t)
+    guid = sprintf('fc-%s-%d', $scope.podcast.code, t)
     $scope.episode =
       guid: guid
       number: next_episode_number()
