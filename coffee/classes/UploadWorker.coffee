@@ -44,6 +44,7 @@ class UploadWorker
     $http.get('http://api.fast-cast.net', params:
       slug: @item.slug
       type: @item.type
+      code: @item.code
     ).then ((response) =>
       @item.progress = 10
       @event('onProgress', @item.progress)

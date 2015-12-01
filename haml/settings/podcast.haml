@@ -5,10 +5,8 @@
     %button.button.button-assertive{'ng-click': 'cancel()', 'ng-if': 'has_changes'} Cancel
   %ion-content.padding
     .podcast-settings-view
+      %p This is your show. Your series. Your podcast.
       .list.list-inset
-        %label.item.item-input{style: 'background: red'}
-          %span.input-label Show Code
-          %input{type: 'text', 'ng-model': 'show.code'}
         %label.item.item-input
           %span.input-label Title
           %input{type: 'text', 'ng-model': 'show.title', autocapitalize: 'words'}
@@ -37,6 +35,6 @@
             .track
               .handle
         %label.item.item-input
-          %textarea{placeholder: 'Show Description', 'ng-model': 'show.description'}
+          %textarea{'class': 'msd-elastic', placeholder: 'Show Description', 'ng-model': 'show.description'}
       %button.button.button-block.button-balanced{"ng-click": "save()"}
         Save

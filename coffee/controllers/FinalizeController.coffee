@@ -32,6 +32,7 @@ app.controller 'FinalizeController', ($scope, $http, $interval, $cordovaFile, $s
       src: $scope.output_directory + $scope.episode.guid + '.m4a'
 
   upload = (item) ->
+    item.code = $scope.podcast.code
     (new UploadWorker(item))
       .started ->
         $scope.upload_count++

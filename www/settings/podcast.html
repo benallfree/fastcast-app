@@ -5,10 +5,8 @@
 <button ng-click="cancel()" ng-if="has_changes" class="button button-assertive">Cancel</button></ion-nav-buttons>
 <ion-content class="padding">
 <div class="podcast-settings-view">
+<p>This is your show. Your series. Your podcast.</p>
 <div class="list list-inset">
-<label style="background: red" class="item item-input">
-<span class="input-label">Show Code</span>
-<input type="text" ng-model="show.code"/></label>
 <label class="item item-input">
 <span class="input-label">Title</span>
 <input type="text" ng-model="show.title" autocapitalize="words"/></label>
@@ -34,5 +32,5 @@
 <div class="track">
 <div class="handle"></div></div></label></div>
 <label class="item item-input">
-<textarea placeholder="Show Description" ng-model="show.description"></textarea></label></div>
+<textarea placeholder="Show Description" ng-model="show.description" class="msd-elastic"></textarea></label></div>
 <button ng-click="save()" class="button button-block button-balanced">Save</button></div></ion-content></ion-view>
