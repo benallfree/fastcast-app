@@ -5,6 +5,7 @@ window.app = angular.module('fastcast', [
   'ngCordova',
   'ngIOS9UIWebViewPatch',
   'jrCrop',
+  'monospaced.elastic',
 ])
 
 .config(($interpolateProvider, $ionicConfigProvider) ->
@@ -31,6 +32,10 @@ window.app = angular.module('fastcast', [
   (episodes) ->
     orderByMagic(episodes)
 )
+
+.config(['msdElasticConfig', (msdElasticConfig) ->
+  msdElasticConfig.append = '\n'
+])
 
 .config(($stateProvider, $urlRouterProvider) ->
   $stateProvider.state('home',

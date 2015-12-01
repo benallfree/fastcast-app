@@ -7,7 +7,8 @@ app.controller 'AppController', (
   $cordovaFileTransfer, 
   $q, 
   $ionicHistory, 
-  $ionicSideMenuDelegate
+  $ionicSideMenuDelegate,
+  $ionicPopup
   ) ->
   console.log('AppController');
 
@@ -43,7 +44,7 @@ app.controller 'AppController', (
       $scope.podcast.episodes[k].is_syncing = false
       
     # Fix up missing episodes
-    $scope.podcast.episodes = angular.merge({}, static_episodes, $scope.podcast.episodes);
+    # $scope.podcast.episodes = angular.merge({}, static_episodes, $scope.podcast.episodes);
     # for guid of static_episodes
     #   episode = static_episodes[guid]
     #   #if !(guid of $scope.podcast.episodes)
@@ -66,7 +67,9 @@ app.controller 'AppController', (
     json = angular.toJson($scope.podcast)
     window.localStorage.setItem 'podcast', angular.toJson($scope.podcast)
     $cordovaFile.writeFile($scope.output_directory, 'data.json', json, true).then ((result) ->
+      return unless $scope.podcast.code
       (new UploadWorker(
+        code: $scope.podcast.code
         type: 'json'
         mime: 'application/json'
         src: $scope.output_directory + 'data.json'
