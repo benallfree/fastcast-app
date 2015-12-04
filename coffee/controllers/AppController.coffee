@@ -38,6 +38,8 @@ app.controller 'AppController', (
         episodes: {}
       $scope.save_state()
       
+    $scope.podcast.itunes_url = 'https://itunes.apple.com/us/podcast/thats-a-good-idea/id1049409195';
+    
     # Fix up missing GUIDs
     for k of $scope.podcast.episodes
       $scope.podcast.episodes[k].guid = k

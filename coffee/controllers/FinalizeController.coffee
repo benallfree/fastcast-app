@@ -14,13 +14,14 @@ app.controller 'FinalizeController', ($scope, $http, $interval, $cordovaFile, $s
     
   upload_html = ->
     html = FastCast.templates.episode
+      podcast: $scope.podcast
       episode: $scope.episode
-    $cordovaFile.writeFile($scope.output_directory, $scope.episode.guid + '.html', html, true).then ((result) ->
+    $cordovaFile.writeFile($scope.output_directory, 'index.html', html, true).then ((result) ->
       upload
         slug: $scope.episode.slug
         type: 'html'
         mime: 'text/html'
-        src: $scope.output_directory + $scope.episode.guid + '.html'
+        src: $scope.output_directory + 'index.html'
     ), (err) ->
       console.log 'file write error', err
 

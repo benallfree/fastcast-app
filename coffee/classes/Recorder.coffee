@@ -9,7 +9,7 @@ class Recorder
       onPlayStart: ->
       onPlayStop: ->
       onEvent: (name,args...)->
-      debug: false
+      debug: true
     @options = angular.extend(default_options, options)
     @scrub_point_ms = 0
     @stop()
@@ -85,6 +85,7 @@ class Recorder
           update_record = =>
             @log('recording check')
             if !@is_recording
+              @log('recording stop requested')
               media.stopRecord()
               return
             current_ms = (new Date).getTime()

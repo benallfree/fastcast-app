@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.benallfree.fastcast" ios-CFBundleVersion="13" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.benallfree.fastcast" ios-CFBundleVersion="32" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <preference name="AllowInlineMediaPlayback" value="false" />
     <preference name="BackupWebStorage" value="cloud" />
     <preference name="DisallowOverscroll" value="false" />
@@ -84,5 +84,6 @@
     <preference name="BackupWebStorage" value="none" />
     <preference name="iosPersistentFileLocation" value="Library" />
     <icon src="resources/ios/icon/icon-40@2x.png" />
-    <hook src="scripts/incrementBuildNum.js" type="after_build" />
+    <hook src="scripts/incrementBuildNum.js" type="before_emulate" />
+    <hook src="scripts/incrementBuildNum.js" type="before_build" />
 </widget>

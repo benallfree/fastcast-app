@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.benallfree.fastcast" version="0.0.1" ios-CFBundleVersion="13" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.benallfree.fastcast" version="0.0.1" ios-CFBundleVersion="33" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
 	<name>FastCast</name>
 	<description>
         Zero to hero podcasting in one touch. Talent not included.
@@ -50,5 +50,6 @@
 		<splash src="resources/ios/splash/Default~iphone.png" width="320" height="480"/>
 	</platform>
 	<icon src="resources/ios/icon/icon-40@2x.png"/>
-	<hook src="scripts/incrementBuildNum.js" type="after_build"/>
+	<hook src="scripts/incrementBuildNum.js" type="before_emulate"/>
+	<hook src="scripts/incrementBuildNum.js" type="before_build"/>
 </widget>
