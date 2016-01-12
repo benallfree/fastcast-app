@@ -76,9 +76,6 @@
         }
     },
     "installed_plugins": {
-        "AudioEncode": {
-            "PACKAGE_NAME": "com.benallfree.fastcast"
-        },
         "com.ionic.keyboard": {
             "PACKAGE_NAME": "com.benallfree.fastcast"
         },
@@ -100,16 +97,10 @@
         "sk.kcorp.cordova.ios-security": {
             "PACKAGE_NAME": "com.benallfree.fastcast"
         },
-        "xu.li.cordova.wav2m4a": {
-            "PACKAGE_NAME": "com.benallfree.fastcast"
-        },
         "com.synconset.imagepicker": {
             "PACKAGE_NAME": "com.benallfree.fastcast"
         },
         "com-badrit-base64": {
-            "PACKAGE_NAME": "com.benallfree.fastcast"
-        },
-        "cordova-plugin-nativeaudio": {
             "PACKAGE_NAME": "com.benallfree.fastcast"
         }
     },

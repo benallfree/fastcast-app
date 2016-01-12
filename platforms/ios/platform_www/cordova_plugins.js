@@ -1,14 +1,6 @@
 cordova.define('cordova/plugin_list', function(require, exports, module) {
 module.exports = [
     {
-        "file": "plugins/AudioEncode/www/AudioEncode.js",
-        "id": "AudioEncode.AudioEncode",
-        "pluginId": "AudioEncode",
-        "clobbers": [
-            "plugins.AudioEncode"
-        ]
-    },
-    {
         "file": "plugins/com.ionic.keyboard/www/keyboard.js",
         "id": "com.ionic.keyboard.keyboard",
         "pluginId": "com.ionic.keyboard",
@@ -240,14 +232,6 @@ module.exports = [
         ]
     },
     {
-        "file": "plugins/xu.li.cordova.wav2m4a/www/wav2m4a.js",
-        "id": "xu.li.cordova.wav2m4a.wav2m4a",
-        "pluginId": "xu.li.cordova.wav2m4a",
-        "clobbers": [
-            "wav2m4a"
-        ]
-    },
-    {
         "file": "plugins/com.synconset.imagepicker/www/imagepicker.js",
         "id": "com.synconset.imagepicker.ImagePicker",
         "pluginId": "com.synconset.imagepicker",
@@ -261,14 +245,6 @@ module.exports = [
         "pluginId": "com-badrit-base64",
         "clobbers": [
             "navigator.Base64"
-        ]
-    },
-    {
-        "file": "plugins/cordova-plugin-nativeaudio/www/nativeaudio.js",
-        "id": "cordova-plugin-nativeaudio.nativeaudio",
-        "pluginId": "cordova-plugin-nativeaudio",
-        "clobbers": [
-            "window.plugins.NativeAudio"
         ]
     }
 ];

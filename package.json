@@ -44,8 +44,7 @@
     {
       "locator": "https://github.com/hazemhagrass/phonegap-base64.git",
       "id": "com-badrit-base64"
-    },
-    "cordova-plugin-nativeaudio"
+    }
   ],
   "cordovaPlatforms": []
 }

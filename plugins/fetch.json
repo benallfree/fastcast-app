@@ -55,28 +55,10 @@
         "is_top_level": true,
         "variables": {}
     },
-    "AudioEncode": {
-        "source": {
-            "type": "git",
-            "url": "https://github.com/wootwoot1234/cordova-audio-encode.git",
-            "subdir": "."
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
     "sk.kcorp.cordova.ios-security": {
         "source": {
             "type": "git",
             "url": "https://github.com/robertklein/cordova-ios-security.git",
-            "subdir": "."
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
-    "xu.li.cordova.wav2m4a": {
-        "source": {
-            "type": "git",
-            "url": "https://github.com/xu-li/phonegap-wav2m4a.git",
             "subdir": "."
         },
         "is_top_level": true,
@@ -104,14 +86,6 @@
             "type": "git",
             "url": "https://github.com/hazemhagrass/phonegap-base64.git",
             "subdir": "."
-        },
-        "is_top_level": true,
-        "variables": {}
-    },
-    "cordova-plugin-nativeaudio": {
-        "source": {
-            "type": "registry",
-            "id": "cordova-plugin-nativeaudio"
         },
         "is_top_level": true,
         "variables": {}
