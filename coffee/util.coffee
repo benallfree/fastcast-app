@@ -1,6 +1,5 @@
 String::slugify = ->
   @toLowerCase().replace(/\s+/g, '-').replace(/[^\w\-]+/g, '').replace(/\-\-+/g, '-').replace(/^-+/, '').replace /-+$/, ''
-  # Trim - from end of text
 
 Number::toHHMMSS = ->
   show_ms = arguments.length > 0 and arguments[0]

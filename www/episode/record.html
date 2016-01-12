@@ -39,5 +39,8 @@
 <div class="ion-record"></div></div>
 <div ng-click="stop_recording()" ng-if="is_recording" class="fc-button stop-record">
 <div class="ion-stop"></div></div></div>
+<div class="fx">
+<button ng-click="drop('intro')" ng-if="is_recording" class="button">Intro</button>
+<button ng-click="drop('error')" ng-if="is_recording" class="button">Error</button></div>
 <div ng-if="has_recording" class="publish">
 <button nav-direction="forward" ui-sref="episode.finalize" class="button button-block button-positive">Finalize</button></div></div></ion-content></ion-view>

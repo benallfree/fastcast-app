@@ -1,5 +1,3 @@
-window.is_app = document.URL.indexOf('http://') == -1 and document.URL.indexOf('https://') == -1
-
 window.app = angular.module('fastcast', [
   'ionic'
   'ngCordova',

@@ -73,6 +73,22 @@
     </div>
     <div class="fb-comments" data-href="http://www.fast-cast.net/podcasts/<%- podcast.code %>/episodes/<%- episode.slug %>/" data-numposts="10"></div>
 
+    <script id="episodesTmpl" type="text/x-jsrender">
+      <ul>
+        {{for episodes}}
+          <li><a href="{{:url}}"><img src="{{:image}}"/>{{:title}}</a></li>
+        {{/for}}
+      </ul>
+    </script>
+    <div class="container">
+      <div id='episodes'>
+        <h3>More Episodes</h3>
+      </div>
+    </div>
+
+
     <script crossorigin="anonymous" integrity="sha256-KXn5puMvxCw+dAYznun+drMdG1IFl3agK0p/pqT9KAo=" src="https://cdn.jsdelivr.net/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-HmmD9koUCcfzc6y9gU2nyfYMY9XWIyYa1e4VPZFfHaI=" src="https://cdn.jsdelivr.net/jsrender/1.0pre62/jsrender.min.js"></script>
+    <script src="/assets/v1/js/app.js"></script>
   </body>
 </html>

@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		073648EAE3E64755AB5618BA /* CDVAssetLibraryFilesystem.m in Sources */ = {isa = PBXBuildFile; fileRef = A0525844329844759A05B36C /* CDVAssetLibraryFilesystem.m */; };
 		0924AE262DFD4563BA1CFB10 /* ELCAssetPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 53000D1771BD4D1BB5DD6F47 /* ELCAssetPicker.xib */; };
@@ -61,6 +60,11 @@
 		D4A0D8761607E02300AEF8BB /* Default-568h@2x~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = D4A0D8751607E02300AEF8BB /* Default-568h@2x~iphone.png */; };
 		D7FC7A218A9644BBB2E51352 /* CDVLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 109E2556AD0641D39FBB244A /* CDVLogger.m */; };
 		FF437EDEBDF7488E8A235F98 /* Overlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5118B356B1484A159A98A5A6 /* Overlay@2x.png */; };
+		745717E03AF2439D9404D64E /* NativeAudio.m in Sources */ = {isa = PBXBuildFile; fileRef = 533B12552BAA4F85A532270A /* NativeAudio.m */; };
+		54F02E1A3CF24AA2B7886EA8 /* NativeAudioAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = D46387F51E31478D8A3ABC0F /* NativeAudioAsset.m */; };
+		24DCB09CA865432DA23C44A0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 636BD5D81DFF441F80B42DED /* Foundation.framework */; };
+		801015F73E2D45AC96E270A7 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2306DE67795C4C318CD53C80 /* AVFoundation.framework */; };
+		D541EBA361BE4BE5ADC4D95F /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D929724203314E8094B9B32B /* AudioToolbox.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -163,6 +167,13 @@
 		F840E1F0165FE0F500CFE078 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = FastCast/config.xml; sourceTree = "<group>"; };
 		FBA614483B3C470E940FBA49 /* ELCAlbumPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ELCAlbumPickerController.m; path = com.synconset.imagepicker/ELCAlbumPickerController.m; sourceTree = "<group>"; };
 		FD641D6662AC4E8EAEB8E3C1 /* ELCAssetSelectionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ELCAssetSelectionDelegate.h; path = com.synconset.imagepicker/ELCAssetSelectionDelegate.h; sourceTree = "<group>"; };
+		533B12552BAA4F85A532270A /* NativeAudio.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "NativeAudio.m"; path = "cordova-plugin-nativeaudio/NativeAudio.m"; sourceTree = "<group>"; fileEncoding = 4; };
+		D46387F51E31478D8A3ABC0F /* NativeAudioAsset.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "NativeAudioAsset.m"; path = "cordova-plugin-nativeaudio/NativeAudioAsset.m"; sourceTree = "<group>"; fileEncoding = 4; };
+		D28F06EE8B8C413397CFB864 /* NativeAudio.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "NativeAudio.h"; path = "cordova-plugin-nativeaudio/NativeAudio.h"; sourceTree = "<group>"; fileEncoding = 4; };
+		06882F3E485441888F8EDE5E /* NativeAudioAsset.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "NativeAudioAsset.h"; path = "cordova-plugin-nativeaudio/NativeAudioAsset.h"; sourceTree = "<group>"; fileEncoding = 4; };
+		636BD5D81DFF441F80B42DED /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "Foundation.framework"; path = "System/Library/Frameworks/Foundation.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
+		2306DE67795C4C318CD53C80 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "AVFoundation.framework"; path = "System/Library/Frameworks/AVFoundation.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
+		D929724203314E8094B9B32B /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "AudioToolbox.framework"; path = "System/Library/Frameworks/AudioToolbox.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,6 +185,9 @@
 				301BF552109A68D80062928A /* libCordova.a in Frameworks */,
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
 				305D5FD1115AB8F900A74A75 /* MobileCoreServices.framework in Frameworks */,
+				24DCB09CA865432DA23C44A0 /* Foundation.framework in Frameworks */,
+				801015F73E2D45AC96E270A7 /* AVFoundation.framework in Frameworks */,
+				D541EBA361BE4BE5ADC4D95F /* AudioToolbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,6 +265,9 @@
 				5B1594DC16A7569C00FEF299 /* AssetsLibrary.framework */,
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
 				305D5FD0115AB8F900A74A75 /* MobileCoreServices.framework */,
+				636BD5D81DFF441F80B42DED /* Foundation.framework */,
+				2306DE67795C4C318CD53C80 /* AVFoundation.framework */,
+				D929724203314E8094B9B32B /* AudioToolbox.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -300,6 +317,10 @@
 				FD641D6662AC4E8EAEB8E3C1 /* ELCAssetSelectionDelegate.h */,
 				5E8D773FAE7A489D87AC1F07 /* ELCAssetTablePicker.h */,
 				95FC767729894C329FF2A511 /* ELCImagePickerController.h */,
+				533B12552BAA4F85A532270A /* NativeAudio.m */,
+				D46387F51E31478D8A3ABC0F /* NativeAudioAsset.m */,
+				D28F06EE8B8C413397CFB864 /* NativeAudio.h */,
+				06882F3E485441888F8EDE5E /* NativeAudioAsset.h */,
 			);
 			name = Plugins;
 			path = FastCast/Plugins;
@@ -515,6 +536,8 @@
 				98DC301814224CA4AC8C56AB /* ELCAssetCell.m in Sources */,
 				9728EDE54A2440A7A4887EE6 /* ELCAssetTablePicker.m in Sources */,
 				96A7E318EE9C40A0BF644A79 /* ELCImagePickerController.m in Sources */,
+				745717E03AF2439D9404D64E /* NativeAudio.m in Sources */,
+				54F02E1A3CF24AA2B7886EA8 /* NativeAudioAsset.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

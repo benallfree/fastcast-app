@@ -72,6 +72,12 @@
     return resourceURL;
 }
 
+- (void)audioRecorderEncodeErrorDidOccur:(AVAudioRecorder *)recorder
+                                   error:(NSError *)error
+{
+    NSLog(@"An error occurred. Finally");
+}
+
 // Maps a url for a resource path for playing
 // "Naked" resource paths are assumed to be from the www folder as its base
 - (NSURL*)urlForPlaying:(NSString*)resourcePath
@@ -129,6 +135,8 @@
 
     return resourceURL;
 }
+
+
 
 // Creates or gets the cached audio file resource object
 - (CDVAudioFile*)audioFileForResource:(NSString*)resourcePath withId:(NSString*)mediaId doValidation:(BOOL)bValidate forRecording:(BOOL)bRecord
@@ -539,6 +547,7 @@
                 audioFile.recorder.delegate = self;
                 audioFile.recorder.mediaId = mediaId;
                 recordingSuccess = [audioFile.recorder record];
+                
                 if (recordingSuccess) {
                     NSLog(@"Started recording audio sample '%@'", audioFile.resourcePath);
                     jsString = [NSString stringWithFormat:@"%@(\"%@\",%d,%d);", @"cordova.require('cordova-plugin-media.Media').onStatus", mediaId, MEDIA_STATE, MEDIA_RUNNING];
@@ -593,6 +602,7 @@
     }
 }
 
+
 - (void)stopRecordingAudio:(CDVInvokedUrlCommand*)command
 {
     NSString* mediaId = [command argumentAtIndex:0];
@@ -609,6 +619,11 @@
     if (jsString) {
         [self.commandDelegate evalJs:jsString];
     }
+}
+
+- (void)audioRecorderBeginInterruption:(AVAudioRecorder *)recorder
+{
+    NSLog(@"Interrupted");
 }
 
 - (void)audioRecorderDidFinishRecording:(AVAudioRecorder*)recorder successfully:(BOOL)flag

@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.benallfree.fastcast" ios-CFBundleVersion="32" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.benallfree.fastcast" ios-CFBundleVersion="81" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <preference name="AllowInlineMediaPlayback" value="false" />
     <preference name="BackupWebStorage" value="cloud" />
     <preference name="DisallowOverscroll" value="false" />
@@ -42,6 +42,9 @@
     </feature>
     <feature name="ImagePicker">
         <param name="ios-package" value="SOSPicker" />
+    </feature>
+    <feature name="NativeAudio">
+        <param name="ios-package" value="NativeAudio" />
     </feature>
     <icon height="57" src="resources/ios/icon/icon.png" width="57" />
     <icon height="114" src="resources/ios/icon/icon@2x.png" width="114" />

@@ -108,6 +108,9 @@
         },
         "com-badrit-base64": {
             "PACKAGE_NAME": "com.benallfree.fastcast"
+        },
+        "cordova-plugin-nativeaudio": {
+            "PACKAGE_NAME": "com.benallfree.fastcast"
         }
     },
     "dependent_plugins": {}

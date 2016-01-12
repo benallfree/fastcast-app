@@ -39,7 +39,7 @@
 		      <guid isPermaLink="false"><%- episode.guid %></guid>
 		      <title><%- sprintf("%03d", episode.number) %> - <%- episode.title %></title>
 		      <pubDate><%- rfc2822(episode.published_at) %></pubDate>
-		      <link>http://www.fast-cast.net/podcasts/<%- podcast.code %>/episodes/<%- episode.slug %></link>
+		      <link>http://www.fast-cast.net/podcasts/<%- podcast.code %>/episodes/<%- episode.slug %>/</link>
 		      <itunes:duration><%- episode.duration_ms.toHHMMSS() %></itunes:duration>
 		      <itunes:author>Ben Allfree</itunes:author>
 		      <itunes:explicit>yes</itunes:explicit>

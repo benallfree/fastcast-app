@@ -47,6 +47,10 @@
                         {
                             "xml": "<feature name=\"ImagePicker\"><param name=\"ios-package\" value=\"SOSPicker\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"NativeAudio\"><param name=\"ios-package\" value=\"NativeAudio\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -87,6 +91,9 @@
             "PACKAGE_NAME": "com.benallfree.fastcast"
         },
         "com-badrit-base64": {
+            "PACKAGE_NAME": "com.benallfree.fastcast"
+        },
+        "cordova-plugin-nativeaudio": {
             "PACKAGE_NAME": "com.benallfree.fastcast"
         }
     },
@@ -353,6 +360,14 @@
             "pluginId": "com-badrit-base64",
             "clobbers": [
                 "navigator.Base64"
+            ]
+        },
+        {
+            "file": "plugins/cordova-plugin-nativeaudio/www/nativeaudio.js",
+            "id": "cordova-plugin-nativeaudio.nativeaudio",
+            "pluginId": "cordova-plugin-nativeaudio",
+            "clobbers": [
+                "window.plugins.NativeAudio"
             ]
         }
     ]

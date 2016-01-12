@@ -35,6 +35,9 @@ app.controller 'RecordController', ($scope, $http, $interval, $cordovaFile, $sta
       $scope.$applyAsync()
       
   )
+  
+  $scope.drop = (id)->
+    rec.drop(id)
 
   hold_promise = null
   $scope.hold = (ms) ->

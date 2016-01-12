@@ -46,5 +46,11 @@
           .ion-record
         .fc-button.stop-record{"ng-click": "stop_recording()", "ng-if": "is_recording"}
           .ion-stop
+      .fx
+        %button.button{"ng-click": "drop('intro')", "ng-if": "is_recording"}
+          Intro
+        %button.button{"ng-click": "drop('error')", "ng-if": "is_recording"}
+          Error
+          
       .publish{"ng-if": "has_recording"}
         %button.button.button-block.button-positive{'nav-direction': 'forward', 'ui-sref': 'episode.finalize'} Finalize
